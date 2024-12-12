@@ -1,0 +1,15 @@
+
+‘	java:S117-"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖÑóæıÿÿÿÿJ$859c7811-70f2-4c2f-b168-ead916f0f83a
+•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ñ¶‘–J$c93d89df-de4f-45db-b65e-bfdf8746dd32
+ƒ
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿJ$6cbfa488-6fd1-435c-8935-1fae2edd2516
+g
+java:S1168"+Return an empty collection instead of null.(¥¹ïJ$383c1321-510f-4f49-bbe9-22c572692005
+s
+java:S1135"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿJ$1d5ae4d6-379e-4c96-8759-85204b047681
+s
+java:S1135"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿJ$d3574017-2ce1-4496-aa7c-85f3ac53ec6c
+s
+java:S1135""2Complete the task associated to this TODO comment.(» æÿÿÿÿÿJ$c3a159ea-034c-4678-bf24-d2656c9379f8
+s
+java:S1135("2Complete the task associated to this TODO comment.(» æÿÿÿÿÿJ$520d9761-eacb-427c-b35e-b5e4f77458c3

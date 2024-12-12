@@ -1,0 +1,28 @@
+
+y
+java:S4977"=Rename "T" which hides a type parameter from the outer scope.(˜ËöJ$b7234ea2-0244-4dd5-b9ab-920b251bcf0c
+”	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(˜€SJ$dcf0ebe6-b60d-4e04-a0c6-1dff9c35875c
+s
+java:S1135#"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿJ$4b879475-d0e0-4669-91c4-31ad21f22a93
+g
+java:S1168%"+Return an empty collection instead of null.(¥¹ïJ$26c81849-4f38-47b3-9d2a-40488c852159
+‚
+java:S62015"FReplace this instanceof check and cast with 'instanceof Double double'(Ë¹¾±J$91b27924-eccb-4bc3-951a-0dfb7c185de5
+‚
+java:S62018"FReplace this instanceof check and cast with 'instanceof String string'(ä…ÙJ$db9f52ee-27e0-48e4-9909-def947d47fd0
+~
+java:S6201:"BReplace this instanceof check and cast with 'instanceof Date date'(äç‘J$8de54167-e5f2-4c46-84f5-07cca493ebea
+s
+java:S1135W"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿJ$1267eccc-ef7f-4ea0-93a6-b3a0c3ee9f0d
+s
+java:S1135k"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿJ$ab44db54-1fdf-4f73-8338-623cbbc8ca5a
+s
+java:S1135p"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿJ$1138dc37-35f9-4c2a-8d7d-d6ad4b29fe81
+t
+java:S1135„"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿJ$0ed12905-ccf1-4e87-bd3b-8b93d63fb610
+U
+java:S1135”"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ8‘È„›ø1
+o
+java:S1128"3Remove this unused import 'java.sql.DriverManager'.(“£°J$2a7954e8-1c4e-4db2-8e38-68654cc516cf
+v
+java:S1128"5Remove this unused import 'RowMaper.ResultSetMapper'.(»©Ç§ùÿÿÿÿJ$de3b0036-c51e-40fc-b260-87cce79980b6

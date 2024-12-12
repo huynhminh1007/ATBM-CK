@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+	<display-name>Do_An_Giua_Ky_LTWeb_Thay_Long_Nhom_12</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- Cấu hình trang lỗi 404 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/page404.jsp</location>
+	</error-page>
+
+	<!-- Cấu hình trang lỗi 500 -->
+	<error-page>
+		<error-code>500</error-code>
+		<location>/page500.jsp</location>
+	</error-page>
+   <context-param>
+      <param-name>
+         javax.servlet.jsp.jstl.fmt.locale
+      </param-name>
+      <param-value>
+         vi_VN
+      </param-value>
+   </context-param>
+</web-app>

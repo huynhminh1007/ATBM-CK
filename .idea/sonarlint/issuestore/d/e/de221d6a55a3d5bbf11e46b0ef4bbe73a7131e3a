@@ -1,0 +1,36 @@
+
+œ	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(º›°Î8ğî–Éö1J$c1c858fd-fe9c-4fec-990a-3a79e8aebb88
+Ä
+java:S1186("€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(÷¤‹ú8‚ï–Éö1J$c2ec617c-4444-42df-b46a-d06a8ac5dccb
+Š
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8…ï–Éö1J$84bf69d7-97a0-4c99-b90e-d214e59558f4
+z
+java:S1135!"2Complete the task associated to this TODO comment.(ƒŠ® úÿÿÿÿ8Šï–Éö1J$fea79267-90ee-4467-9f54-918a5bb3a084
+}
+java:S1161(":Add the "@Override" annotation above this method signature(÷¤‹ú8ï–Éö1J$2bc2f625-a36d-401f-9c7a-90516fea3bbe
+‚
+java:S11610":Add the "@Override" annotation above this method signature(ş³‚”ûÿÿÿÿ8ï–Éö1J$4ab35ce2-fbb7-4828-99de-41f940b9867c
+Ÿ
+java:S19894"]Handle the following exceptions that could be thrown by "add": ServletException, IOException.(âÖn8ï–Éö1J$2269f1e0-6ab8-4c03-aebc-ec3331d24064
+¨
+java:S19895"`Handle the following exceptions that could be thrown by "update": ServletException, IOException.(Å”ôÎûÿÿÿÿ8ï–Éö1J$e6a53080-7d83-4800-b3f3-d0f76d4c0840
+‘
+java:S19897"IHandle the "IllegalArgumentException" thrown here in a "try/catch" block.(×Å“½ıÿÿÿÿ8ï–Éö1J$751aa48d-2ef7-42d5-ac6c-9ea9179abd7d
+^
+java:S3626M"Remove this redundant jump.(ûÁİ…8’ï–Éö1J$c8e7fbdf-ccc0-4b1c-b0bd-a2621c2a0bc8
+¿
+java:S1130;"wRemove the declaration of thrown exception 'javax.servlet.ServletException', as it cannot be thrown from method's body.(°“î£úÿÿÿÿ8“ï–Éö1J$9a6adb4b-803d-4f5a-b96a-6ed2370bb0b5
+
+java:S2130>"9Use "Integer.parseInt" for this string-to-int conversion.(Áñşıÿÿÿÿ8”ï–Éö1J$75f840e8-3bf9-4721-98c5-c5828fcd7b83
+
+java:S2130@"9Use "Integer.parseInt" for this string-to-int conversion.(ùòÉúÿÿÿÿ8–ï–Éö1J$6b7dff21-bd83-4eae-81c1-b378a83589f3
+^
+java:S3626c"Remove this redundant jump.(ûÁİ…8ï–Éö1J$5a442fcc-c467-4057-b296-482a26d033c9
+¿
+java:S1130Q"wRemove the declaration of thrown exception 'javax.servlet.ServletException', as it cannot be thrown from method's body.(åÇïŸıÿÿÿÿ8Ÿï–Éö1J$e6ecb757-44d5-4d29-a615-ab5df14eeab1
+
+java:S2130T"9Use "Integer.parseInt" for this string-to-int conversion.(Áñşıÿÿÿÿ8 ï–Éö1J$f61280b8-6d56-41fa-907f-23455c4fb8f0
+
+java:S2130V"9Use "Integer.parseInt" for this string-to-int conversion.(ùòÉúÿÿÿÿ8¡ï–Éö1J$479af66b-4460-4e15-aa12-a3e24c6c3337
+x
+java:S1128"0Remove this unused import 'Database.IReviewDAO'.(Ôä—Ÿøÿÿÿÿ8¤ï–Éö1J$f680ed52-0442-47bc-a735-ab4bf0e5446f

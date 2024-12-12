@@ -1,0 +1,140 @@
+#card .copyz-btn{
+    position: absolute;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    right: 10px;
+    color: #FFFFFF;
+}
+#card .discount i{
+    border-radius: 100%;
+    border: 1px solid var(--primary-green);
+    padding: 4px 10px;
+    color: var(--primary-green);
+    cursor: pointer;
+    left: 280px;
+    top: 10px;
+    position: absolute;
+}
+.cart-header-info {
+    padding: 0 20px;
+    border: 1px solid var(--primary-green);
+}
+.cart_body .cart_product{
+    border: 1px solid var(--primary-green);
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
+.cart_body .cart_products{
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
+#btn-proceed-checkout {
+    width: 100%;
+    background-color: #679210;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #679210;
+    border-radius: 5px;
+}
+#btn-proceed-checkout:hover{
+    background-color: var(--hover-green);
+}
+
+#card textarea {
+    overflow: auto;
+    resize: vertical;
+}
+
+
+.col-cart-right {
+    padding-right: 0;
+}
+
+.formVAT {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.formVAT h4 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.timedeli-modal {
+    margin-bottom: 20px;
+}
+
+.input_group {
+    margin-bottom: 15px;
+}
+
+.date_pick .date_picker,
+.date_time select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+.date_pick .date_picker:focus,
+.date_time select:focus {
+    border-color: #007bff;
+}
+
+.r-bill .checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.r-bill .checkbox input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.r-bill .checkbox label.box {
+    margin-right: 10px;
+}
+
+.r-bill .checkbox label.title {
+    font-weight: 500;
+}
+
+.bill-field {
+    display: none;
+    margin-top: 20px;
+}
+
+.bill-field .form-group {
+    margin-bottom: 15px;
+}
+
+.bill-field .form-group label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.bill-field .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+.bill-field .form-control:focus {
+    border-color: #007bff;
+}

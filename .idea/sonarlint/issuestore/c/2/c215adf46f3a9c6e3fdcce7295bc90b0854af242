@@ -1,0 +1,24 @@
+
+\
+java:S11921"FDefine a constant instead of duplicating this literal "email" 3 times.(»öÃ—
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(º›°Î
+—
+java:S1186&"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(÷¤‹ú
+]
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–Žüÿÿÿÿ
+M
+java:S1135"2Complete the task associated to this TODO comment.(ƒŠ® úÿÿÿÿ
+P
+java:S1161&":Add the "@Override" annotation above this method signature(÷¤‹ú
+U
+java:S1161/":Add the "@Override" annotation above this method signature(þ³‚”ûÿÿÿÿ
+w
+java:S1989>"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(üÿˆÌ
+U
+java:S2441C":Make "User" serializable or don't store it in the session.(£™Õàûÿÿÿÿ
+U
+java:S2441F":Make "User" serializable or don't store it in the session.(£™Õàûÿÿÿÿ
+Y
+java:S2441G">Make "Wishlist" serializable or don't store it in the session.(Ýª«Øüÿÿÿÿ
+w
+java:S1989U"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(üÿˆÌ

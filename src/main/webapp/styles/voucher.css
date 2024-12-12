@@ -1,0 +1,64 @@
+.card-coupon {
+	border: 2px solid var(--primary-green);
+	border-radius: 5px;
+	padding: 5px;
+	width: 100%;
+	height: auto;
+}
+
+.card-coupon:last-child {
+	margin-bottom: 0;
+}
+.card-coupon .btn-info:hover{
+	background: var(--primary-green);
+	color: #fff;
+	border: #fff;
+}
+.card-coupon .btn-info {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	text-decoration: none;
+	background: #fff;
+	width: 25px;
+	height: 25px;
+	font-size: 14px;
+	border-radius: 50%;
+	color: var(--primary-green);
+	border: 1px solid var(--primary-green);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.coupon-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card-coupon .coupon-info {
+	font-size: 15px;
+	font-weight: normal;;
+}
+
+.coupon-footer .coupon-copy {
+	color: #fff;
+	background: var(--primary-green);
+	padding: 5px 15px;
+	border-radius: 8px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.slick-slide:not(.slick-track:first-child){
+	margin: 0 6px;
+}
+.slick-prev, .slick-next {
+	/*color: #bc2a2a;*/
+	border: aliceblue!important;
+	border-radius: 100%;
+	background: #828588!important;
+}
+.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+	background: #5e605f !important;
+}

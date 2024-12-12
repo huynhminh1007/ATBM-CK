@@ -1,0 +1,30 @@
+
+n
+java:S2293C"YReplace the type specification in this constructor call with the diamond operator ("<>").(•­€'
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(º›°Î
+]
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–Žüÿÿÿÿ
+M
+java:S1135%"2Complete the task associated to this TODO comment.(ƒŠ® úÿÿÿÿ
+P
+java:S1161,":Add the "@Override" annotation above this method signature(÷¤‹ú
+T
+java:S2130."9Use "Integer.parseInt" for this string-to-int conversion.(Ó”¡êüÿÿÿÿ
+s
+java:S1989."XHandle the following exception that could be thrown by "valueOf": NumberFormatException.(Ó”¡êüÿÿÿÿ
+w
+java:S19899"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(üÿˆÌ
+n
+java:S1989;"SHandle the following exception that could be thrown by "sendRedirect": IOException.(ÝÉý©üÿÿÿÿ
+U
+java:S1161X":Add the "@Override" annotation above this method signature(þ³‚”ûÿÿÿÿ
+z
+java:S1989["_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(®Ó‘ûÿÿÿÿÿ
+M
+java:S1135Z"2Complete the task associated to this TODO comment.(» æžÿÿÿÿÿ
+M
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓþÿÿÿÿ
+R
+java:S1128	"<Remove this unused import 'javax.servlet.RequestDispatcher'.(Ëöò¼
+`
+java:S1128"JRemove this unused import 'com.mysql.cj.x.protobuf.MysqlxCrud.Collection'.(§¢Žñ

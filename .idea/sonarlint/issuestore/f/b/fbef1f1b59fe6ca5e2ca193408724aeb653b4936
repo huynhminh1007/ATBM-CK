@@ -1,0 +1,14 @@
+
+‘	java:S117E"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖÑóæıÿÿÿÿJ$d3ad261b-a68b-4f93-8b59-2f5b0f7b90aa
+Œ	java:S117P"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ã‰²ÜJ$53673595-69cd-419f-9f6e-f47f773f768d
+”	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(˜€SJ$1193d769-ff4f-432f-87c2-aa06f21430bc
+ƒ
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿJ$d106bbe5-3901-4c18-9bf7-b921e97d01e5
+u
+java:S2479":Remove the non-escaped \u0009 character from this literal.(–·ÄJ$5ff6dfd7-ab53-4e5b-9d82-f545b14c8a31
+w	java:S1259"<This block of commented-out lines of code should be removed.(Òè¦¯J$6c247204-9f23-49c6-bc05-08de2b2600d0
+f	java:S106A"+Replace this use of System.out by a logger.(ŒîåJ$9c336cae-9bc8-4f36-8439-c62a3cf40474
+l
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒJ$5a8acfa9-4d5b-4349-ba58-4aa6c3cfd3e4
+c
+java:S1128"'Remove this unused import 'Model.User'.(×ÈğŠJ$792965a8-2691-442b-8d0f-1770621d371f

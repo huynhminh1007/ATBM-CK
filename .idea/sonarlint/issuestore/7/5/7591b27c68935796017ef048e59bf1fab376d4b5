@@ -1,0 +1,12 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(º›°Î
+]
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–Žüÿÿÿÿ
+U
+java:S1161#":Add the "@Override" annotation above this method signature(Ïû©Öûÿÿÿÿ
+w
+java:S1989&"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(íµ®„
+P
+java:S1161,":Add the "@Override" annotation above this method signature(‹¨¯¿
+z
+java:S1989-"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(®Ó‘ûÿÿÿÿÿ

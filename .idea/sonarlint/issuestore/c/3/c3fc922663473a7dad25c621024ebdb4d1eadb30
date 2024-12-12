@@ -1,0 +1,32 @@
+
+•	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(º›°ÎJ$63705c05-6554-49c8-b912-449ebfd23c96
+ƒ
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–ŽüÿÿÿÿJ$be7e525f-0b3f-43e0-8fcb-2071ab8d45c3
+ƒ
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–ŽüÿÿÿÿJ$8a7bf8a7-4e9a-4687-95c5-2d7245678f7b
+ƒ
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–ŽüÿÿÿÿJ$417e9b51-7b8e-4825-8753-f7f35b52f10a
+v
+java:S1161-":Add the "@Override" annotation above this method signature(÷¤‹úJ$8ad8944d-da90-4161-ae2f-3b70a5a60b1a
+s
+java:S1135/"2Complete the task associated to this TODO comment.(» æžÿÿÿÿÿJ$51063ee4-1ed3-4dd9-b358-90ccefd273d2
+
+java:S1989>"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(´íÍèJ$f361fb31-a833-4cf7-aa3c-76a472b1a62b
+{
+java:S1161E":Add the "@Override" annotation above this method signature(þ³‚”ûÿÿÿÿJ$7c3ece96-ca14-4639-9ffe-9a3f479e36f7
+ 
+java:S1989H"_Handle the following exceptions that could be thrown by "doGet": ServletException, IOException.(®Ó‘ûÿÿÿÿÿJ$508f9e91-75e3-429d-bbe6-581275d09dbb
+s
+java:S1135G"2Complete the task associated to this TODO comment.(» æžÿÿÿÿÿJ$3358521e-5882-4b68-b4c8-8deb82873daa
+l
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±ÄøÿÿÿÿJ$0ac0dedf-8833-4f53-9d1e-3cf93cbe1e0f
+r
+java:S1128"1Remove this unused import 'Database.IProductDAO'.(«¯ÜóøÿÿÿÿJ$089c6f03-bd49-47e8-ac82-33fa44faf697
+n
+java:S1128"-Remove this unused import 'Database.UserDAO'.(ãý¤¾ÿÿÿÿÿJ$5a50166f-be64-483f-87f1-3cdff4815e3e
+c
+java:S1128"'Remove this unused import 'Model.User'.(×ÈðŠJ$df3adfe4-b2d7-41e9-a872-70b7f1707485
+k
+java:S1128"*Remove this unused import 'Model.Product'.(Ñ‡ÁºøÿÿÿÿJ$a7a7b0f1-6381-48d4-b012-fb372d15d42d
+u
+java:S1128"4Remove this unused import 'Services.ProductService'.(å°…°øÿÿÿÿJ$bd56d675-cedc-42b1-a2aa-43d0c0bea8a1

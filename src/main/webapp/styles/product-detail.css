@@ -1,0 +1,310 @@
+.left-side {
+	height: auto;
+	padding-bottom: 50px;
+}
+
+.box {
+	padding: 15px;
+	background-color: var(--primary-light-green);
+}
+
+.text-group {
+	margin-left: 10px;
+}
+
+.description {
+	font-size: 17px;
+}
+
+.text-light-color {
+	color: #679210;
+}
+
+.product-price-box {
+	background-color: var(--primary-light-green);
+	padding: 10px 5px;
+	position: relative;
+	border-radius: 5px;
+}
+
+.origin-price {
+	text-decoration: line-through;
+	position: absolute;
+	top: 22px;
+	margin-left: 40px;
+}
+
+.text-red {
+	color: red;
+}
+
+.weight-btn {
+	border-radius: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	padding: 5px;
+	margin-right: 5px;
+	background-color: white;
+	margin-top: 5px;
+}
+
+.actived {
+	background-color: var(--primary-green) !important;
+	color: white !important;
+}
+
+.minus-btn,
+.plus-btn {
+	border: none;
+	width: 35px;
+	height: 35px;
+	border-radius: 5px;
+}
+
+.input-quanlity:focus {
+	outline: none;
+}
+
+.quantity-form {
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	width: 135px;
+	padding: 2px;
+	border-radius: 5px;
+}
+
+.input-quanlity {
+	width: 50px;
+	border: none;
+	text-align: center;
+}
+
+.add-to-cart-btn:hover {
+	background-color: var(--hover-green);
+}
+
+.add-to-cart-btn {
+	width: 400px;
+	border: none;
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.cart-icon {
+	font-size: 35px;
+}
+
+.my-progress-bar {
+	background-color: var(--primary-green);
+}
+
+.sale-title {
+	padding: 10px 20px;
+	width: 250px;
+	color: white;
+	border-radius: 5px;
+}
+
+.sale-detail {
+	padding: 5px 10px;
+}
+
+.discount-item {
+	border-radius: 5px;
+	border: 3px solid var(--primary-green);
+	padding: 10px 10px 20px 10px;
+	position: relative;
+}
+
+.copy-btn {
+	position: absolute;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 15px;
+	left: 120px;
+}
+
+.fa-info {
+	border-radius: 100%;
+	border: 1px solid var(--primary-green);
+	padding: 4px 10px;
+	color: var(--primary-green);
+	cursor: pointer;
+	left: 180px;
+	top: 10px;
+	position: absolute;
+}
+
+.product-images {
+	width: 300px;
+}
+
+.description-box,
+.buy-guide-box {
+	border: 1px solid var(--primary-green);
+	padding: 5px 10px;
+	margin-top: 10px;
+	border-radius: 5px;
+}
+
+.container-review {
+	margin-top: 10px;
+	position: relative;
+	max-height: 100%;
+	max-width: 100%;
+	background: #fffff;
+	padding: 20px 30px;
+	border: 1px solid #444;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.container-review .post {
+	display: none;
+}
+
+.container-review .text {
+	font-size: 25px;
+	color: #fe7;
+	font-weight: 500;
+}
+
+.review .edit {
+	font-size: 20px;
+	color: var(--primary-green);
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.container-review .edit:hover {
+	text-decoration: underline;
+}
+
+.container-review .star-rating input {
+	display: none;
+}
+
+.star-rating label {
+	font-size: 40px;
+	color: #444;
+	padding: 10px;
+	float: right;
+	transition: all 0.2s ease;
+}
+
+input:not(:checked)~label:hover,
+input:not(:checked)~label:hover~label {
+	color: #fd4;
+}
+
+input:checked~label {
+	color: #fd4;
+}
+
+input#rate-5:checked~label {
+	color: #fe7;
+	text-shadow: 0 0 20px #952;
+}
+
+#rate-1:checked~form header:before {
+	content: "Tôi Ghét Sản Phẩm ";
+}
+
+#rate-2:checked~form header:before {
+	content: "Tôi Không Thích Sản Phẩm ";
+}
+
+#rate-3:checked~form header:before {
+	content: "Sản Phẩm Bình Thường ";
+}
+
+#rate-4:checked~form header:before {
+	content: "Sản Phẩm Tốt ";
+}
+
+#rate-5:checked~form header:before {
+	content: "Sản Phẩm Tuyệt Vời";
+}
+
+.container-review form {
+	display: none;
+}
+
+input:checked~form {
+	display: block;
+}
+
+form header {
+	width: 100%;
+	font-size: 25px;
+	color: #fe7;
+	font-weight: 500;
+	margin: 5px 0 20px 0;
+	text-align: center;
+	transition: all 0.2s ease;
+}
+
+form .textarea {
+	height: 100px;
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #000;
+	overflow: hidden;
+}
+
+form .textarea textarea {
+	height: 100%;
+	width: 100%;
+	outline: none;
+	color: #000;
+	background: #fff;
+	padding: 10px;
+	font-size: 17px;
+	resize: none;
+}
+
+.textarea textarea:focus {
+	border-color: #444;
+}
+
+form .btn-review {
+	height: 45px;
+	width: 100%;
+	margin: 15px 0;
+}
+
+form .btn-review button {
+	border-radius: 5px;
+	height: 100%;
+	width: 100%;
+	border: 1px solid #444;
+	outline: none;
+	background: #679210;
+	color: #fff;
+	font-size: 17px;
+	font-weight: 500;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+form .btn-review button:hover {
+	background: #76A713;
+}
+
+.review {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.checked {
+	color: orange;
+}
+
+.date {
+	color: #76A713;
+	font-style: italic;
+	margin-top: 10px;
+	text-align: right;
+}

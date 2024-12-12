@@ -1,0 +1,171 @@
+#Change_Password .form-signup .form-group input {
+    width: 100%;
+    border-radius: 4px;
+    height: 40px;
+    font-size: 15px;
+    border: 1px solid #e6e6e6;
+    border-bottom: 2px solid #000;
+    padding: 1px 10px;
+    margin-bottom: 10px;
+}
+
+.signup ul li {
+    list-style-type: none;
+}
+
+#Change_Password,
+#address_your,
+#YOUR_ORDER {
+    display: none;
+}
+
+.adress-form {
+	position: fixed;
+	max-height: 100%;
+	max-width: 100%;
+	top: 50%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+	display: none;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: #333;
+	z-index: 999;
+}
+
+.adress-form-content {
+	width: 500px;
+    height: auto;
+	background-color: white;
+	border-radius: 8px;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.adress-form-content h2 {
+	font-size: 20px;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 10px;
+	position: relative;
+}
+
+#adress-close, #closeForm {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 20px;
+	cursor: pointer;
+	color: #666;
+}
+
+.adress-form-content p {
+	font-size: 14px;
+	margin-top: 10px;
+	color: #666;
+}
+.select2-container {
+    width: 100% !important;}
+.form-input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.group-country {
+	display: flex;
+	flex-direction: column;
+}
+.select-field-provinces{
+	width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+.select-field {
+	width: calc(50% - 5px);
+	display: inline-block;
+}
+
+.adress-form-content form input, select {
+	height: 40px;
+	display: block;
+	width: 100%!important;
+	border-bottom: 1px solid #ddd;
+	padding: 0 6px;
+	border-radius: 5px;
+}
+
+.adress-form-content form button {
+	font-size: 16px;
+	margin-top: 20px;
+	height: 40px;
+	width: 30%;
+	background-color: var(- -primary-green);
+	cursor: pointer;
+	outline: none;
+	border: none;
+	color: #ddd;
+}
+
+.select2-selection__rendered {
+	line-height: 35px !important;
+}
+
+.select2-container .select2-selection--single {
+	text-align: left;
+}
+
+.select2-selection__arrow {
+	height: 34px !important;
+}
+
+.form-group {
+	margin: 10px 0 !important;
+	width: 450px;
+}
+
+.active {
+	color: green;
+}
+
+.select2-container--default .select2-selection--single {
+	background-color: #fff;
+	border: none !important;
+}
+.address_info{
+	display: flex;
+}
+
+ .table-cart {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .table-cart, .table-cart th, .table-cart td {
+        border: 1px solid #2c3034;
+    }
+
+    .table-cart th {
+        background-color: #2c3034;
+        color: white;
+        text-align: center;
+    }
+
+    .table-cart td {
+        text-align: center;
+    }
+
+    .table-cart td p:empty {
+        display: none;
+    }
+
+.error{
+	color: red;
+}

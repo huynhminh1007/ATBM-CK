@@ -1,0 +1,40 @@
+
+u
+java:S2293î"YReplace the type specification in this constructor call with the diamond operator ("<>").(¿İ¥èüÿÿÿÿ
+|
+java:S1192"aDefine a constant instead of duplicating this literal " ORDER BY products.productId ASC" 5 times.(Ç‡·ÿıÿÿÿÿ
+b
+java:S1192"GDefine a constant instead of duplicating this literal "limit" 10 times.(úÒ…êÿÿÿÿÿ
+e
+java:S1192#"JDefine a constant instead of duplicating this literal " ORDER BY" 4 times.(Ì´û¨ûÿÿÿÿ
+n
+java:S1192)"XDefine a constant instead of duplicating this literal " products.productId ASC" 4 times.(¥üØÄ
+d
+java:S1192_"IDefine a constant instead of duplicating this literal "category" 3 times.(Ü˜òëúÿÿÿÿ
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(˜€S
+S
+java:S2589“"7Remove this expression which always evaluates to "true"(àü‘Âşÿÿÿÿ
+S
+java:S2589¸"7Remove this expression which always evaluates to "true"(àü‘Âşÿÿÿÿ
+S
+java:S2589§"7Remove this expression which always evaluates to "true"(àü‘Âşÿÿÿÿ
+S
+java:S2589ƒ"7Remove this expression which always evaluates to "true"(àü‘Âşÿÿÿÿ
+S
+java:S2589„"7Remove this expression which always evaluates to "true"(àü‘Âşÿÿÿÿ
+S
+java:S2589á"7Remove this expression which always evaluates to "true"(àü‘Âşÿÿÿÿ
+S
+java:S1155i">Use isEmpty() to check whether the collection is empty or not.(¤•î}
+A	java:S106ğ"+Replace this use of System.out by a logger.(úÎÎö
+3
+java:S1116ğ"Remove this empty statement.(úÎÎö
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
+?
+java:S1128
+")Remove this unused import 'Model.Status'.(Ò’÷‘
+C
+java:S1128"-Remove this unused import 'Model.Categories'.(ë™¨
+E
+java:S1128"/Remove this unused import 'RowMaper.RowMapper'.(œçñ²

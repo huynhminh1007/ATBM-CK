@@ -1,0 +1,6 @@
+
+‘	java:S117&"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü¥×»øÿÿÿÿJ$de174e6b-8da4-4209-b651-155d6efb8c2f
+”	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(˜€SJ$928039ef-dd53-4053-b83a-e3c5d3bf67f7
+m	java:S106?"+Replace this use of System.out by a logger.(‹ŠõŠ8½ïş‰û1J$6bb78285-9f99-4c1a-89f4-ad8aa0cc4e1c
+c
+java:S1128"'Remove this unused import 'Model.User'.(×ÈğŠJ$c7d4c4fb-c274-444c-b3c4-604a81c6355e

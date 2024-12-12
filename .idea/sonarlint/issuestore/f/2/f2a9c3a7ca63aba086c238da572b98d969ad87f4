@@ -1,0 +1,15 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(á–Ì“
+G
+java:S1948",Make "categories" transient or serializable.(âÿ‚Üıÿÿÿÿ
+>
+java:S1948"(Make "status" transient or serializable.(¡Ò
+\	java:S107"BConstructor has 11 parameters, which is greater than 7 authorized.(’Åæ™øÿÿÿÿ
+@
+java:S1128"*Remove this unused import 'java.sql.Date'.(ÙÀ½Ê
+j
+java:S1128"TRemove this unnecessary import: same package classes are always implicitly imported.(ë™¨
+M
+java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ
+T
+java:S1128">Remove this unused import 'java.util.logging.SimpleFormatter'.(ÇöÁ

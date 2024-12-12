@@ -1,0 +1,10 @@
+
+|
+java:S1488%"fImmediately return this expression instead of assigning it to the temporary variable "vietnameseDate".(ÿêà‹
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(á–Ì“
+^
+java:S3986$"HMake sure that week Year "YYYY" is expected here instead of Year "yyyy".(’ãÄ…
+D
+java:S1874$".Remove this use of "Locale"; it is deprecated.(’ãÄ…
+@
+java:S1128"*Remove this unused import 'java.sql.Date'.(ÙÀ½Ê

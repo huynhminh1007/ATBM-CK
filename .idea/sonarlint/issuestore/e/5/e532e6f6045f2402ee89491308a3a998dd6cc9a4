@@ -1,0 +1,8 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(á–Ì“
+A
+java:S1948"&Make "blog" transient or serializable.(·³Ú°ûÿÿÿÿ
+=
+java:S1948"(Make "images" transient or serializable.(‹ÞÔ=
+D
+java:S1948")Make "reviews" transient or serializable.(áË›Âúÿÿÿÿ

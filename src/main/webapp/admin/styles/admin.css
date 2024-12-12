@@ -1,0 +1,183 @@
+.header {
+	background-color: var(--primary-green);
+	height: 50px;
+	position: relative;
+}
+
+.sign-out-icon {
+	width: 60px;
+	font-size: 25px;
+	padding: 10px 20px;
+	background-color: var(--bs-yellow);
+	cursor: pointer;
+}
+
+.move-left {
+	margin-left: 0px !important;
+}
+
+.profile-box {
+	width: 100%;
+}
+
+.sub-menu a {
+	text-align: left !important;
+	/*    color: red !important;*/
+	font-size: 13px !important;
+	font-weight: normal !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	min-height: 10px !important;
+}
+
+#navigation {
+	/*  border-top: 1px solid rgba(0, 0, 0, 0.4 );*/
+	
+}
+
+.line:after {
+	content: "";
+	width: 200px;
+	display: block;
+	background-color: rgba(255, 255, 255, 0.5);
+	height: 1px;
+	margin-top: 5px;
+}
+
+.active {
+	background-color: white;
+	color: var(--primary-green) !important;
+}
+
+#navigation .nav-link:hover {
+	background-color: white;
+	color: var(--primary-green);
+}
+
+#navigation .nav-link, .parent-nav {
+	cursor: pointer;
+	color: white;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	border: 2px solid white;
+	border-radius: 5px;
+	width: 95%;
+	padding-top: 10px;
+	margin: 5px auto;
+	min-height: 50px;
+}
+
+.bg-grey {
+	background-color: #F5F5F5;
+}
+
+/*dashboard css" */
+.title {
+	border-left: 8px solid var(--bs-yellow);
+}
+
+.widget {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	padding: 10px 15px;
+	border-radius: 5px;
+	margin: 10px 15px;
+	width: 240px;
+	box-shadow: 5px 5px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.widget i {
+	justify-content: center;
+	font-size: 50px;
+	text-align: center;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.icon-green {
+	background-color: var(--primary-light-green);
+	color: var(--primary-green);
+}
+
+.icon-blue {
+	background-color: #ADCBF3;
+	color: #1D5AAB;
+}
+
+.icon-orange {
+	background-color: #FDE1C3;
+	color: #FF8B07;
+}
+
+.list-orders, .list-new-customers {
+	width: 95%;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.icon-red {
+	background-color: #F9BABA;
+	color: #DE2222;
+}
+
+.sub-title {
+	width: 95%;
+	border-bottom: 3px solid var(--bs-yellow);
+}
+
+.menu-icon {
+	font-size: 20px;
+	color: white;
+	padding: 10px;
+	border-radius: 10px;
+	border: 5px solid white;
+	cursor: pointer;
+	width: 50px;
+	margin-left: 245px;
+	transition: 1s ease;
+}
+
+.edit-btn i {
+	color: var(--bs-yellow);
+	font-size: 20px;
+}
+
+.delete-btn i {
+	color: var(--bs-danger);
+	font-size: 20px;
+}
+
+.status {
+	border-radius: 5px;
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+	padding: 2px 5px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	color: white;
+}
+
+.status-active {
+	background-color: var(--primary-green) !important;
+}
+
+.status-delivering {
+	background-color: var(--bs-yellow) !important;
+}
+
+.status-cancel {
+	background-color: var(--bs-red) !important;
+}
+
+input[type='checkbox'] {
+	margin: 4px 0 0;
+	line-height: normal;
+	width: 20px;
+	height: 20px;
+}
+
+#left {
+	min-height: 100%;
+}

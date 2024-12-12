@@ -1,0 +1,15 @@
+
+n	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(˜€S
+O
+java:S2479":Remove the non-escaped \u0009 character from this literal.(–·Ä
+A
+java:S1168"+Return an empty collection instead of null.(¥¹ï
+M
+java:S1135!"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿ
+M
+java:S1135'"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿ
+M
+java:S1135-"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿ
+E	java:S1063"+Replace this use of System.out by a logger.(®äçéûÿÿÿÿ
+O
+java:S24799":Remove the non-escaped \u0009 character from this literal.(–·Ä
