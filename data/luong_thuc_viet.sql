@@ -14,6 +14,8 @@
  Date: 18/07/2024 20:37:21
 */
 
+USE luong_thuc_viet;
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
