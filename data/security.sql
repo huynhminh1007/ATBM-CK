@@ -1,10 +1,10 @@
 USE luong_thuc_viet;
 
-DROP TABLE IF EXISTS `order_signature`;
+DROP TABLE IF EXISTS `order_signatures`;
 DROP TABLE IF EXISTS `keys`;
 
 CREATE TABLE `keys` (
-    keyId INT AUTO_INCREMENT PRIMARY KEY,
+    keyId INT AUTO_INCREMENT NOT NULL,
     userId INT NOT NULL,
     `key` TEXT NOT NULL,
     algorithm VARCHAR(100) NOT NULL,
@@ -12,11 +12,13 @@ CREATE TABLE `keys` (
     update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     is_active TINYINT(1) UNSIGNED DEFAULT '0' COMMENT '0: inactive, 1: active',
 		
+		PRIMARY KEY (`keyId`) USING BTREE,
+		
     INDEX `fk_key_users`(`userId` ASC) USING BTREE,
     CONSTRAINT `fk_key_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
-CREATE TABLE `order_signature` (
+CREATE TABLE order_signatures (
     signatureId INT AUTO_INCREMENT PRIMARY KEY,
 		keyId INT,
     signatureBase64 TEXT NOT NULL,    
@@ -30,3 +32,10 @@ CREATE TABLE `order_signature` (
     INDEX `fk_order_key_signature`(`orderId` ASC) USING BTREE,
     CONSTRAINT `fk_order_key_signature` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+
+INSERT INTO `keys` (userId, `key`, algorithm, is_active)
+VALUES (1, 'MIIDQzCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBgACggEBAIDqG05lKo7zBxuWn1rccr3Oy6ggOARdFV36LhlbUyH5iH6P2CQSrcYBcKCRlz/mxgExcqtlY54F22SN3J9nicnHUtdWqw5weKXw+NrepdU9nigTjajmHig4PZQ4Y3PnlJFsEfibEWmLNlnxcnQhljCHXvIn0kxmkuY24e827CMc1wmHyFLqMe76hBf9Ns30ciKBYL2cm2AS53CvfBDYprytOSD6Vml6GS8dtRTLNYOHzOXMs3I6JSdWf0LV27siSfGP6NtA6xYqEUTX+ShD3lSDQMXMEsfE4cB5koByAI0gn7dgg8qxRPdSWaq+7O13naglgHB+r0Fd6lhU8jv+dSw=', 
+'SHA224withDSA', 1);
+
+INSERT INTO order_signatures (keyId, signatureBase64, orderId, `hash`)
+VALUES (10, 'MD0CHQCWIs2Ld8j54jRoH4JcZiNqh4qSFVTWaXOcSsmMAhwSXoTLEnKRqNrkMUntH1eCXJvtDphtEVLI5OeR', 1, 'kwo6LLjqutZAUaVKSOTWA4qZgSd0lk7u5ozgvOn477QWZJzsWvZgJbAzldbF9JI6tt0e9WZ3jiczp8thUpJVUg==');
