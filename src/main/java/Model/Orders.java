@@ -40,21 +40,6 @@ public class Orders extends Model {
 		return discountId;
 	}
 
-	/**
-	 * Constructor khởi tạo một đối tượng Orders với các thuộc tính được cung cấp.
-	 *
-	 * @param id            Mã định danh của đơn hàng
-	 * @param statusId      Mã định danh trạng thái đơn hàng
-	 * @param userId        Mã định danh người dùng
-	 * @param totalPrice    Tổng giá trị đơn hàng
-	 * @param discountId    Mã định danh giảm giá
-	 * @param paymentMethod Phương thức thanh toán
-	 * @param shippingFee   Phí vận chuyển
-	 * @param address       Địa chỉ giao hàng
-	 * @param dateCreated   Ngày tạo đơn hàng
-	 * @param lastUpdated   Ngày cập nhật đơn hàng
-	 */
-
 	// Getter và Setter cho các thuộc tính
 
 	public int getId() {

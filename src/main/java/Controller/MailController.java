@@ -74,28 +74,112 @@ public class MailController extends HttpServlet {
         response.getWriter().append("Order confirmation email sent successfully.");
     }
 
+//    public void sendOrderConfirmationEmail(String to, double amount, Orders orders) {
+//        double totalPrice = orders.getTotalPrice();
+//        String formattedTotalPrice = String.format("%,.0f", totalPrice);
+//        String voucherInfo = getVoucherInfo(orders, amount);
+//        String logoUrl = "https://firebasestorage.googleapis.com/v0/b/i-love-truyen.appspot.com/o/ltv%2Flogo_large.png?alt=media&token=a0cf5e2a-a21e-46c4-b036-d38354736cfb";
+//
+//        String body = "<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 8px;\">\r\n"
+//                + "<h2 style=\"text-align: center; color: #4CAF50;\"><img src=\"" + logoUrl + "\" alt=\"Logo\" style=\"height: 70px; width: auto; margin-bottom: 10px;\"><br>Thông tin đơn hàng</h2>\r\n"
+//                + "<div style=\"background-color: #fff; padding: 15px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\">\r\n"
+//                + "<p>Xin chào bạn," + to + "</p>\r\n"
+//                + "<p>Đơn hàng của bạn đã được xác nhận. Dưới đây là thông tin chi tiết:</p>\r\n"
+//                + "<div style=\"margin-bottom: 20px;\">\r\n"
+//                + generateOrderDetailsHtml(orders)
+//                + "</div>\r\n"
+//                + "<p style=\"margin-bottom: 10px;\"><strong>Tổng tiền hàng:</strong> " + String.format("%,.0f", (totalPrice - orders.getShippingFee()) + amount) + " VNĐ</p>\r\n"
+//                + "<p style=\"margin-bottom: 10px;\">" + voucherInfo + "</p>\r\n"
+//                + "<p style=\"margin-bottom: 10px;\"><strong>Phí vận chuyển:</strong> " + String.format("%,.0f", orders.getShippingFee()) + " VNĐ</p>\r\n"
+//                + "<p style=\"margin-bottom: 10px;\"><strong>Tổng tiền thanh toán:</strong> " + formattedTotalPrice + " VNĐ</p>\r\n"
+//                + "</div>\r\n"
+//                + "<p style=\"text-align: center; margin-top: 20px; color: #777;\">Trân trọng,<br> Website Lương Thực Việt</p>\r\n"
+//                + "</div>";
+//
+//        String subject = "Xác nhận đơn hàng #" + orders.getId() + " từ Lương Thực Việt";
+//        executorService.submit(() -> emailService.send(to, subject, body));
+//
+//    }
+
     public void sendOrderConfirmationEmail(String to, double amount, Orders orders) {
         double totalPrice = orders.getTotalPrice();
         String formattedTotalPrice = String.format("%,.0f", totalPrice);
         String voucherInfo = getVoucherInfo(orders, amount);
+        String username = orders.getUser().getUsername();
+        String userId = String.valueOf(orders.getUser().getId());
         String logoUrl = "https://firebasestorage.googleapis.com/v0/b/i-love-truyen.appspot.com/o/ltv%2Flogo_large.png?alt=media&token=a0cf5e2a-a21e-46c4-b036-d38354736cfb";
 
-        String body = "<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 8px;\">\r\n"
-                + "<h2 style=\"text-align: center; color: #4CAF50;\"><img src=\"" + logoUrl + "\" alt=\"Logo\" style=\"height: 50px; width: auto; margin-bottom: 10px;\"><br>Thông tin đơn hàng</h2>\r\n"
-                + "<div style=\"background-color: #fff; padding: 15px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\">\r\n"
-                + "<p>Xin chào bạn," + to + "</p>\r\n"
-                + "<p>Đơn hàng của bạn đã được xác nhận. Dưới đây là thông tin chi tiết:</p>\r\n"
-                + "<div style=\"margin-bottom: 20px;\">\r\n"
-                + generateOrderDetailsHtml(orders)
-                + "</div>\r\n"
-                + "<p style=\"margin-bottom: 10px;\"><strong>Tổng tiền hàng:</strong> " + String.format("%,.0f", (totalPrice - orders.getShippingFee()) + amount) + " VNĐ</p>\r\n"
-                + "<p style=\"margin-bottom: 10px;\">" + voucherInfo + "</p>\r\n"
-                + "<p style=\"margin-bottom: 10px;\"><strong>Phí vận chuyển:</strong> " + String.format("%,.0f", orders.getShippingFee()) + " VNĐ</p>\r\n"
-                + "<p style=\"margin-bottom: 10px;\"><strong>Tổng tiền thanh toán:</strong> " + formattedTotalPrice + " VNĐ</p>\r\n"
-                + "</div>\r\n"
-                + "<p style=\"text-align: center; margin-top: 20px; color: #777;\">Trân trọng,<br> Website Lương Thực Việt</p>\r\n"
-                + "</div>";
+        String activationUrl = "http://localhost:8080//kich-hoat.jsp"; // Link kích hoạt
 
+        StringBuilder bodyBuilder = new StringBuilder();
+        bodyBuilder.append("""
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 8px;">
+            <h2 style="text-align: center; color: #4CAF50;">
+                <img src="%s" alt="Logo" style="height: 70px; width: auto; margin-bottom: 5px;"><br>Thông tin đơn hàng
+            </h2>
+            <div style="background-color: #fff; padding: 15px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                <p>Xin chào, %s</p>
+                <p><strong>QUAN TRỌNG:</strong> Đây là chứng nhận quyền sử dụng các tiện ích cho phần mềm của Lương Thực Việt. Vui lòng lưu một bản sao tài liệu này để tham khảo sau.</p>
+                <p><strong>CHI TIẾT GIẤY PHÉP:</strong></p>
+                <ul>
+                    <li>Loại: Giấy phép cá nhân</li>
+                    <li>Mã tham chiếu*: R21106426</li>
+                    <li>Ngày cấp: 21 Tháng 5, 2024</li>
+                    <li>Hiệu lực đến: 20 Tháng 6, 2024</li>
+                    <li>Số người dùng được phép: 1</li>
+                </ul>
+                <p>Kích hoạt phần mềm: <a href="%s">Kích hoạt ngay</a></p>
+    """.formatted(logoUrl, to, activationUrl));
+
+        // Thêm thông tin người dùng
+        bodyBuilder.append("<p><strong>Người sử dụng:</strong>");
+        if (username != null && !username.isBlank()) {
+            bodyBuilder.append(" Tên: ").append(username).append(",");
+        }
+        bodyBuilder.append(" Mã khách hàng: ").append(userId).append("</p>");
+
+        bodyBuilder.append("""
+        <p>ID Giấy phép: LYQ7H1BSK3</p>
+        <p><strong>Dưới đây là danh sách thông tin chi tiết đơn hàng của bạn:</strong></p>
+        <div style="margin-bottom: 20px;">
+            %s
+        </div>
+        <p style="margin-bottom: 10px;"><strong>Tổng tiền hàng:</strong> %,.0f VNĐ</p>
+        <p style="margin-bottom: 10px;">%s</p>
+        <p style="margin-bottom: 10px;"><strong>Phí vận chuyển:</strong> %,.0f VNĐ</p>
+        <p style="margin-bottom: 10px;"><strong>Tổng tiền thanh toán:</strong> %s VNĐ</p>
+            </div>
+        <p style="text-align: center; margin-top: 20px; color: #777;">Trân trọng,<br> Website Lương Thực Việt</p>
+        </div>
+    """.formatted(
+                generateOrderDetailsHtml(orders),
+                (totalPrice - orders.getShippingFee()) + amount,
+                voucherInfo,
+                orders.getShippingFee(),
+                formattedTotalPrice
+        ));
+        bodyBuilder.append("""
+        <p>ID Giấy phép: LYQ7H1BSK3</p>
+        <p><strong>Dưới đây là danh sách thông tin chi tiết đơn hàng của bạn:</strong></p>
+        <div style="margin-bottom: 20px;">
+            %s
+        </div>
+        <p style="margin-bottom: 10px;"><strong>Tổng tiền hàng:</strong> %,.0f VNĐ</p>
+        <p style="margin-bottom: 10px;">%s</p>
+        <p style="margin-bottom: 10px;"><strong>Phí vận chuyển:</strong> %,.0f VNĐ</p>
+        <p style="margin-bottom: 10px;"><strong>Tổng tiền thanh toán:</strong> %s VNĐ</p>
+            </div>
+        <p style="text-align: center; margin-top: 20px; color: #777;">Trân trọng,<br> Website Lương Thực Việt</p>
+        </div>
+    """.formatted(
+                generateOrderDetailsHtml(orders),
+                (totalPrice - orders.getShippingFee()) + amount,
+                voucherInfo,
+                orders.getShippingFee(),
+                formattedTotalPrice
+        ));
+
+        String body = bodyBuilder.toString();
         String subject = "Xác nhận đơn hàng #" + orders.getId() + " từ Lương Thực Việt";
         executorService.submit(() -> emailService.send(to, subject, body));
 

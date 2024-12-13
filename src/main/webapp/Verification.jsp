@@ -50,8 +50,7 @@ String email = request.getAttribute("email") == null ? "" : (String) request.get
     <text x="100" y="120" text-anchor="middle">seconds</text>
  	 </svg>
 		</div>
-		<p id="resendButton" class="resend-button"
-			padding-top: 50px;" onclick="resend()">Gửi lại mã xác thực</p>
+		<p id="resendButton" class="resend-button padding-top: 50px;" onclick="resend()">Gửi lại mã xác thực</p>
 	</div>
 	<!--    footer-->
 	<footer id="footer">
