@@ -60,7 +60,7 @@ public class OrderDAO extends AbtractDAO<Orders> implements IOrderDAO {
 //		order_details.add(od1);
 //		order_details.add(od2);
 		OrderDAO dao = new OrderDAO();
-		Orders o1 = dao.findOrderById(19).get(0);
+		Orders o1 = dao.findOrderById(18).get(0);
 		o1.setStatus(new Status(5, null));
 		System.out.println(dao.findOrderById(29));
 	}
