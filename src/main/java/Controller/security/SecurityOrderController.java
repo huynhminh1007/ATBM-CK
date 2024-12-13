@@ -127,7 +127,6 @@ public class SecurityOrderController extends HttpServlet {
 
     /**
      * Get short info for hash
-     *
      * @param order
      * @return
      */
@@ -140,7 +139,6 @@ public class SecurityOrderController extends HttpServlet {
         result.addProperty("discountId", order.getDiscountId());
         result.addProperty("paymentMethod", order.getPaymentMethod());
         result.addProperty("shippingFee", order.getShippingFee());
-        result.addProperty("address", order.getAddress());
         result.addProperty("dateCreated", order.getDateCreated().toString());
 
         JsonArray detailsArray = new JsonArray();

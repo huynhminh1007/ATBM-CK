@@ -57,6 +57,8 @@ public class OrderDetailsDAO extends AbtractDAO<Order_details> implements IOrder
 		String sql = """
 								SELECT * FROM orderdetails
 				JOIN products on products.productId = orderdetails.productId
+				JOIN categories on categories.categoryId = products.categoryId
+				JOIN status on status.statusId = products.statusId
 				where orderdetails.orderId = ?
 								""";
 		return querry(sql, new MyOrderDetailsMapper(), orderId);
