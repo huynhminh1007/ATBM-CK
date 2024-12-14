@@ -123,4 +123,11 @@ public class DigitalSignature {
     public String getPublicKey() {
         return Base64.getEncoder().encodeToString(publicKey.getEncoded());
     }
+
+    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException, SignatureException, InvalidKeyException {
+        DigitalSignature signature = new DigitalSignature();
+        signature.setAlgorithm("SHA224withDSA");
+        signature.loadPublicKey("MIIDQzCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBgACggEBAIDqG05lKo7zBxuWn1rccr3Oy6ggOARdFV36LhlbUyH5iH6P2CQSrcYBcKCRlz/mxgExcqtlY54F22SN3J9nicnHUtdWqw5weKXw+NrepdU9nigTjajmHig4PZQ4Y3PnlJFsEfibEWmLNlnxcnQhljCHXvIn0kxmkuY24e827CMc1wmHyFLqMe76hBf9Ns30ciKBYL2cm2AS53CvfBDYprytOSD6Vml6GS8dtRTLNYOHzOXMs3I6JSdWf0LV27siSfGP6NtA6xYqEUTX+ShD3lSDQMXMEsfE4cB5koByAI0gn7dgg8qxRPdSWaq+7O13naglgHB+r0Fd6lhU8jv+dSw=");
+        System.out.println(signature.verify("0crLXlH+0o7YFAMdH8ggRNsJrORPcYzNAZxDKUFZouYbvCDZQt8cSMShbO2Z9DPHCNiTT6F8NU3IjeRJYcubUw==", "MDwCHB9xztsJcPJxNq4Rs6hpWLDvyAHzczygRVFzXkYCHFJgn/4tVC+S+ZnS6NRGMJ2Zvcj2OLZ48lG/aQw="));
+    }
 }

@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : localhost 3306
  Source Server Type    : MySQL
  Source Server Version : 80030 (8.0.30)
  Source Host           : localhost:3306
@@ -11,10 +11,8 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 18/07/2024 20:37:21
+ Date: 14/12/2024 19:58:32
 */
-
-USE luong_thuc_viet;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -449,6 +447,28 @@ INSERT INTO `images` VALUES (275, 81, 'Bánh bao nhân khoai môn C.P 270g', 'im
 INSERT INTO `images` VALUES (276, 81, 'Bánh bao nhân khoai môn C.P 270g', 'images\\product-images\\\nbanh-bao-nhan-khoai-mon-cp-270g-202212261129172965.jpg\n');
 
 -- ----------------------------
+-- Table structure for keys
+-- ----------------------------
+DROP TABLE IF EXISTS `keys`;
+CREATE TABLE `keys`  (
+  `keyId` int NOT NULL AUTO_INCREMENT,
+  `userId` int NOT NULL,
+  `key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `algorithm` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `begin_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_active` tinyint UNSIGNED NULL DEFAULT 0 COMMENT '0: inactive, 1: active',
+  PRIMARY KEY (`keyId`) USING BTREE,
+  INDEX `fk_key_users`(`userId` ASC) USING BTREE,
+  CONSTRAINT `fk_key_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of keys
+-- ----------------------------
+INSERT INTO `keys` VALUES (10, 13, 'MIIDQzCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBgACggEBAIDqG05lKo7zBxuWn1rccr3Oy6ggOARdFV36LhlbUyH5iH6P2CQSrcYBcKCRlz/mxgExcqtlY54F22SN3J9nicnHUtdWqw5weKXw+NrepdU9nigTjajmHig4PZQ4Y3PnlJFsEfibEWmLNlnxcnQhljCHXvIn0kxmkuY24e827CMc1wmHyFLqMe76hBf9Ns30ciKBYL2cm2AS53CvfBDYprytOSD6Vml6GS8dtRTLNYOHzOXMs3I6JSdWf0LV27siSfGP6NtA6xYqEUTX+ShD3lSDQMXMEsfE4cB5koByAI0gn7dgg8qxRPdSWaq+7O13naglgHB+r0Fd6lhU8jv+dSw=', 'SHA224withDSA', '2024-12-14 19:57:59', '2024-12-14 19:57:59', 1);
+
+-- ----------------------------
 -- Table structure for logs
 -- ----------------------------
 DROP TABLE IF EXISTS `logs`;
@@ -463,7 +483,7 @@ CREATE TABLE `logs`  (
   `level` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`logId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1351 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1380 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of logs
@@ -1792,6 +1812,30 @@ INSERT INTO `logs` VALUES (1347, '127.0.0.1', '/CartController', 'Viet Nam', '',
 INSERT INTO `logs` VALUES (1348, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'View', 'INFO', '2024-07-18 19:38:45');
 INSERT INTO `logs` VALUES (1349, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'View', 'INFO', '2024-07-18 19:46:45');
 INSERT INTO `logs` VALUES (1350, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'View', 'INFO', '2024-07-18 19:46:50');
+INSERT INTO `logs` VALUES (1351, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:29:54');
+INSERT INTO `logs` VALUES (1353, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:30:29');
+INSERT INTO `logs` VALUES (1354, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:30:59');
+INSERT INTO `logs` VALUES (1355, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:31:25');
+INSERT INTO `logs` VALUES (1356, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:31:25');
+INSERT INTO `logs` VALUES (1357, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:33:11');
+INSERT INTO `logs` VALUES (1358, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 11:33:17');
+INSERT INTO `logs` VALUES (1359, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:33:19');
+INSERT INTO `logs` VALUES (1361, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:37:53');
+INSERT INTO `logs` VALUES (1362, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 11:38:03');
+INSERT INTO `logs` VALUES (1363, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:38:04');
+INSERT INTO `logs` VALUES (1365, '127.0.0.1', '//Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:52:43');
+INSERT INTO `logs` VALUES (1366, '127.0.0.1', '//Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 11:54:41');
+INSERT INTO `logs` VALUES (1367, '127.0.0.1', '//Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 11:55:29');
+INSERT INTO `logs` VALUES (1368, '127.0.0.1', '//Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:56:16');
+INSERT INTO `logs` VALUES (1369, '127.0.0.1', '//Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 11:56:27');
+INSERT INTO `logs` VALUES (1370, '127.0.0.1', '//Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 11:57:03');
+INSERT INTO `logs` VALUES (1371, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 12:01:22');
+INSERT INTO `logs` VALUES (1372, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 14:41:51');
+INSERT INTO `logs` VALUES (1373, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 14:41:58');
+INSERT INTO `logs` VALUES (1374, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 14:41:59');
+INSERT INTO `logs` VALUES (1376, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 19:54:59');
+INSERT INTO `logs` VALUES (1377, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 19:55:08');
+INSERT INTO `logs` VALUES (1378, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 19:55:09');
 
 -- ----------------------------
 -- Table structure for news
@@ -1803,11 +1847,34 @@ CREATE TABLE `news`  (
   `blogId` int NULL DEFAULT NULL,
   `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`newId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of news
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for order_signatures
+-- ----------------------------
+DROP TABLE IF EXISTS `order_signatures`;
+CREATE TABLE `order_signatures`  (
+  `signatureId` int NOT NULL AUTO_INCREMENT,
+  `keyId` int NULL DEFAULT NULL,
+  `signatureBase64` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `orderId` int NOT NULL,
+  `hash` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `signed_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`signatureId`) USING BTREE,
+  INDEX `fk_key`(`keyId` ASC) USING BTREE,
+  INDEX `fk_order_key_signature`(`orderId` ASC) USING BTREE,
+  CONSTRAINT `fk_key` FOREIGN KEY (`keyId`) REFERENCES `keys` (`keyId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_order_key_signature` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of order_signatures
+-- ----------------------------
+INSERT INTO `order_signatures` VALUES (10, 10, 'MD0CHQCWIs2Ld8j54jRoH4JcZiNqh4qSFVTWaXOcSsmMAhwSXoTLEnKRqNrkMUntH1eCXJvtDphtEVLI5OeR', 1, 'kwo6LLjqutZAUaVKSOTWA4qZgSd0lk7u5ozgvOn477QWZJzsWvZgJbAzldbF9JI6tt0e9WZ3jiczp8thUpJVUg==', '2024-12-14 19:57:59');
 
 -- ----------------------------
 -- Table structure for orderdetails
@@ -2012,6 +2079,11 @@ INSERT INTO `orderdetails` VALUES (78, 2, 149000, 4);
 INSERT INTO `orderdetails` VALUES (79, 6, 113000, 5);
 INSERT INTO `orderdetails` VALUES (80, 2, 149000, 5);
 INSERT INTO `orderdetails` VALUES (81, 6, 113000, 1);
+INSERT INTO `orderdetails` VALUES (82, 5, 108540, 1);
+INSERT INTO `orderdetails` VALUES (83, 6, 113000, 1);
+INSERT INTO `orderdetails` VALUES (84, 5, 108540, 1);
+INSERT INTO `orderdetails` VALUES (85, 5, 108540, 1);
+INSERT INTO `orderdetails` VALUES (86, 5, 108540, 1);
 
 -- ----------------------------
 -- Table structure for orders
@@ -2034,12 +2106,12 @@ CREATE TABLE `orders`  (
   INDEX `fk_orders_users`(`userId` ASC) USING BTREE,
   CONSTRAINT `fk_orders_status` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_orders_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 82 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 87 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES (1, 6, 2, 729000, 0, 'COD', 0, '123 Nguyen Hue Street, Ho Chi Minh City', '2024-03-12 01:05:45', '2024-07-12 02:09:04', 'Giao hàng nhanh');
+INSERT INTO `orders` VALUES (1, 6, 13, 729000, 0, 'COD', 0, '123 Nguyen Hue Street, Ho Chi Minh City', '2024-12-14 19:57:47', '2024-12-14 19:57:47', 'Giao hàng nhanh');
 INSERT INTO `orders` VALUES (2, 6, 3, 266000, 1, 'Credit card', 0, '456 Le Loi Street, Ho Chi Minh City', '2024-03-12 01:05:56', '2024-07-12 02:09:06', 'Không cần gấp');
 INSERT INTO `orders` VALUES (3, 6, 4, 39000, 1, 'PayPal', 0, '789 Pham Ngu Lao Street, Ho Chi Minh City', '2024-02-12 01:05:55', '2024-07-12 02:09:08', 'Không cần gấp');
 INSERT INTO `orders` VALUES (4, 6, 2, 1978700, 0, 'COD', 40000, 'Khu dân cư quận Gò Vấp 13 Go Vap Ho Chi Minh City', '2024-07-13 04:15:18', '2024-07-13 04:15:18', 'Giao hàng theo giờ hành chính');
@@ -2119,6 +2191,11 @@ INSERT INTO `orders` VALUES (78, 4, 4, 516800, 2, 'COD', 40000, '456, Xã Phúc 
 INSERT INTO `orders` VALUES (79, 4, 4, 492000, 2, 'COD', 40000, '780, Xã Cốc Đán, Huyện Ngân Sơn, Tỉnh Bắc Kạn, Người nhận: Nguyễn Thị Chúc Ngân 123, Số điện thoại: 0869769142', '2024-07-17 18:17:41', '2024-07-17 18:17:41', '');
 INSERT INTO `orders` VALUES (80, 4, 4, 636000, 2, 'COD', 40000, '780, Xã Cốc Đán, Huyện Ngân Sơn, Tỉnh Bắc Kạn, Người nhận: Nguyễn Thị Chúc Ngân 123, Số điện thoại: 0869769142', '2024-07-17 18:35:47', '2024-07-17 18:35:47', '');
 INSERT INTO `orders` VALUES (81, 4, 4, 153000, 0, 'COD', 40000, '456, Xã Phúc Ứng, Huyện Sơn Dương, Tỉnh Tuyên Quang, Người nhận: Chúc Ngân123, Số điện thoại: 0463632573', '2024-07-18 17:54:29', '2024-07-18 17:54:29', '');
+INSERT INTO `orders` VALUES (82, 4, 13, 148540, 0, 'COD', 40000, 'Tỉnh Hà Giang, Huyện Quang Bình, Xã Xuân Minh, Người nhận: Minh đẹp trai, Số điện thoại: 0222222222', '2024-12-14 11:30:09', '2024-12-14 11:30:09', '');
+INSERT INTO `orders` VALUES (83, 4, 13, 153000, 0, 'COD', 40000, 'Tỉnh Hà Giang, Huyện Quang Bình, Xã Xuân Minh, Người nhận: Minh đẹp trai, Số điện thoại: 0222222222', '2024-12-14 11:33:29', '2024-12-14 11:33:29', '');
+INSERT INTO `orders` VALUES (84, 4, 13, 148540, 0, 'COD', 40000, 'Tỉnh Hà Giang, Huyện Quang Bình, Xã Xuân Minh, Người nhận: Minh đẹp trai, Số điện thoại: 0222222222', '2024-12-14 11:38:15', '2024-12-14 11:38:15', '');
+INSERT INTO `orders` VALUES (85, 4, 13, 148540, 0, 'COD', 40000, 'Tỉnh Hà Giang, Huyện Bắc Quang, Xã Vĩnh Hảo, Người nhận: Minh đẹp trai, Số điện thoại: 0222222222', '2024-12-14 14:43:14', '2024-12-14 14:43:14', '');
+INSERT INTO `orders` VALUES (86, 4, 13, 148540, 0, 'COD', 40000, 'Tỉnh Hà Giang, Huyện Bắc Quang, Thị trấn Việt Quang, Người nhận: Minh đẹp trai, Số điện thoại: 0222222222', '2024-12-14 19:55:20', '2024-12-14 19:55:20', '');
 
 -- ----------------------------
 -- Table structure for producthaspromotion
@@ -2145,7 +2222,7 @@ CREATE TABLE `productimports`  (
   `costPrice` decimal(10, 0) NULL DEFAULT NULL,
   `quantity` int NULL DEFAULT NULL,
   `dateCreated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of productimports
@@ -2185,8 +2262,8 @@ INSERT INTO `products` VALUES (1, 2, 'Gạo thơm đặc sản Neptune ST25 túi
 INSERT INTO `products` VALUES (2, 2, 'Gạo giống Nhật Bản Vinh Hiển Taiyo túi 5kg', 'images/product-images/gao-giong-nhat-ban-vinh-hien-taiyo-tui-5kg-202007211001455095.jpg', 100000, 149000, 2, 8, 25.00, 10, '2023-01-20 00:00:00', '2023-01-21 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (3, 2, 'Gạo Hạt Ngọc Trời Tiên Nữ túi 5kg', 'images/product-images/-202210270821594671.jpg', 100000, 120000, 3, 8, 10.00, 223, '2023-01-25 00:00:00', '2023-02-26 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (4, 2, 'Gạo lài sữa Đồng Việt túi 5kg', 'images/product-images/gao-lai-sua-dong-viet-tui-5kg-202212280858091468.jpg', 100000, 115000, 4, 8, 10.00, 33, '2022-12-29 00:00:00', '2023-03-24 00:00:00', '2024-07-17 15:39:42');
-INSERT INTO `products` VALUES (5, 2, 'Gạo ST25 Đồng Việt túi 5kg', 'images/product-images/gao-st25-thuong-hang-dong-viet-tui-5kg-202212280854102020.jpg', 100000, 134000, 5, 8, 5.00, 55, '2023-01-10 00:00:00', '2023-01-10 00:00:00', '2024-07-17 15:39:42');
-INSERT INTO `products` VALUES (6, 2, 'Gạo thơm A An ST21 túi 5kg', 'images/product-images/gao-thom-a-an-st21-tui-5kg-202006061602569575.jpg', 123000, 133000, 1, 8, 5.00, 25, '2023-01-16 00:00:00', '2023-01-17 00:00:00', '2024-07-17 15:39:42');
+INSERT INTO `products` VALUES (5, 2, 'Gạo ST25 Đồng Việt túi 5kg', 'images/product-images/gao-st25-thuong-hang-dong-viet-tui-5kg-202212280854102020.jpg', 100000, 134000, 5, 8, 5.00, 51, '2023-01-10 00:00:00', '2023-01-10 00:00:00', '2024-07-17 15:39:42');
+INSERT INTO `products` VALUES (6, 2, 'Gạo thơm A An ST21 túi 5kg', 'images/product-images/gao-thom-a-an-st21-tui-5kg-202006061602569575.jpg', 123000, 133000, 1, 8, 5.00, 24, '2023-01-16 00:00:00', '2023-01-17 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (7, 2, 'Gạo Lài hương Đồng Việt túi 5kg', 'images/product-images/gao-lai-huong-dong-viet-tui-5kg-202212280845480911.jpg', 100000, 120000, 1, 8, 5.00, 13, '2023-01-17 00:00:00', '2023-01-18 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (8, 14, 'Gạo lức huyết rồng PMT túi 2kg', 'images/product-images/-202210150918339457.jpg', 800000, 100000, 1, 8, 5.00, 50, '2023-03-22 00:00:00', '2023-04-06 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (9, 2, 'Gạo thơm Vua Gạo ST25 túi 5kg', 'images/product-images/-202306191015007772.jpg', 124000, 134000, 1, 9, 5.00, 0, '2023-05-20 00:00:00', '2023-05-20 00:00:00', '2024-07-17 15:39:42');
@@ -2282,36 +2359,36 @@ CREATE TABLE `products_sale`  (
 -- ----------------------------
 -- Records of products_sale
 -- ----------------------------
-INSERT INTO `products_sale` VALUES (1, '20.000đ', 119000, 149, 109, '2024-01-29 08:50:02', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (5, '19%', 108540, 331, 173, '2024-01-28 18:48:53', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (6, '20.000đ', 113000, 444, 216, '2024-01-26 10:50:27', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (10, '30.000đ', 127000, 145, 125, '2024-01-29 16:05:06', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (15, '42%', 10440, 280, 204, '2024-01-21 07:25:44', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (17, '51%', 10290, 317, 312, '2024-01-27 00:11:43', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (18, '44%', 13440, 195, 125, '2024-01-29 05:56:23', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (23, '8.000đ', 10000, 353, 190, '2024-01-22 03:27:48', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (26, '50%', 47500, 454, 222, '2024-01-21 02:12:57', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (28, '16%', 94080, 132, 112, '2024-01-23 12:49:19', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (30, '45%', 41250, 336, 301, '2024-01-28 06:38:42', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (32, '10.000đ', 23000, 296, 275, '2024-01-28 07:36:25', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (35, '43%', 73530, 499, 221, '2024-01-27 09:19:18', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (37, '47%', 13250, 309, 248, '2024-01-28 15:30:51', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (40, '58%', 13860, 490, 391, '2024-01-25 07:11:48', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (43, '28%', 44640, 421, 348, '2024-01-24 09:01:24', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (44, '33%', 44220, 279, 267, '2024-01-29 02:59:19', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (47, '30%', 25200, 228, 203, '2024-01-29 20:55:34', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (49, '32%', 18360, 113, 110, '2024-01-27 20:10:45', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (51, '35%', 33150, 413, 282, '2024-01-21 16:07:15', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (52, '31%', 73830, 321, 104, '2024-01-29 01:38:23', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (56, '41%', 9204, 281, 136, '2024-01-26 08:39:31', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (57, '5.000đ', 30000, 356, 255, '2024-01-29 12:52:26', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (66, '21%', 197500, 138, 125, '2024-01-26 17:23:54', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (71, '17%', 63080, 114, 102, '2024-01-23 04:32:33', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (72, '14%', 60200, 438, 319, '2024-01-28 14:16:17', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (73, '18%', 37720, 383, 268, '2024-01-28 06:52:25', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (78, '47%', 49290, 441, 261, '2024-01-24 10:08:22', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (79, '39%', 61000, 423, 300, '2024-01-22 20:10:16', '2024-08-06 00:21:56');
-INSERT INTO `products_sale` VALUES (81, '35%', 55250, 368, 233, '2024-01-21 20:54:43', '2024-08-06 00:21:56');
+INSERT INTO `products_sale` VALUES (1, '20.000đ', 119000, 149, 109, '2024-01-29 08:50:02', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (5, '19%', 108540, 331, 173, '2024-01-28 18:48:53', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (6, '20.000đ', 113000, 444, 216, '2024-01-26 10:50:27', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (10, '30.000đ', 127000, 145, 125, '2024-01-29 16:05:06', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (15, '42%', 10440, 280, 204, '2024-01-21 07:25:44', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (17, '51%', 10290, 317, 312, '2024-01-27 00:11:43', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (18, '44%', 13440, 195, 125, '2024-01-29 05:56:23', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (23, '8.000đ', 10000, 353, 190, '2024-01-22 03:27:48', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (26, '50%', 47500, 454, 222, '2024-01-21 02:12:57', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (28, '16%', 94080, 132, 112, '2024-01-23 12:49:19', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (30, '45%', 41250, 336, 301, '2024-01-28 06:38:42', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (32, '10.000đ', 23000, 296, 275, '2024-01-28 07:36:25', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (35, '43%', 73530, 499, 221, '2024-01-27 09:19:18', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (37, '47%', 13250, 309, 248, '2024-01-28 15:30:51', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (40, '58%', 13860, 490, 391, '2024-01-25 07:11:48', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (43, '28%', 44640, 421, 348, '2024-01-24 09:01:24', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (44, '33%', 44220, 279, 267, '2024-01-29 02:59:19', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (47, '30%', 25200, 228, 203, '2024-01-29 20:55:34', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (49, '32%', 18360, 113, 110, '2024-01-27 20:10:45', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (51, '35%', 33150, 413, 282, '2024-01-21 16:07:15', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (52, '31%', 73830, 321, 104, '2024-01-29 01:38:23', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (56, '41%', 9204, 281, 136, '2024-01-26 08:39:31', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (57, '5.000đ', 30000, 356, 255, '2024-01-29 12:52:26', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (66, '21%', 197500, 138, 125, '2024-01-26 17:23:54', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (71, '17%', 63080, 114, 102, '2024-01-23 04:32:33', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (72, '14%', 60200, 438, 319, '2024-01-28 14:16:17', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (73, '18%', 37720, 383, 268, '2024-01-28 06:52:25', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (78, '47%', 49290, 441, 261, '2024-01-24 10:08:22', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (79, '39%', 61000, 423, 300, '2024-01-22 20:10:16', '2025-12-14 11:29:31');
+INSERT INTO `products_sale` VALUES (81, '35%', 55250, 368, 233, '2024-01-21 20:54:43', '2025-12-14 11:29:31');
 
 -- ----------------------------
 -- Table structure for promotions
@@ -2720,5 +2797,3 @@ INSERT INTO `wishlists` VALUES (3, 3);
 INSERT INTO `wishlists` VALUES (4, 6);
 
 SET FOREIGN_KEY_CHECKS = 1;
-
-UPDATE products_sale SET endDateDiscount = DATE_ADD(NOW(), INTERVAL 12 MONTH);

@@ -1,11 +1,14 @@
 package Controller.security;
 
+import Database.KeyDAO;
 import Database.OrderDAO;
+import Database.OrderSignatureDAO;
 import Model.Order_details;
 import Model.Orders;
 import Model.User;
 import Model.security.DigitalSignature;
 import Model.security.Hash;
+import Model.security.Key;
 import Utils.JsonUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -28,12 +31,17 @@ public class SecurityOrderController extends HttpServlet {
 
     private DigitalSignature signature;
     private Hash hashAlgorithm;
-    OrderDAO orderDAO;
+
+    private OrderDAO orderDAO;
+    private OrderSignatureDAO orderSignatureDAO;
+    private KeyDAO keyDAO;
 
     public SecurityOrderController() {
         signature = new DigitalSignature();
         hashAlgorithm = new Hash();
         orderDAO = new OrderDAO();
+        keyDAO = new KeyDAO();
+        orderSignatureDAO = new OrderSignatureDAO();
     }
 
     @Override
@@ -87,7 +95,7 @@ public class SecurityOrderController extends HttpServlet {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         int orderId = Integer.parseInt(req.getParameter("orderId"));
-        // Change logic for get Order
+
         Orders order = orderDAO.findById(orderId);
         if (order == null) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Không tìm thấy đơn hàng");
@@ -111,22 +119,46 @@ public class SecurityOrderController extends HttpServlet {
      * @param req
      * @param resp
      */
-    private void verifySignature(HttpServletRequest req, HttpServletResponse resp) {
+    private void verifySignature(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession();
-        Orders orders = (Orders) session.getAttribute("order_sign");
-        String hash = (String) session.getAttribute("hash");
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
+        int orderId = Integer.parseInt(req.getParameter("orderId"));
+        String signed = req.getParameter("digitalSignature");
 
-        // Change logic to get signature
-        String signed = req.getParameter("sign");
+        Orders order = orderDAO.findById(orderId);
+        if (order == null) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Không tìm thấy đơn hàng");
+            return;
+        }
 
+        Key key = keyDAO.findByUser(userId);
+
+        if (key == null) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Bạn chưa có Public Key");
+            return;
+        }
+        JsonObject response = new JsonObject();
+        int status;
+
+        String shortInfo = getShortInfo(user, order);
         try {
-            // Logic here
+            signature.setAlgorithm(key.getAlgorithm());
+            signature.loadPublicKey(key.getKey());
+            String hash = hashAlgorithm.hashBase64(shortInfo, "utf-8");
+
+
+            // Nếu xác thực thành công
             if (signature.verify(hash, signed)) {
-
+                status = HttpServletResponse.SC_OK;
             } else {
-
+                status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
             }
-        } catch (InvalidKeyException | SignatureException e) {
+            JsonUtils.sendJsonResponse(resp, status, response.toString());
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException | InvalidKeyException | SignatureException |
+                 InvalidKeySpecException e) {
+            status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+            JsonUtils.sendJsonResponse(resp, status, response.toString());
             e.printStackTrace();
         }
     }
