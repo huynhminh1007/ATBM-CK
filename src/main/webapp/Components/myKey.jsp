@@ -1,3 +1,5 @@
+<%@ page import="Model.security.Key" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -72,9 +74,18 @@
         #key-table tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
+        .text-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px; /* Chiều rộng tối đa */
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
+
 <table id="key-table" class="dataTable" aria-describedby="key-table_info" style="width: 100%;">
     <thead>
     <tr>
@@ -83,42 +94,46 @@
         <th>Thuật toán</th>
         <th>Ngày Bắt Đầu</th>
         <th>Ngày Kết Thúc</th>
-<%--        <th>Chức năng</th>--%>
+        <th>Trạng Thái</th>
     </tr>
     </thead>
-    <c:if test="">
-        <c:forEach var="key" items="">
+    <c:if test="${not empty keys}">
+        <c:forEach var="key" items="${keys}" varStatus="status">
             <tr>
                 <td class="text-center">
-                    <p></p>
+                    <p>${key.id}</p>
                 </td>
                 <td class="text-center">
-                    <p></p>
+                    <p class="text-ellipsis" title="${key.key}">${key.key}</p>
+                </td>
+
+                <td class="text-center">
+                    <p>${key.algorithm}</p>
                 </td>
                 <td class="text-center">
-                    <p></p>
+                    <p>${key.beginDate}</p>
                 </td>
                 <td class="text-center">
-                    <p></p>
+                    <p>${key.updateDate}</p>
                 </td>
-                <td class="text-center" style="color: #e39b04">
-                    <p></p>
+                <td class="text-center" style="color: ${key.isActive ? 'green' : 'red'};">
+                    <p>${key.isActive ? 'Active' : 'Inactive'}</p>
                 </td>
-<%--                <td class="text-center">--%>
-<%--                    <div class="btn-group">--%>
-<%--                        <a target="_blank"--%>
-<%--                           href="">--%>
-<%--                            <button--%>
-<%--                                    class="btn btn-secondary btn-sm me-1 btn-key-detail"--%>
-<%--                                    data-target=>--%>
-<%--                                <i class="fa-solid fa-square-minus"></i>--%>
-<%--                            </button>--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
+
+            <%--                <td class="text-center" style="color:<c:if test="${key.isActive}==true">'green'</c:if> <c:if test="${key.isActive}==false">'red'</c:if>;">--%>
+<%--                    <p><c:if test="${key.isActive}==true">'Active'</c:if> <c:if test="${key.isActive}==false">'Inactive'</c:if></p>--%>
 <%--                </td>--%>
             </tr>
         </c:forEach>
     </c:if>
+    <c:if test="${empty keys}">
+        <tr>
+            <td colspan="6" class="text-center">
+                <p>Không có Key nào được tìm thấy.</p>
+            </td>
+        </tr>
+    </c:if>
+    </tbody>
 </table>
 <script>
     let table = new DataTable('#key-table', {

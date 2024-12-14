@@ -2,10 +2,8 @@ package Controller;
 
 import Controller.cart.Cart;
 import Model.*;
-import Services.ICartService;
-import Services.LogServiceManager;
-import Services.MLogFactory;
-import Services.UserServices;
+import Model.security.Key;
+import Services.*;
 import Utils.BHash;
 import Utils.GoogleLoginHelper;
 
@@ -24,6 +22,10 @@ public class GoogleLogin extends HttpServlet {
     UserServices userServices;
     @Inject
     private ICartService cartService;
+
+    @Inject
+    KeyService keyService;
+
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,6 +53,7 @@ public class GoogleLogin extends HttpServlet {
             user.setStatus(new Status(1, ""));
             session.setAttribute("wishlist", new Wishlist());
             userServices.save(user);
+
             user = userServices.findUserByEmail(acc.getEmail());
         } else {
             List<CartItem> cartItems = cartService.findByUserId(user.getId());
@@ -63,13 +66,19 @@ public class GoogleLogin extends HttpServlet {
                 cart = new Cart();
             }
             cart.addAll(user.getId(), map);
+           var keys = keyService.findByUsers(user.getId());
+            session.setAttribute("keys", keys);
+//            keys.forEach(System.out::println);
+
             session.setAttribute("cart", cart);
             session.setAttribute("wishlist", new Wishlist(userServices.getWishlist(user.getId())));
         }
         Log log = MLogFactory.getLog(request, this, 2);
         log.setDescription("Người dùng đăng nhập bằng tài khoản Google");
         LogServiceManager.getLogService().saveLog(log);
+
         session.setAttribute("user", user);
+
         String url = "tai-khoan.jsp";
         response.sendRedirect(url);
     }

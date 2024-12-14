@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -12,10 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import Model.Address;
 import Model.Log;
 import Model.User;
-import Services.IAddressService;
-import Services.IUserService;
-import Services.LogServiceManager;
-import Services.MLogFactory;
+import Model.security.Key;
+import Services.*;
 import Utils.BHash;
 
 /**
@@ -29,6 +28,7 @@ public class UserInfo extends HttpServlet {
 
     @Inject
     IUserService userService;
+
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -76,6 +76,8 @@ public class UserInfo extends HttpServlet {
                 .getLog(request, this, 2,
                         "Người dùng cập nhập thông tin: Họ và tên mới  " + newFullName + ", số điện thoại mới: " + newPhone));
         request.getSession().setAttribute("user", user);
+
+
         request.getRequestDispatcher("tai-khoan.jsp").forward(request, response);
     }
 

@@ -80,4 +80,7 @@
     </div>
     </footer>
 </body>
+<script>
+    console.log("footer");
+</script>
 </html>

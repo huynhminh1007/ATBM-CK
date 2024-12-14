@@ -10,6 +10,7 @@ import Model.security.DigitalSignature;
 import Model.security.Hash;
 import Model.security.Key;
 import Utils.JsonUtils;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -88,10 +89,12 @@ public class SecurityOrderController extends HttpServlet {
 
             keyDAO.disableLatestKey(user.getId());
             keyDAO.insert(new Key(user.getId(), signature.getPublicKey(), algorithm, true));
-
+            var keys = keyDAO.findByUsers(user.getId());
+            session.setAttribute("keys", keys);
             // Phản hồi thành công
             resp.setStatus(HttpServletResponse.SC_OK);
-            resp.getWriter().write("Public key uploaded and processed successfully!");
+            String json = new Gson().toJson(keys); // Sử dụng Gson để chuyển đổi đối tượng thành JSON
+            resp.getWriter().write(json);
 
         } catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             try {
