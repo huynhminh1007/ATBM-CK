@@ -8,7 +8,7 @@ import java.util.Optional;
 public class KeyDAO extends AbtractDAO<Key> {
 
     public Key findByUser(int userId) {
-        String sql = "SELECT * FROM `keys` WHERE userId = ? ORDER BY begin_date LIMIT 1";
+        String sql = "SELECT * FROM `keys` WHERE userId = ? ORDER BY begin_date DESC LIMIT 1";
         return Optional.ofNullable(querry(sql, new KeyMapper(), userId))
                 .filter(keys -> !keys.isEmpty())
                 .map(keys -> keys.get(0))
@@ -33,12 +33,14 @@ public class KeyDAO extends AbtractDAO<Key> {
 
     public int disableLatestKey(int userId) {
         Key latestKey = findByUser(userId);
+        System.out.println(latestKey);
         return disableKey(latestKey.getId());
     }
 
     public static void main(String[] args) {
         KeyDAO dao = new KeyDAO();
-        Key key = dao.findByUser(13);
-        System.out.println(key);
+//        Key key = dao.findByUser(13);
+//        System.out.println(key);
+        dao.disableLatestKey(13);
     }
 }
