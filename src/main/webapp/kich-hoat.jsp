@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,42 +18,111 @@
     <title>Title</title>
 </head>
 <body>
-    <jsp:include page="Components/header.jsp" />
-    <section class="verify-section">
-        <div class="container justify-content-center align-items-center">
-            <div class="verify-box">
-                <h1 class="verify-title text-center py-2">Xác thực đơn hàng</h1>
-                <div id="error-message" class="text-danger text-center"></div>
-                <form method="post" action="verifyOrder" id="verifyForm" accept-charset="UTF-8" class="verify-form">
-                    <!-- Mã hash -->
-                    <div class="my-5 input-group">
-                        <input type="text" class="form-control py-3" placeholder="Mã hash" aria-label="Mã hash" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-secondary px-4 py-2" type="button" id="button-addon2">Copy</button>
-                    </div>
+<jsp:include page="Components/header.jsp"/>
+<section class="verify-section">
+    <div class="container justify-content-center align-items-center">
+        <div class="verify-box">
+            <h1 class="verify-title text-center py-2">Xác thực đơn hàng</h1>
+            <div id="error-message" class="text-danger text-center"></div>
+            <form method="post" action="verifyOrder" id="verifyForm" accept-charset="UTF-8" class="verify-form">
+                <!-- Mã hash -->
+                <div class="my-5 input-group">
+                    <input id="hashInput" type="text" class="form-control py-3" placeholder="Mã hash"
+                           aria-label="Mã hash"
+                           readonly>
+                    <button class="btn btn-outline-secondary px-4 py-2" type="button" id="button-addon2">Copy</button>
+                </div>
 
-                    <!-- Chữ ký điện tử -->
-                    <div class="input-group my-5">
-                            <label for="digitalSignature" style="align-content: space-around" class="col-sm-1 col-form-label">Chữ ký điện tử:</label>
-                            <div class="col-sm-11 ps-4 p-0">
-                                <input type="text" id="digitalSignature" name="digitalSignature" class="form-control py-3 w-100" placeholder="Nhập chữ ký điện tử" required>
-                            </div>
+                <!-- Chữ ký điện tử -->
+                <div class="input-group my-5">
+                    <label for="digitalSignature" style="align-content: space-around" class="col-sm-1 col-form-label">Chữ
+                        ký điện tử:</label>
+                    <div class="col-sm-11 ps-4 p-0">
+                        <input type="text" id="digitalSignature" name="digitalSignature" class="form-control py-3 w-100"
+                               placeholder="Nhập chữ ký điện tử" required>
                     </div>
+                </div>
 
-                    <!-- Nút xác thực -->
-                    <div class="pull-xs-left justify-content-center text-center">
-                        <button type="submit" value=""
-                                class="btn btn-green px-5 py-3 my-2" style="color: #fff">Xác thực</button>
-                    </div>
-                </form>
-            </div>
+                <!-- Nút xác thực -->
+                <div class="pull-xs-left justify-content-center text-center">
+                    <button type="button" id="submitButton" class="btn btn-green px-5 py-3 my-2" style="color: #fff">Xác
+                        thực
+                    </button>
+                </div>
+            </form>
         </div>
-    </section>
-    <footer>
-        <jsp:include page="Components/footer.jsp" />
-    </footer>
+    </div>
+</section>
+<footer>
+    <jsp:include page="Components/footer.jsp"/>
+</footer>
 </body>
 
 <script>
+    document.getElementById("button-addon2").addEventListener("click", function () {
+        const hashInput = document.querySelector('input[placeholder="Mã hash"]');
+        hashInput.select();
+        document.execCommand("copy");
+        alert("Mã hash đã được sao chép!");
+    });
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('orderId');
+
+    // Gửi yêu cầu AJAX để lấy mã hash
+    $(document).ready(function () {
+        $.ajax({
+            url: '/order-security',
+            type: 'POST',
+            data: {
+                action: 'send-hash',
+                orderId: orderId
+            },
+            success: function (response) {
+                $('#hashInput').val(response.hash);
+            },
+            error: function () {
+                $('#error-message').text('Có lỗi xảy ra khi lấy mã hash.');
+            }
+        });
+
+        $('#submitButton').click(function (e) {
+            e.preventDefault();
+
+            // Lấy giá trị của chữ ký điện tử
+            var digitalSignature = $('#digitalSignature').val();
+
+            // Kiểm tra nếu chữ ký không rỗng
+            if (digitalSignature.trim() === '') {
+                alert('Chữ ký điện tử không được để trống!');
+                return;
+            }
+
+            // Gửi dữ liệu qua AJAX
+            $.ajax({
+                url: 'verify-signature', // Action URL
+                type: 'POST',
+                data: {
+                    orderId: orderId,
+                    digitalSignature: digitalSignature // Gửi chữ ký điện tử lên server
+                },
+                success: function (response) {
+                    // Xử lý khi nhận được phản hồi từ server
+                    if (response.status === 'success') {
+                        alert('Xác thực thành công!');
+                        // Nếu cần, bạn có thể chuyển hướng đến trang khác, chẳng hạn:
+                        // window.location.href = '/trang-chuc-nang-khac';
+                    } else {
+                        alert('Xác thực không thành công: ' + response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý lỗi
+                    alert('Có lỗi xảy ra: ' + error);
+                }
+            });
+        });
+    });
 </script>
+
 </html>

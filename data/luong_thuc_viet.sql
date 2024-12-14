@@ -2661,7 +2661,7 @@ INSERT INTO `users` VALUES (9, '$2a$04$p8j7jJjP44dJr7tJr1qNzOf4fMeh5bhVFvIIJJHMY
 INSERT INTO `users` VALUES (10, '$2a$04$3KDYTPpiP1GYFYfuCjx1VuivXcn1PK629xnQozA/h3oVjfKytRxba', 'Nguyễn Thị Chúc Ngân', 'ag@gmail.com', '0869769142', 2, 1, '2024-01-24 20:56:25', '2024-01-24 20:56:25');
 INSERT INTO `users` VALUES (11, '$2a$04$a15S6so/.fnSa3fDVFcUOu3OXbz1dpCZ.25VpZPKU4ShukFkluprO', 'Liêu Thị Diễm Quỳnh', '21130509@st.hcmuaf.edu.vn', '0785145453', 2, 1, '2024-01-24 20:56:26', '2024-01-24 20:56:26');
 INSERT INTO `users` VALUES (12, '$2a$04$85li0fsOjQ1FyT0BtG5/rOBTwBkxe4Fo/zMrwHdhn3/qTGZSbHJ0a', 'Dư Thành Minh', 'abc@gmail.com', '0925821477', 2, 1, '2024-01-24 20:56:34', '2024-01-24 20:56:34');
-INSERT INTO `users` VALUES (13, '$2a$04$3KDYTPpiP1GYFYfuCjx1VuivXcn1PK629xnQozA/h3oVjfKytRxba', 'Trần Văn Long', '21130445@st.hcmuaf.edu.vn', '0222222222', 2, 1, '2024-07-17 12:03:28', '2024-07-17 12:03:28');
+INSERT INTO `users` VALUES (13, '$2a$04$3KDYTPpiP1GYFYfuCjx1VuivXcn1PK629xnQozA/h3oVjfKytRxba', 'Minh đẹp trai', '21130445@st.hcmuaf.edu.vn', '0222222222', 2, 1, '2024-07-17 12:03:28', '2024-07-17 12:03:28');
 INSERT INTO `users` VALUES (17, '$2a$04$3KDYTPpiP1GYFYfuCjx1VuivXcn1PK629xnQozA/h3oVjfKytRxba', 'Lê Anh Hùng', 'huynh123minh@gmail.com', '0222222222', 2, 1, '2024-07-10 01:45:17', '2024-07-10 01:45:17');
 INSERT INTO `users` VALUES (18, '$04$l3Qw4OrBxY41Qbxhy2SzPOVY0Dlj4/GS6bz.ZBj.Ih05N5XMH5wca', 'Tăng Thanh Tuệ', 'huyminh@gmail.com', '0925451547', 2, 1, '2023-11-15 20:23:46', '2023-11-15 20:23:46');
 INSERT INTO `users` VALUES (19, '$2a$04$3KDYTPpiP1GYFYfuCjx1VuivXcn1PK629xnQozA/h3oVjfKytRxba', 'Lê Văn Sĩ', 'siteoma@gmail.com', '0925811454', 2, 1, '2024-07-10 01:43:08', '2024-07-10 01:43:08');
@@ -2720,3 +2720,5 @@ INSERT INTO `wishlists` VALUES (3, 3);
 INSERT INTO `wishlists` VALUES (4, 6);
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+UPDATE products_sale SET endDateDiscount = DATE_ADD(NOW(), INTERVAL 12 MONTH);

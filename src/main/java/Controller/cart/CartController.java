@@ -53,7 +53,7 @@ public class CartController extends HttpServlet {
             action = action.trim().toUpperCase();
         } else
             action = "";
-
+        System.out.println(action);
         switch (action) {
             case "ADD" -> addToCart(req, resp);
             case "UPDATE" -> update(req, resp);
@@ -109,6 +109,7 @@ public class CartController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         int userId = -1;
         if (user != null) userId = user.getId();
+
         if (cart.add(userId, idProduct, quantity)) {
             session.setAttribute("cart", cart);
             addJsonCart(cart.getItem(idProduct), jsonResp);
