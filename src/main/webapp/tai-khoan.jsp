@@ -73,6 +73,9 @@
                         style="cursor: pointer; font-size: 20px">Số địa chỉ
                         (${user.getAddresses().size()})
                     </li>
+                    <li class="key-management" data-target="Key-Manager"
+                        style="cursor: pointer; font-size: 20px">Quản lý khóa
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-9">
@@ -231,6 +234,58 @@
                     </div>
                     <jsp:include page="Components/addAddress.jsp"/>
                 </div>
+
+                <div class="block-account" id="Key-Manager">
+                    <div class="recent-key">
+                        <div class="table-responsive-block tab-all"
+                             style="overflow-x: auto;">
+                            <h5 class="title-acccount">QUẢN LÝ KHÓA</h5>
+                            <!-- Nút tạo khóa và upload khóa -->
+                            <div style="margin-bottom: 20px; text-align: right;">
+                                <button id="create-key-btn" class="btn btn-primary">
+                                    <i class="fa fa-plus-circle"></i> Tải tool
+                                </button>
+                                <button id="upload-key-btn" class="btn btn-secondary" style="margin-left: 10px;">
+                                    <i class="fa fa-upload"></i> Upload Khóa
+                                </button>
+                            </div>
+
+                            <!-- Form upload khóa -->
+                            <form id="key-upload-form" style="display: none; margin-top: 20px;">
+                                <div style="margin-bottom: 10px;">
+                                    <label for="key-file-input">Chọn Tệp Khóa:</label>
+                                    <input type="file" id="key-file-input" class="form-control" accept=".txt,.json" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Lưu Thông Tin</button>
+                            </form>
+
+                            <!-- Khung hiển thị thông tin khóa hiện tại -->
+                            <div id="current-key-container" class="card my-4" style="padding: 20px; display: flex; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+                                <h6 style="margin-bottom: 15px; font-weight: bold;">Khóa Hiện Tại</h6>
+                                <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
+                                        <strong>Khóa:</strong> <span id="current-key">---</span>
+                                    </p>
+                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
+                                        <strong>Thuật Toán:</strong> <span id="current-algorithm">---</span>
+                                    </p>
+                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
+                                        <strong>Ngày Bắt Đầu:</strong> <span id="current-start-date">---</span>
+                                    </p>
+                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
+                                        <strong>Ngày Kết Thúc:</strong> <span id="current-end-date">---</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Giao diện danh sách khóa -->
+                            <jsp:include page="Components/myKey.jsp" />
+                        </div>
+                        <div
+                                class="paginate-pages pull-right page-account text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -272,11 +327,77 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Hướng Dẫn Tạo Khóa -->
+<div class="modal fade" id="createKeyModal" tabindex="-1" aria-labelledby="createKeyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createKeyModalLabel">Hướng Dẫn Tạo Khóa Chữ Ký Điện Tử</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="m-0"><strong>Bước 1:</strong> Tải công cụ hỗ trợ tạo khóa tại link bên dưới.</p>
+                <a href="link-to-tool-download" class="btn btn-link" target="_blank">Tải Công Cụ</a>
+                <p><strong>Bước 2:</strong> Thực hiện các bước sau trong công cụ:</p>
+                <ul>
+                    <li> Chọn thuật toán (ví dụ: RSA, DSA).</li>
+                    <li> Nhập độ dài khóa hoặc các thông tin bổ sung (nếu cần).</li>
+                    <li> Nhấn nút <strong>"Tạo Khóa"</strong> để tạo khóa.</li>
+                    <li> Tải khóa về file bằng nút <strong>"Save Key"</strong>.</li>
+                </ul>
+                <p><strong>Bước 3:</strong> Sau khi tạo khóa, nhập thông tin khóa vào hệ thống để sử dụng.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 <footer>
     <jsp:include page="Components/footer.jsp"/>
 </footer>
 
 <script>
+
+    // Hiển thị form upload khi nhấn nút Upload Khóa
+    document.getElementById('upload-key-btn').addEventListener('click', function() {
+        var form = document.getElementById('key-upload-form');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Xử lý khi người dùng chọn tệp và submit form
+    document.getElementById('key-upload-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var fileInput = document.getElementById('key-file-input');
+        var file = fileInput.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var fileContent = event.target.result;
+                try {
+                    // Giả sử tệp JSON chứa thông tin khóa
+                    var keyData = JSON.parse(fileContent);
+                    // Hiển thị thông tin khóa
+                    document.getElementById('current-key').textContent = keyData.key || '---';
+                    document.getElementById('current-algorithm').textContent = keyData.algorithm || '---';
+                    document.getElementById('current-start-date').textContent = keyData.startDate || '---';
+                    document.getElementById('current-end-date').textContent = keyData.endDate || '---';
+                } catch (error) {
+                    alert('Định dạng tệp không hợp lệ!');
+                }
+            };
+            reader.readAsText(file);
+        }
+    });
+
+    $('#create-key-btn').on('click', function () {
+        $('#createKeyModal').modal('show');
+    });
+
     $("#change_customer_password").on("submit", function () {
         event.preventDefault();
         changePassword();
@@ -443,6 +564,8 @@
             showMenu(id);
         })
     });
+
+
 </script>
 </body>
 <style>
