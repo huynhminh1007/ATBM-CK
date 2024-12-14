@@ -267,7 +267,7 @@
                                         <strong>Khóa:</strong> <span id="current-key">---</span>
                                     </p>
                                     <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Thuật Toán:</strong> <span id="current-algorithm">---</span>
+                                        <strong>Trạng thái:</strong> <span id="current-status">---</span>
                                     </p>
                                     <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
                                         <strong>Ngày Bắt Đầu:</strong> <span id="current-start-date">---</span>
@@ -383,7 +383,7 @@
                     var keyData = JSON.parse(fileContent);
                     // Hiển thị thông tin khóa
                     document.getElementById('current-key').textContent = keyData.key || '---';
-                    document.getElementById('current-algorithm').textContent = keyData.algorithm || '---';
+                    // document.getElementById('current-status').textContent = keyData.algorithm || '---';
                     document.getElementById('current-start-date').textContent = keyData.startDate || '---';
                     document.getElementById('current-end-date').textContent = keyData.endDate || '---';
                 } catch (error) {
