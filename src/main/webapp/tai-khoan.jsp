@@ -367,33 +367,6 @@
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
     });
 
-    // Xử lý khi người dùng chọn tệp và submit form
-    document.getElementById('key-upload-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        var fileInput = document.getElementById('key-file-input');
-        var file = fileInput.files[0];
-
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function(event) {
-                var fileContent = event.target.result;
-                try {
-                    // Giả sử tệp JSON chứa thông tin khóa
-                    var keyData = JSON.parse(fileContent);
-                    // Hiển thị thông tin khóa
-                    document.getElementById('current-key').textContent = keyData.key || '---';
-                    // document.getElementById('current-status').textContent = keyData.algorithm || '---';
-                    document.getElementById('current-start-date').textContent = keyData.startDate || '---';
-                    document.getElementById('current-end-date').textContent = keyData.endDate || '---';
-                } catch (error) {
-                    alert('Định dạng tệp không hợp lệ!');
-                }
-            };
-            reader.readAsText(file);
-        }
-    });
-
     $('#create-key-btn').on('click', function () {
         $('#createKeyModal').modal('show');
     });
