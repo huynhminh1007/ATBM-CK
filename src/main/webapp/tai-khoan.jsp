@@ -267,7 +267,7 @@
                                         <strong>Khóa:</strong> <span id="current-key">---</span>
                                     </p>
                                     <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Thuật Toán:</strong> <span id="current-algorithm">---</span>
+                                        <strong>Trạng thái:</strong> <span id="current-status">---</span>
                                     </p>
                                     <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
                                         <strong>Ngày Bắt Đầu:</strong> <span id="current-start-date">---</span>
@@ -338,7 +338,7 @@
             </div>
             <div class="modal-body">
                 <p class="m-0"><strong>Bước 1:</strong> Tải công cụ hỗ trợ tạo khóa tại link bên dưới.</p>
-                <a href="link-to-tool-download" class="btn btn-link" target="_blank">Tải Công Cụ</a>
+                <a href="https://drive.google.com/file/d/1nU5_gSpPd6Bj_-i2YrgObpApZAF8jKJo/view?usp=drive_link" class="btn btn-link" target="_blank">Tải Công Cụ</a>
                 <p><strong>Bước 2:</strong> Thực hiện các bước sau trong công cụ:</p>
                 <ul>
                     <li> Chọn thuật toán (ví dụ: RSA, DSA).</li>
@@ -383,7 +383,7 @@
                     var keyData = JSON.parse(fileContent);
                     // Hiển thị thông tin khóa
                     document.getElementById('current-key').textContent = keyData.key || '---';
-                    document.getElementById('current-algorithm').textContent = keyData.algorithm || '---';
+                    // document.getElementById('current-status').textContent = keyData.algorithm || '---';
                     document.getElementById('current-start-date').textContent = keyData.startDate || '---';
                     document.getElementById('current-end-date').textContent = keyData.endDate || '---';
                 } catch (error) {
