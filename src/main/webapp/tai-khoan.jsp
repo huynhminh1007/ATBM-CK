@@ -338,7 +338,7 @@
             </div>
             <div class="modal-body">
                 <p class="m-0"><strong>Bước 1:</strong> Tải công cụ hỗ trợ tạo khóa tại link bên dưới.</p>
-                <a href="link-to-tool-download" class="btn btn-link" target="_blank">Tải Công Cụ</a>
+                <a href="https://drive.google.com/file/d/1nU5_gSpPd6Bj_-i2YrgObpApZAF8jKJo/view?usp=drive_link" class="btn btn-link" target="_blank">Tải Công Cụ</a>
                 <p><strong>Bước 2:</strong> Thực hiện các bước sau trong công cụ:</p>
                 <ul>
                     <li> Chọn thuật toán (ví dụ: RSA, DSA).</li>

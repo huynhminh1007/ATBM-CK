@@ -27,10 +27,13 @@
             <form method="post" action="verifyOrder" id="verifyForm" accept-charset="UTF-8" class="verify-form">
                 <!-- Mã hash -->
                 <div class="my-5 input-group">
-                    <input id="hashInput" type="text" class="form-control py-3" placeholder="Mã hash"
-                           aria-label="Mã hash"
-                           readonly>
-                    <button class="btn btn-outline-secondary px-4 py-2" type="button" id="button-addon2">Copy</button>
+                        <label for="hashInput" style="align-content: space-around" class="col-sm-1 col-form-label me-4" title="Mã hash đã được tạo tự động và có thể sao chép bằng cách nhấn nút Copy.">
+                            Mã hash:
+                        </label>
+                            <input id="hashInput" type="text" class="form-control py-3 col-sm-11" placeholder="Mã hash"
+                                   aria-label="Mã hash"
+                                   readonly>
+                            <button class="btn btn-outline-secondary px-4 py-2" type="button" id="button-addon2">Copy</button>
                 </div>
 
                 <!-- Chữ ký điện tử -->
