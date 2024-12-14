@@ -83,7 +83,7 @@
         <th>Thuật toán</th>
         <th>Ngày Bắt Đầu</th>
         <th>Ngày Kết Thúc</th>
-        <th>Chức năng</th>
+<%--        <th>Chức năng</th>--%>
     </tr>
     </thead>
     <c:if test="">
@@ -104,18 +104,18 @@
                 <td class="text-center" style="color: #e39b04">
                     <p></p>
                 </td>
-                <td class="text-center">
-                    <div class="btn-group">
-                        <a target="_blank"
-                           href="">
-                            <button
-                                    class="btn btn-secondary btn-sm me-1 btn-key-detail"
-                                    data-target=>
-                                <i class="fa-solid fa-square-minus"></i>
-                            </button>
-                        </a>
-                    </div>
-                </td>
+<%--                <td class="text-center">--%>
+<%--                    <div class="btn-group">--%>
+<%--                        <a target="_blank"--%>
+<%--                           href="">--%>
+<%--                            <button--%>
+<%--                                    class="btn btn-secondary btn-sm me-1 btn-key-detail"--%>
+<%--                                    data-target=>--%>
+<%--                                <i class="fa-solid fa-square-minus"></i>--%>
+<%--                            </button>--%>
+<%--                        </a>--%>
+<%--                    </div>--%>
+<%--                </td>--%>
             </tr>
         </c:forEach>
     </c:if>

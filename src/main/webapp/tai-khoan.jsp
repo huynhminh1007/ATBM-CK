@@ -338,7 +338,7 @@
             </div>
             <div class="modal-body">
                 <p class="m-0"><strong>Bước 1:</strong> Tải công cụ hỗ trợ tạo khóa tại link bên dưới.</p>
-                <a href="link-to-tool-download" class="btn btn-link" target="_blank">Tải Công Cụ</a>
+                <a href="https://drive.google.com/file/d/1nU5_gSpPd6Bj_-i2YrgObpApZAF8jKJo/view?usp=drive_link" class="btn btn-link" target="_blank">Tải Công Cụ</a>
                 <p><strong>Bước 2:</strong> Thực hiện các bước sau trong công cụ:</p>
                 <ul>
                     <li> Chọn thuật toán (ví dụ: RSA, DSA).</li>
@@ -365,6 +365,33 @@
     document.getElementById('upload-key-btn').addEventListener('click', function() {
         var form = document.getElementById('key-upload-form');
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Xử lý khi người dùng chọn tệp và submit form
+    document.getElementById('key-upload-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var fileInput = document.getElementById('key-file-input');
+        var file = fileInput.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var fileContent = event.target.result;
+                try {
+                    // Giả sử tệp JSON chứa thông tin khóa
+                    var keyData = JSON.parse(fileContent);
+                    // Hiển thị thông tin khóa
+                    document.getElementById('current-key').textContent = keyData.key || '---';
+                    // document.getElementById('current-status').textContent = keyData.algorithm || '---';
+                    document.getElementById('current-start-date').textContent = keyData.startDate || '---';
+                    document.getElementById('current-end-date').textContent = keyData.endDate || '---';
+                } catch (error) {
+                    alert('Định dạng tệp không hợp lệ!');
+                }
+            };
+            reader.readAsText(file);
+        }
     });
 
     $('#create-key-btn').on('click', function () {
