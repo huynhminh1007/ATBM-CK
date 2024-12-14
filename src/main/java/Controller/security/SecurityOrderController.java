@@ -1,10 +1,12 @@
 package Controller.security;
 
+import Database.OrderDAO;
 import Model.Order_details;
 import Model.Orders;
 import Model.User;
 import Model.security.DigitalSignature;
 import Model.security.Hash;
+import Utils.JsonUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -26,10 +28,12 @@ public class SecurityOrderController extends HttpServlet {
 
     private DigitalSignature signature;
     private Hash hashAlgorithm;
+    OrderDAO orderDAO;
 
     public SecurityOrderController() {
         signature = new DigitalSignature();
         hashAlgorithm = new Hash();
+        orderDAO = new OrderDAO();
     }
 
     @Override
@@ -38,8 +42,14 @@ public class SecurityOrderController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect(req.getContextPath() + "/login.jsp");
+            return;
+        }
 
+        String action = req.getParameter("action").toLowerCase();
         switch (action.toLowerCase()) {
             case "upload-key" -> uploadKey(req, resp);
             case "send-hash" -> sendHashOrder(req, resp);
@@ -69,22 +79,27 @@ public class SecurityOrderController extends HttpServlet {
     /**
      * Send a hash text of order
      * User use this hash text to sign
+     *
      * @param req
      * @param resp
      */
-    private void sendHashOrder(HttpServletRequest req, HttpServletResponse resp) {
+    private void sendHashOrder(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
+        int orderId = Integer.parseInt(req.getParameter("orderId"));
         // Change logic for get Order
-        Orders order = new Orders();
+        Orders order = orderDAO.findById(orderId);
+        if (order == null) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Không tìm thấy đơn hàng");
+            return;
+        }
 
         String shortInfo = getShortInfo(user, order);
         try {
             String hash = hashAlgorithm.hashBase64(shortInfo, "utf-8");
-            session.setAttribute("order_sign", order);
-            session.setAttribute("hash", hash);
-
-            // Send an email with hash
+            JsonObject response = new JsonObject();
+            response.addProperty("hash", hash);
+            JsonUtils.sendJsonResponse(resp, HttpServletResponse.SC_OK, response.toString());
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -92,6 +107,7 @@ public class SecurityOrderController extends HttpServlet {
 
     /**
      * Verify Signature
+     *
      * @param req
      * @param resp
      */
@@ -127,6 +143,7 @@ public class SecurityOrderController extends HttpServlet {
 
     /**
      * Get short info for hash
+     *
      * @param order
      * @return
      */
