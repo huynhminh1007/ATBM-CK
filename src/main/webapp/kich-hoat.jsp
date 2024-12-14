@@ -100,25 +100,18 @@
 
             // Gửi dữ liệu qua AJAX
             $.ajax({
-                url: 'verify-signature', // Action URL
+                url: '/order-security', // Action URL
                 type: 'POST',
                 data: {
                     orderId: orderId,
-                    digitalSignature: digitalSignature // Gửi chữ ký điện tử lên server
+                    digitalSignature: digitalSignature,
+                    action: 'verify-signature'
                 },
                 success: function (response) {
-                    // Xử lý khi nhận được phản hồi từ server
-                    if (response.status === 'success') {
-                        alert('Xác thực thành công!');
-                        // Nếu cần, bạn có thể chuyển hướng đến trang khác, chẳng hạn:
-                        // window.location.href = '/trang-chuc-nang-khac';
-                    } else {
-                        alert('Xác thực không thành công: ' + response.message);
-                    }
+                    alert('Xác thực thành công!');
                 },
                 error: function (xhr, status, error) {
-                    // Xử lý lỗi
-                    alert('Có lỗi xảy ra: ' + error);
+                    alert('Xác thực không thành công!');
                 }
             });
         });

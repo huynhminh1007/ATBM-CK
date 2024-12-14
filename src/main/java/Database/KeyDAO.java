@@ -38,7 +38,7 @@ public class KeyDAO extends AbtractDAO<Key> {
 
     public static void main(String[] args) {
         KeyDAO dao = new KeyDAO();
-        Key key = dao.findByUser(1);
+        Key key = dao.findByUser(13);
         System.out.println(key);
     }
 }
