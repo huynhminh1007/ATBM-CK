@@ -66,6 +66,24 @@ public class SecurityOrderController extends HttpServlet {
             case "upload-key" -> uploadKey(req, resp);
             case "send-hash" -> sendHashOrder(req, resp);
             case "verify-signature" -> verifySignature(req, resp);
+            case "report-key" -> reportKey(req, resp);
+        }
+    }
+
+    private void reportKey(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
+
+        keyDAO.disableLatestKey(user.getId());
+        var keys = keyDAO.findByUsers(userId);
+        session.setAttribute("keys", keys);
+        try {
+            resp.setStatus(HttpServletResponse.SC_OK);
+            session.setAttribute("keys", keys);
+            String json = new Gson().toJson(keys); // Sử dụng Gson để chuyển đổi đối tượng thành JSON
+            resp.getWriter().write(json);
+        } catch (IOException e) {
         }
     }
 

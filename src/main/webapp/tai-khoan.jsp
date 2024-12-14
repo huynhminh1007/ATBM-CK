@@ -41,6 +41,10 @@
             max-width: 200px;  /* Tùy chỉnh chiều rộng tối đa của cột */
         }
 
+        #dt-length-0 {
+            width: 90% !important;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <script src="javascripts/jquery-3.7.1.js"></script>
@@ -281,11 +285,12 @@
                             </form>
 
                             <!-- Khung hiển thị thông tin khóa hiện tại -->
-                            <div id="current-key-container" class="card my-4" style="padding: 20px; display: flex; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+                            <c:if test="${not empty keys}">
+                            <c:forEach var="key" items="${keys}" varStatus="status">
+                            <div id="current-key-container" class="card my-4" style="padding: 20px; display: ${key.isActive ? 'flex' : 'none'} ; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
                                 <h6 style="margin-bottom: 15px; font-weight: bold;">Khóa Hiện Tại</h6>
-                                <c:if test="${not empty keys}">
-                                <c:forEach var="key" items="${keys}" varStatus="status">
-                                <div style="display: ${key.isActive ? 'flex' : 'none'} ; flex-wrap: wrap; gap: 15px;">
+
+                                <div style="display: flex; flex-wrap: wrap; gap: 15px;">
                                     <p style="flex: 1 1 calc(50% - 10px); margin: 0; line-height: 1.2;" title="${key.key}">
                                         <strong style="vertical-align: middle;">Khóa:</strong>
                                         <span id="current-key" class="text-ellipsis" style="vertical-align: middle;">${key.key}</span>
@@ -305,12 +310,6 @@
                                         <strong>Ngày Kết Thúc:</strong> <span id="current-end-date">${key.updateDate}</span>
                                     </p>
                                 </div>
-                                </c:forEach>
-                                </c:if>
-
-                                <c:if test="${not empty keys}">
-                                    <p>Không có Key nào được tìm thấy.</p>
-                                </c:if>
 
                                 <!-- Nút Report Key -->
                                 <div class="mt-4 text-end">
@@ -318,7 +317,10 @@
                                         Report Key
                                     </button>
                                 </div>
+
                             </div>
+                            </c:forEach>
+                            </c:if>
 
                             <!-- Giao diện danh sách khóa -->
                             <jsp:include page="Components/myKey.jsp" />
@@ -403,37 +405,6 @@
 
 <script>
 
-    $(document).ready(function () {
-        // Sự kiện khi nhấn nút Report Key
-        $('#reportKeyButton').on('click', function () {
-            // Lấy giá trị của khóa hiện tại
-            const key = $('#current-key').text().trim();
-
-            // Kiểm tra nếu không có khóa nào
-            if (key === '---' || key === '') {
-                alert('Không có khóa để báo cáo.');
-                return;
-            }
-
-            // Hộp thoại xác nhận báo cáo
-            const confirmReport = confirm(`Bạn có chắc muốn báo cáo khóa này: ${key}?`);
-
-            if (confirmReport) {
-                // Thực hiện gửi báo cáo (giả sử gửi qua AJAX)
-                $.ajax({
-                    url: '/reportKey', // URL endpoint để xử lý báo cáo
-                    type: 'POST', // Phương thức gửi
-                    data: { key: key }, // Dữ liệu gửi lên server
-                    success: function (response) {
-                        alert('Khóa đã được báo cáo thành công.');
-                    },
-                    error: function () {
-                        alert('Đã xảy ra lỗi khi báo cáo khóa. Vui lòng thử lại.');
-                    }
-                });
-            }
-        });
-    });
 
 
     // Hiển thị form upload khi nhấn nút Upload Khóa
@@ -663,15 +634,131 @@
                     var currentKey = keys.find(function (key) {
                         return key.isActive; // Lọc khóa hiện tại
                     });
+                    // Nếu có khóa hiện tại, cập nhật giao diện
                     if (currentKey) {
                         $('#current-key').text(currentKey.key);
                         $('#current-algorithm').text(currentKey.algorithm);
                         $('#current-start-date').text(currentKey.beginDate);
                         $('#current-end-date').text(currentKey.updateDate);
+
+                        // Hiển thị container nếu nó bị ẩn
+                        $('#current-key-container').css('display', 'flex');
+                    } else {
+                        // Nếu không có khóa nào active, ẩn container
+                        $('#current-key-container').css('display', 'none');
                     }
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Khóa đã được tải lên và cập nhật thành công.',
+                        icon: 'success'
+                    });
+
                 },
                 error: function (xhr, status, error) {
-                    alert('Có lỗi xảy ra khi tải lên tệp: ' + error);
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Dữ liệu phản hồi không hợp lệ.',
+                        icon: 'error'
+                    });
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () {
+
+        // Sự kiện khi nhấn nút Report Key
+        $('#reportKeyButton').on('click', function () {
+            let table = new DataTable('#key-table', {
+                paging: true, // Bật phân trang
+                searching: true, // Bật tìm kiếm
+                ordering: true, // Bật sắp xếp
+                info: true, // Hiển thị thông tin
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/2.0.2/i18n/vi.json"
+                }
+            });
+            // Tạo FormData để chứa dữ liệu
+            var formData = new FormData();
+            formData.append('action', 'report-key'); // Đính kèm action vào FormData
+
+            // Hiển thị hộp thoại xác nhận
+            Swal.fire({
+                title: "Bạn có chắc muốn xóa chứ?",
+                text: "Một khi đã xóa sẽ không thể khôi phục",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Tôi muốn xóa",
+                cancelButtonText: "Hủy"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Nếu người dùng xác nhận, gửi yêu cầu AJAX
+                    $.ajax({
+                        url: '/order-security',
+                        type: 'POST',
+                        data: formData,
+                        processData: false, // Không xử lý dữ liệu
+                        contentType: false, // Không đặt Content-Type
+                        success: function (response) {
+                            var keys = JSON.parse(response); // Parse JSON trả về từ server
+
+                            // Xóa tất cả các dòng hiện tại trong DataTable
+                            table.clear();
+
+                            // Thêm các dòng mới vào bảng
+                            keys.forEach(function (key) {
+                                table.row.add([
+                                    key.id,
+                                    '<p class="text-ellipsis" title="' + key.key + '">' + key.key + '</p>',
+                                    '<p class="text-ellipsis" title="' + key.algorithm + '">' + key.algorithm + '</p>',
+                                    key.beginDate,
+                                    key.updateDate,
+                                    '<p style="color: ' + (key.isActive ? 'green' : 'red') + ';">' + (key.isActive ? 'Active' : 'Inactive') + '</p>'
+                                ]).draw();
+                            });
+
+                            // Xác định khóa hiện tại
+                            var currentKey = keys.find(function (key) {
+                                return key.isActive; // Lọc khóa hiện tại
+                            });
+
+                            if (currentKey) {
+                                // Cập nhật khung hiển thị khóa hiện tại
+                                $('#current-key-container').show(); // Hiển thị khung
+                                $('#current-key').text(currentKey.key);
+                                $('#current-algorithm').text(currentKey.algorithm);
+                                $('#current-start-date').text(currentKey.beginDate);
+                                $('#current-end-date').text(currentKey.updateDate);
+                            } else {
+                                // Ẩn khung nếu không còn khóa hiện tại
+                                $('#current-key-container').hide();
+                            }
+
+                            // Hiển thị thông báo thành công
+                            Swal.fire(
+                                'Đã xóa!',
+                                'Khóa đã được báo cáo thành công.',
+                                'success'
+                            );
+                        },
+                        error: function () {
+                            // Hiển thị thông báo lỗi
+                            Swal.fire(
+                                'Lỗi!',
+                                'Đã xảy ra lỗi khi báo cáo khóa. Vui lòng thử lại.',
+                                'error'
+                            );
+                        }
+                    });
+                } else {
+                    // Nếu người dùng không xác nhận, không làm gì cả
+                    Swal.fire(
+                        'Đã hủy',
+                        'Bạn đã hủy việc xóa khóa.',
+                        'info'
+                    );
                 }
             });
         });
