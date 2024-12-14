@@ -120,9 +120,9 @@
                     <p>${key.isActive ? 'Active' : 'Inactive'}</p>
                 </td>
 
-            <%--                <td class="text-center" style="color:<c:if test="${key.isActive}==true">'green'</c:if> <c:if test="${key.isActive}==false">'red'</c:if>;">--%>
-<%--                    <p><c:if test="${key.isActive}==true">'Active'</c:if> <c:if test="${key.isActive}==false">'Inactive'</c:if></p>--%>
-<%--                </td>--%>
+                    <%--                <td class="text-center" style="color:<c:if test="${key.isActive}==true">'green'</c:if> <c:if test="${key.isActive}==false">'red'</c:if>;">--%>
+                    <%--                    <p><c:if test="${key.isActive}==true">'Active'</c:if> <c:if test="${key.isActive}==false">'Inactive'</c:if></p>--%>
+                    <%--                </td>--%>
             </tr>
         </c:forEach>
     </c:if>
@@ -136,16 +136,17 @@
     </tbody>
 </table>
 <script>
-    let table = new DataTable('#key-table', {
-        paging: true, // Bật phân trang
-        searching: true, // Bật tìm kiếm
-        ordering: true, // Bật sắp xếp
-        info: true, // Hiển thị thông tin
+    let t = new DataTable('#key-table', {
+            paging: true, // Bật phân trang
+            searching: true, // Bật tìm kiếm
+            ordering: true, // Bật sắp xếp
+            info: true, // Hiển thị thông tin
             language: {
                 url: "https://cdn.datatables.net/plug-ins/2.0.2/i18n/vi.json"
             },
         }
     );
+
 </script>
 </body>
 </html>

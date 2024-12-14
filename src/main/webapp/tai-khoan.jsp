@@ -585,17 +585,6 @@
     });
 
     $(document).ready(function () {
-        // Khởi tạo DataTable
-        let table = new DataTable('#key-table', {
-            paging: true, // Bật phân trang
-            searching: true, // Bật tìm kiếm
-            ordering: true, // Bật sắp xếp
-            info: true, // Hiển thị thông tin
-            language: {
-                url: "https://cdn.datatables.net/plug-ins/2.0.2/i18n/vi.json"
-            }
-        });
-
         // Xử lý sự kiện khi submit form tải lên key
         $('#key-upload-form').on('submit', function (e) {
             e.preventDefault();
@@ -610,13 +599,14 @@
                 processData: false, // Không xử lý dữ liệu
                 contentType: false, // Không đặt Content-Type
                 success: function (response) {
+                    // Khởi tạo DataTable
+                    let table = $('#key-table').DataTable();
 
                     // Giả sử bạn nhận được dữ liệu keys mới từ server
                     var keys = JSON.parse(response); // Điều này có thể thay đổi tùy thuộc vào cách server trả về dữ liệu
 
                     // Xóa tất cả các dòng hiện tại trong DataTable
                     table.clear();
-
                     // Thêm các dòng mới vào bảng
                     keys.forEach(function (key) {
                         table.row.add([
@@ -669,15 +659,7 @@
 
         // Sự kiện khi nhấn nút Report Key
         $('#reportKeyButton').on('click', function () {
-            let table = new DataTable('#key-table', {
-                paging: true, // Bật phân trang
-                searching: true, // Bật tìm kiếm
-                ordering: true, // Bật sắp xếp
-                info: true, // Hiển thị thông tin
-                language: {
-                    url: "https://cdn.datatables.net/plug-ins/2.0.2/i18n/vi.json"
-                }
-            });
+
             // Tạo FormData để chứa dữ liệu
             var formData = new FormData();
             formData.append('action', 'report-key'); // Đính kèm action vào FormData
@@ -702,6 +684,8 @@
                         processData: false, // Không xử lý dữ liệu
                         contentType: false, // Không đặt Content-Type
                         success: function (response) {
+                            console.log(response);
+                            let table = $('#key-table').DataTable();
                             var keys = JSON.parse(response); // Parse JSON trả về từ server
 
                             // Xóa tất cả các dòng hiện tại trong DataTable

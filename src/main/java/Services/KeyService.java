@@ -33,7 +33,6 @@ public class KeyService implements IKeyService{
 
     @Override
     public List<Key> findByUsers(int userId) {
-        System.out.println(userId + " is the user id");
         return keyDAO.findByUsers(userId);
     }
 

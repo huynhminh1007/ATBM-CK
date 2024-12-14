@@ -104,10 +104,11 @@ public class SecurityOrderController extends HttpServlet {
 
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("user");
-
-            keyDAO.disableLatestKey(user.getId());
-            keyDAO.insert(new Key(user.getId(), signature.getPublicKey(), algorithm, true));
             var keys = keyDAO.findByUsers(user.getId());
+            if(keys != null && !keys.isEmpty()) {
+                keyDAO.disableLatestKey(user.getId());
+            }
+            keyDAO.insert(new Key(user.getId(), signature.getPublicKey(), algorithm, true));
             session.setAttribute("keys", keys);
             // Phản hồi thành công
             resp.setStatus(HttpServletResponse.SC_OK);
