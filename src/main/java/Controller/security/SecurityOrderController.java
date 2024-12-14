@@ -14,11 +14,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -26,6 +24,11 @@ import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 
 @WebServlet("/order-security")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 1, // 1MB
+        maxFileSize = 1024 * 1024 * 10,      // 10MB
+        maxRequestSize = 1024 * 1024 * 15   // 15MB
+)
 public class SecurityOrderController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -69,19 +72,59 @@ public class SecurityOrderController extends HttpServlet {
      * Upload public key
      */
     private void uploadKey(HttpServletRequest req, HttpServletResponse resp) {
-        File publicKeyFile = getFile("public-key");
+        try (InputStream inputStream = getFileStream(req, resp);
+             DataInputStream in = new DataInputStream(new BufferedInputStream(inputStream))) {
 
-        try (DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(publicKeyFile)))) {
+            // Đọc nội dung file từ DataInputStream
             String algorithm = in.readUTF();
             String publicKey = in.readUTF();
 
+            // Cập nhật thông tin chữ ký
             signature.setAlgorithm(algorithm);
             signature.loadPublicKey(publicKey);
 
-            // Handle if successful
+            HttpSession session = req.getSession();
+            User user = (User) session.getAttribute("user");
+
+            keyDAO.disableLatestKey(user.getId());
+            keyDAO.insert(new Key(user.getId(), signature.getPublicKey(), algorithm, true));
+
+            // Phản hồi thành công
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.getWriter().write("Public key uploaded and processed successfully!");
+
         } catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException e) {
-            e.printStackTrace();
+            try {
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                resp.getWriter().write("Error processing the public key: " + e.getMessage());
+            } catch (IOException ioException) {
+            }
         }
+    }
+
+    /**
+     * Receive public key file from client using HttpServlet Part API
+     *
+     * @param req
+     * @param resp
+     * @return InputStream of the uploaded file
+     */
+    private InputStream getFileStream(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try {
+            // Lấy file từ request part
+            Part filePart = req.getPart("key-file-input"); // "file" là tên field từ form
+            if (filePart != null && filePart.getSize() > 0) {
+                return filePart.getInputStream(); // Trả về InputStream của file
+            } else {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().write("No file uploaded or file is empty!");
+            }
+        } catch (ServletException e) {
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().write("Error handling file upload: " + e.getMessage());
+        }
+
+        throw new IOException("Không tìm thấy file hợp lệ trong request!");
     }
 
     /**
@@ -109,7 +152,6 @@ public class SecurityOrderController extends HttpServlet {
             response.addProperty("hash", hash);
             JsonUtils.sendJsonResponse(resp, HttpServletResponse.SC_OK, response.toString());
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
         }
     }
 
@@ -159,18 +201,7 @@ public class SecurityOrderController extends HttpServlet {
                  InvalidKeySpecException e) {
             status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
             JsonUtils.sendJsonResponse(resp, status, response.toString());
-            e.printStackTrace();
         }
-    }
-
-    /**
-     * Receive public key file from client
-     *
-     * @param fileName
-     * @return
-     */
-    private File getFile(String fileName) {
-        return null;
     }
 
     /**

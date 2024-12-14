@@ -251,12 +251,12 @@
                             </div>
 
                             <!-- Form upload khóa -->
-                            <form id="key-upload-form" style="display: none; margin-top: 20px;">
+                            <form id="key-upload-form" enctype="multipart/form-data" style="display: none; margin-top: 20px;">
                                 <div style="margin-bottom: 10px;">
                                     <label for="key-file-input">Chọn Tệp Khóa:</label>
-                                    <input type="file" id="key-file-input" class="form-control" accept=".txt,.json" required>
+                                    <input name="key-file-input" type="file" id="key-file-input" class="form-control" required>
                                 </div>
-                                <button type="submit" class="btn btn-success">Lưu Thông Tin</button>
+                                <button id="btn_upload_key" type="submit" class="btn btn-success">Lưu Thông Tin</button>
                             </form>
 
                             <!-- Khung hiển thị thông tin khóa hiện tại -->
@@ -267,7 +267,7 @@
                                         <strong>Khóa:</strong> <span id="current-key">---</span>
                                     </p>
                                     <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Trạng thái:</strong> <span id="current-status">---</span>
+                                        <strong>Thuật Toán:</strong> <span id="current-algorithm">---</span>
                                     </p>
                                     <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
                                         <strong>Ngày Bắt Đầu:</strong> <span id="current-start-date">---</span>
@@ -565,7 +565,28 @@
         })
     });
 
+    $(document).ready(function () {
+        $('#key-upload-form').on('submit', function (e) {
+            e.preventDefault();
 
+            var formData = new FormData(this);
+            formData.append('action', 'upload-key'); // Đính kèm action vào FormData
+
+            $.ajax({
+                url: '/order-security',
+                type: 'POST',
+                data: formData,
+                processData: false, // Không xử lý dữ liệu
+                contentType: false, // Không đặt Content-Type
+                success: function (response) {
+                    alert(response);
+                },
+                error: function (xhr, status, error) {
+                    alert('Có lỗi xảy ra khi tải lên tệp: ' + error);
+                }
+            });
+        });
+    });
 </script>
 </body>
 <style>
