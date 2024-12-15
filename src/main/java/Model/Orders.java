@@ -116,16 +116,17 @@ public class Orders extends Model {
 
 	@Override
 	public String toString() {
-		return "Orders{" +
+		return getLastUpdated() + " " +
+				"Orders{" +
 				"id=" + id +
-				", user=" + user +
+//				", user=" + user +
 				", totalPrice=" + totalPrice +
 				", discountId=" + discountId +
 				", status=" + status +
 				", paymentMethod='" + paymentMethod + '\'' +
 				", shippingFee=" + shippingFee +
 				", address='" + address + '\'' +
-				", details=" + details +
+//				", details=" + details +
 				", note='" + note + '\'' +
 				'}';
 	}

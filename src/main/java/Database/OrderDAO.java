@@ -48,10 +48,10 @@ public class OrderDAO extends AbtractDAO<Orders> implements IOrderDAO {
 
     @Override
     public boolean update(Orders order) {
-        String sql = "UPDATE orders SET statusId = ?, userId=?, totalPrice =? , discountId = ?, paymentMethod=?, shippingFee =?, address = ?, dateCreated = ?, lastUpDated = ?, WHERE orderId = ?";
+        String sql = "UPDATE orders SET statusId = ?, userId=?, totalPrice =? , discountId = ?, paymentMethod=?, shippingFee =?, address = ? WHERE orderId = ?";
         return update(sql, order.getStatus().getId(), order.getUser().getId(), order.getTotalPrice(),
-                order.getDiscountId(), order.getPaymentMethod(), order.getShippingFee(), order.getShippingFee(),
-                order.getAddress(), order.getDateCreated(), order.getLastUpdated(), order.getId());
+                order.getDiscountId(), order.getPaymentMethod(), order.getShippingFee(),
+                order.getAddress(), order.getId());
     }
 
     @Override
@@ -73,10 +73,15 @@ public class OrderDAO extends AbtractDAO<Orders> implements IOrderDAO {
 //		List<Order_details> order_details = new ArrayList<Order_details>();
 //		order_details.add(od1);
 //		order_details.add(od2);
+//        OrderDAO dao = new OrderDAO();
+//        Orders o1 = dao.findOrderById(19).get(0);
+//        o1.setStatus(new Status(5, null));
+//        System.out.println(dao.findOrderById(29));
+
         OrderDAO dao = new OrderDAO();
-        Orders o1 = dao.findOrderById(19).get(0);
-        o1.setStatus(new Status(5, null));
-        System.out.println(dao.findOrderById(29));
+        Orders order = dao.findById(87);
+        System.out.println(order);
+        System.out.println(dao.update(order));
     }
 
     @Override

@@ -9,13 +9,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Model.Discounts;
 import Model.Order_details;
 import Model.Orders;
+import Model.User;
 import Services.IDiscountService;
 import Services.IOrderDetailsService;
 import Services.IOrderService;
+import Utils.JsonUtils;
+import com.google.gson.JsonObject;
 
 /**
  * Servlet implementation class UserOrderController
@@ -47,8 +51,35 @@ public class UserOrderController extends HttpServlet {
 		String action = request.getParameter("action") != null ? request.getParameter("action") : "get";
 		switch (action) {
 		case "detail" -> detail(request, response);
+		case "changeAddress" -> changeAddress(request, response);
 		default -> throw new IllegalArgumentException("Unexpected value: " + action);
 		}
+	}
+
+	private void changeAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getParameter("orderId") == null || request.getParameter("orderId").isEmpty())
+			return;
+
+		String street = request.getParameter("street");
+		String ward = request.getParameter("ward");
+		String district = request.getParameter("district");
+		String province = request.getParameter("province");
+		String recipientName = request.getParameter("recipientName");
+		String phone = request.getParameter("phone");
+
+		int orderId = Integer.valueOf(request.getParameter("orderId"));
+
+		Orders order = orderService.findById(orderId);
+
+		String customAddress = String.format("%s, Xã %s, Huyện %s, Tỉnh %s, Người nhận: %s, Số điện thoại: %s",
+				street, ward, district, province, recipientName, phone);
+		order.setAddress(customAddress);
+		orderService.update(order);
+
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("address", customAddress);
+
+		JsonUtils.sendJsonResponse(response, HttpServletResponse.SC_OK, jsonObject.toString());
 	}
 
 	/**
@@ -69,7 +100,7 @@ public class UserOrderController extends HttpServlet {
 		order.setDetails(order_details);
 		request.setAttribute("order", order);
 		request.setAttribute("discounts", discounts);
-		System.out.println(order);
+//		System.out.println(order);
 		request.getRequestDispatcher("/order-detail.jsp").forward(request, response);
 
 	}
