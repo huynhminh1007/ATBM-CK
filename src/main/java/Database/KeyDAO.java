@@ -40,7 +40,6 @@ public class KeyDAO extends AbtractDAO<Key> {
 
     public int disableLatestKey(int userId) {
         Key latestKey = findByUser(userId);
-        System.out.println(latestKey);
         return disableKey(latestKey.getId());
     }
 
