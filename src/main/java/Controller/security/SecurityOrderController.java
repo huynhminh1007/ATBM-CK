@@ -3,10 +3,13 @@ package Controller.security;
 import Database.KeyDAO;
 import Database.OrderDAO;
 import Database.OrderSignatureDAO;
+import Model.Log;
 import Model.Order_details;
 import Model.Orders;
 import Model.User;
 import Model.security.*;
+import Services.LogServiceManager;
+import Services.MLogFactory;
 import Utils.JsonUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -119,11 +122,19 @@ public class SecurityOrderController extends HttpServlet {
                 return;
             }
 
+            // Ghi log
+            Log log = MLogFactory.getLog(req, this, 3);
+            var des = "User %s uploaded public key: algorithm: %s, publicKey: %s".formatted(user.getEmail(), algorithm, publicKey);
+            log.setCurrentValue(publicKey);
+            log.setDescription(des);
+            LogServiceManager.getLogService().saveLog(log);
+
             var keys = keyDAO.findByUsers(user.getId());
             if (keys != null && !keys.isEmpty()) {
                 keyDAO.disableLatestKey(user.getId());
             }
             keyDAO.insert(new Key(user.getId(), publicKey, algorithm, true));
+
             session.setAttribute("keys", keys);
             // Phản hồi thành công
             resp.setStatus(HttpServletResponse.SC_OK);
@@ -226,10 +237,18 @@ public class SecurityOrderController extends HttpServlet {
             signature.loadPublicKey(key.getKey());
             String hash = hashAlgorithm.hashBase64(shortInfo, "utf-8");
 
-
             // Nếu xác thực thành công
             if (signature.verify(hash, signed)) {
                 status = HttpServletResponse.SC_OK;
+
+                orderSignatureDAO.insert(new OrderSignature(key.getId(), signed, orderId, hash));
+
+                // Ghi log, cần kiểm tra lại do không ghi log đc
+                Log log = MLogFactory.getLog(req, this, 3);
+                var des = "User signed orderId: %s, keyId: %s, signature: %s".formatted(String.valueOf(orderId), key.getId(), signed);
+                log.setCurrentValue(signed);
+                log.setDescription(des);
+                LogServiceManager.getLogService().saveLog(log);
             } else {
                 status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
             }

@@ -21,7 +21,6 @@ public class KeyDAO extends AbtractDAO<Key> {
         return querry(sql, new KeyMapper(), userId);
     }
 
-
     public int insert(Key key) {
         String sql = "INSERT INTO `keys` (userId, `key`, algorithm, is_active) VALUES (?, ?, ?, ?)";
 
