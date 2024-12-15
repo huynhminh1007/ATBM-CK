@@ -21,7 +21,6 @@ public class KeyDAO extends AbtractDAO<Key> {
         return querry(sql, new KeyMapper(), userId);
     }
 
-
     public int insert(Key key) {
         String sql = "INSERT INTO `keys` (userId, `key`, algorithm, is_active) VALUES (?, ?, ?, ?)";
 
@@ -40,7 +39,6 @@ public class KeyDAO extends AbtractDAO<Key> {
 
     public int disableLatestKey(int userId) {
         Key latestKey = findByUser(userId);
-        System.out.println(latestKey);
         return disableKey(latestKey.getId());
     }
 
