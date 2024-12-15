@@ -399,14 +399,35 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- Modal Form -->
+<div class="modal fade" id="edit-address-modal" tabindex="-1" aria-labelledby="editAddressModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="edit-address-form">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editAddressModalLabel">Cập nhật địa chỉ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <footer>
     <jsp:include page="Components/footer.jsp"/>
 </footer>
 
 <script>
-
-
-
     // Hiển thị form upload khi nhấn nút Upload Khóa
     document.getElementById('upload-key-btn').addEventListener('click', function() {
         var form = document.getElementById('key-upload-form');
@@ -492,6 +513,7 @@
             wardE.append(option);
         }
     }
+
     document.addEventListener('DOMContentLoaded', function () {
         provincesElement.select2();
         showMenu('<%=menuId%>');
@@ -511,7 +533,8 @@
             form.find("#PhoneNumber").val(phone);
             $("#address-form > input[name='action']").val("changeAddress");
             showAddressForm();
-        })
+        });
+
         let addressForm = $(".adress-form");
         let closeForm = $('#adress-close');
         closeForm.click(() => {
@@ -560,7 +583,6 @@
             hideDeleteForm();
         })
     });
-
 
     function showMenu(id) {
         $(".block-account").each(function () {

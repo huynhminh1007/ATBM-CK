@@ -6,16 +6,6 @@ public class Order_details {
 	private double price;
 	private int quantity;
 
-	/**
-	 * Constructor khởi tạo một đối tượng Order_details với các thuộc tính được cung
-	 * cấp.
-	 *
-	 * @param order_id   Mã định danh của đơn hàng
-	 * @param product_id Mã định danh của sản phẩm
-	 * @param price      Giá sản phẩm
-	 * @param quantity   Số lượng sản phẩm
-	 */
-
 	// Getter và Setter cho các thuộc tính
 
 	public Order_details() {

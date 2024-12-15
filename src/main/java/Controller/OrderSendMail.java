@@ -107,7 +107,7 @@ public class OrderSendMail extends HttpServlet {
         String note = request.getParameter("note");
 
         if ("other".equals(selectedAddress)) {
-            System.out.println("khác");
+//            System.out.println("khác");
             String customAddress = province + ", " + district + ", " + ward + ", Người nhận: " + user.getFullName() + ", Số điện thoại: " + user.getPhone();
             orders.setAddress(customAddress);
         } else {
