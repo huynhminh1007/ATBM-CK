@@ -83,7 +83,7 @@
         <th>Địa chỉ</th>
         <th>Giá trị đơn hàng</th>
         <th>TT đơn hàng</th>
-        <th>Xem chi tiết</th>
+        <th>Chức năng</th>
     </tr>
     </thead>
     <c:if test="${user ne null}">
@@ -114,6 +114,12 @@
                                 <i class="fa-solid fa-circle-info"></i>
                             </button>
                         </a>
+
+                        <button
+                                class="btn btn-primary btn-sm btn-order-edit ms-2"
+                                data-target=${item.id}>
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
                     </div>
                 </td>
             </tr>

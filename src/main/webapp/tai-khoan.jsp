@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page import="java.util.List" %>
+<%@ page import="Model.security.Key" %>
 <!DOCTYPE html>
 <html lang="en">
 <title>Trang tài khoản</title>
@@ -21,6 +22,28 @@
     <style>
         .delete-form {
             display: none;
+        }
+
+        .text-ellipsis {
+            display: inline-block;
+            max-width: 300px; /* Giới hạn chiều rộng */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2; /* Điều chỉnh chiều cao dòng */
+            vertical-align: middle; /* Căn giữa dọc */
+        }
+
+        #key-table td.text-ellipsis {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;  /* Tùy chỉnh chiều rộng tối đa của cột */
+        }
+
+        #dt-length-0 {
+            width: 90% !important;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -40,6 +63,8 @@
             ? ""
             : (String) request.getAttribute("successMessage");
     String menuId = request.getAttribute("menu") == null ? "ACCOUNT_INFORMATION" : request.getAttribute("menu") + "";
+//    // Lấy danh sách keys từ request
+    List<Key> keys = (List<Key>) session.getAttribute("keys");
 %>
 
 <body>
@@ -260,23 +285,42 @@
                             </form>
 
                             <!-- Khung hiển thị thông tin khóa hiện tại -->
-                            <div id="current-key-container" class="card my-4" style="padding: 20px; display: flex; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+                            <c:if test="${not empty keys}">
+                            <c:forEach var="key" items="${keys}" varStatus="status">
+                            <div id="current-key-container" class="card my-4" style="padding: 20px; display: ${key.isActive ? 'flex' : 'none'} ; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
                                 <h6 style="margin-bottom: 15px; font-weight: bold;">Khóa Hiện Tại</h6>
+
                                 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0; line-height: 1.2;" title="${key.key}">
+                                        <strong style="vertical-align: middle;">Khóa:</strong>
+                                        <span id="current-key" class="text-ellipsis" style="vertical-align: middle;">${key.key}</span>
+                                    </p>
+
                                     <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Khóa:</strong> <span id="current-key">---</span>
+                                        <strong>Thuật Toán:</strong>
+                                        <span id="current-algorithm">
+                                                ${key.algorithm}
+                                        </span>
+                                    </p>
+
+                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
+                                        <strong>Ngày Bắt Đầu:</strong> <span id="current-start-date">${key.beginDate}</span>
                                     </p>
                                     <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Thuật Toán:</strong> <span id="current-algorithm">---</span>
-                                    </p>
-                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Ngày Bắt Đầu:</strong> <span id="current-start-date">---</span>
-                                    </p>
-                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Ngày Kết Thúc:</strong> <span id="current-end-date">---</span>
+                                        <strong>Ngày Kết Thúc:</strong> <span id="current-end-date">${key.updateDate}</span>
                                     </p>
                                 </div>
+
+                                <!-- Nút Report Key -->
+                                <div class="mt-4 text-end">
+                                    <button id="reportKeyButton" class="btn btn-danger px-4 py-2" style="font-size: 14px;">
+                                        Report Key
+                                    </button>
+                                </div>
+
                             </div>
+                            </c:forEach>
+                            </c:if>
 
                             <!-- Giao diện danh sách khóa -->
                             <jsp:include page="Components/myKey.jsp" />
@@ -360,6 +404,8 @@
 </footer>
 
 <script>
+
+
 
     // Hiển thị form upload khi nhấn nút Upload Khóa
     document.getElementById('upload-key-btn').addEventListener('click', function() {
@@ -539,6 +585,7 @@
     });
 
     $(document).ready(function () {
+        // Xử lý sự kiện khi submit form tải lên key
         $('#key-upload-form').on('submit', function (e) {
             e.preventDefault();
 
@@ -552,14 +599,155 @@
                 processData: false, // Không xử lý dữ liệu
                 contentType: false, // Không đặt Content-Type
                 success: function (response) {
-                    alert(response);
+                    // Khởi tạo DataTable
+                    let table = $('#key-table').DataTable();
+
+                    // Giả sử bạn nhận được dữ liệu keys mới từ server
+                    var keys = JSON.parse(response); // Điều này có thể thay đổi tùy thuộc vào cách server trả về dữ liệu
+
+                    // Xóa tất cả các dòng hiện tại trong DataTable
+                    table.clear();
+                    // Thêm các dòng mới vào bảng
+                    keys.forEach(function (key) {
+                        table.row.add([
+                            key.id,
+                            '<p class="text-ellipsis" title="' + key.key + '">' + key.key + '</p>',
+                            '<p class="text-ellipsis" title="' + key.algorithm + '">' + key.algorithm + '</p>',
+                            key.beginDate,
+                            key.updateDate,
+                            '<p style="color: ' + (key.isActive ? 'green' : 'red') + ';">' + (key.isActive ? 'Active' : 'Inactive') + '</p>'
+                        ]).draw();
+                    });
+
+
+                    // Nếu bạn có phần hiển thị khóa hiện tại, có thể cập nhật lại nó ở đây.
+                    var currentKey = keys.find(function (key) {
+                        return key.isActive; // Lọc khóa hiện tại
+                    });
+                    // Nếu có khóa hiện tại, cập nhật giao diện
+                    if (currentKey) {
+                        $('#current-key').text(currentKey.key);
+                        $('#current-algorithm').text(currentKey.algorithm);
+                        $('#current-start-date').text(currentKey.beginDate);
+                        $('#current-end-date').text(currentKey.updateDate);
+
+                        // Hiển thị container nếu nó bị ẩn
+                        $('#current-key-container').css('display', 'flex');
+                    } else {
+                        // Nếu không có khóa nào active, ẩn container
+                        $('#current-key-container').css('display', 'none');
+                    }
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Khóa đã được tải lên và cập nhật thành công.',
+                        icon: 'success'
+                    });
+
                 },
                 error: function (xhr, status, error) {
-                    alert('Có lỗi xảy ra khi tải lên tệp: ' + error);
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Dữ liệu phản hồi không hợp lệ.',
+                        icon: 'error'
+                    });
                 }
             });
         });
     });
+
+    $(document).ready(function () {
+
+        // Sự kiện khi nhấn nút Report Key
+        $('#reportKeyButton').on('click', function () {
+
+            // Tạo FormData để chứa dữ liệu
+            var formData = new FormData();
+            formData.append('action', 'report-key'); // Đính kèm action vào FormData
+
+            // Hiển thị hộp thoại xác nhận
+            Swal.fire({
+                title: "Bạn có chắc muốn xóa chứ?",
+                text: "Một khi đã xóa sẽ không thể khôi phục",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Tôi muốn xóa",
+                cancelButtonText: "Hủy"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Nếu người dùng xác nhận, gửi yêu cầu AJAX
+                    $.ajax({
+                        url: '/order-security',
+                        type: 'POST',
+                        data: formData,
+                        processData: false, // Không xử lý dữ liệu
+                        contentType: false, // Không đặt Content-Type
+                        success: function (response) {
+                            console.log(response);
+                            let table = $('#key-table').DataTable();
+                            var keys = JSON.parse(response); // Parse JSON trả về từ server
+
+                            // Xóa tất cả các dòng hiện tại trong DataTable
+                            table.clear();
+
+                            // Thêm các dòng mới vào bảng
+                            keys.forEach(function (key) {
+                                table.row.add([
+                                    key.id,
+                                    '<p class="text-ellipsis" title="' + key.key + '">' + key.key + '</p>',
+                                    '<p class="text-ellipsis" title="' + key.algorithm + '">' + key.algorithm + '</p>',
+                                    key.beginDate,
+                                    key.updateDate,
+                                    '<p style="color: ' + (key.isActive ? 'green' : 'red') + ';">' + (key.isActive ? 'Active' : 'Inactive') + '</p>'
+                                ]).draw();
+                            });
+
+                            // Xác định khóa hiện tại
+                            var currentKey = keys.find(function (key) {
+                                return key.isActive; // Lọc khóa hiện tại
+                            });
+
+                            if (currentKey) {
+                                // Cập nhật khung hiển thị khóa hiện tại
+                                $('#current-key-container').show(); // Hiển thị khung
+                                $('#current-key').text(currentKey.key);
+                                $('#current-algorithm').text(currentKey.algorithm);
+                                $('#current-start-date').text(currentKey.beginDate);
+                                $('#current-end-date').text(currentKey.updateDate);
+                            } else {
+                                // Ẩn khung nếu không còn khóa hiện tại
+                                $('#current-key-container').hide();
+                            }
+
+                            // Hiển thị thông báo thành công
+                            Swal.fire(
+                                'Đã xóa!',
+                                'Khóa đã được báo cáo thành công.',
+                                'success'
+                            );
+                        },
+                        error: function () {
+                            // Hiển thị thông báo lỗi
+                            Swal.fire(
+                                'Lỗi!',
+                                'Đã xảy ra lỗi khi báo cáo khóa. Vui lòng thử lại.',
+                                'error'
+                            );
+                        }
+                    });
+                } else {
+                    // Nếu người dùng không xác nhận, không làm gì cả
+                    Swal.fire(
+                        'Đã hủy',
+                        'Bạn đã hủy việc xóa khóa.',
+                        'info'
+                    );
+                }
+            });
+        });
+    });
+
 </script>
 </body>
 <style>

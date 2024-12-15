@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost 3306
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
  Source Server Version : 80030 (8.0.30)
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 14/12/2024 19:58:32
+ Date: 15/12/2024 04:07:35
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `addresses`  (
   PRIMARY KEY (`addressId`) USING BTREE,
   INDEX `fk_address_users`(`userId` ASC) USING BTREE,
   CONSTRAINT `fk_address_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of addresses
@@ -43,6 +43,8 @@ INSERT INTO `addresses` VALUES (1, 4, 'Chúc Ngân123', '0463632573', 'Tỉnh Tu
 INSERT INTO `addresses` VALUES (2, 4, 'Quang Minh', '0747532573', 'Tỉnh Bắc Kạn', 'Huyện Ngân Sơn', 'Xã Vân Tùng', '123', 0);
 INSERT INTO `addresses` VALUES (5, 2, 'Thành Minh', '0869824533', 'Tỉnh Bắc Kạn', 'Huyện Ngân Sơn', 'Thị trấn Nà Phặc', '123', 1);
 INSERT INTO `addresses` VALUES (9, 4, 'Nguyễn Thị Chúc Ngân 123', '0869769142', 'Tỉnh Bắc Kạn', 'Huyện Ngân Sơn', 'Xã Cốc Đán', '780', 1);
+INSERT INTO `addresses` VALUES (10, 26, 'Chúc Ngân', '0869769142', 'Tỉnh Hà Giang', 'Huyện Xín Mần', 'Xã Chế Là', '456', 0);
+INSERT INTO `addresses` VALUES (11, 26, 'Chúc Ngân123', '0869824533', 'Tỉnh Hà Giang', 'Huyện Bắc Quang', 'Xã Hùng An', '', 1);
 
 -- ----------------------------
 -- Table structure for blogs
@@ -461,12 +463,13 @@ CREATE TABLE `keys`  (
   PRIMARY KEY (`keyId`) USING BTREE,
   INDEX `fk_key_users`(`userId` ASC) USING BTREE,
   CONSTRAINT `fk_key_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of keys
 -- ----------------------------
-INSERT INTO `keys` VALUES (10, 13, 'MIIDQzCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBgACggEBAIDqG05lKo7zBxuWn1rccr3Oy6ggOARdFV36LhlbUyH5iH6P2CQSrcYBcKCRlz/mxgExcqtlY54F22SN3J9nicnHUtdWqw5weKXw+NrepdU9nigTjajmHig4PZQ4Y3PnlJFsEfibEWmLNlnxcnQhljCHXvIn0kxmkuY24e827CMc1wmHyFLqMe76hBf9Ns30ciKBYL2cm2AS53CvfBDYprytOSD6Vml6GS8dtRTLNYOHzOXMs3I6JSdWf0LV27siSfGP6NtA6xYqEUTX+ShD3lSDQMXMEsfE4cB5koByAI0gn7dgg8qxRPdSWaq+7O13naglgHB+r0Fd6lhU8jv+dSw=', 'SHA224withDSA', '2024-12-14 19:57:59', '2024-12-14 19:57:59', 1);
+INSERT INTO `keys` VALUES (10, 26, 'MIIDQzCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBgACggEBAIDqG05lKo7zBxuWn1rccr3Oy6ggOARdFV36LhlbUyH5iH6P2CQSrcYBcKCRlz/mxgExcqtlY54F22SN3J9nicnHUtdWqw5weKXw+NrepdU9nigTjajmHig4PZQ4Y3PnlJFsEfibEWmLNlnxcnQhljCHXvIn0kxmkuY24e827CMc1wmHyFLqMe76hBf9Ns30ciKBYL2cm2AS53CvfBDYprytOSD6Vml6GS8dtRTLNYOHzOXMs3I6JSdWf0LV27siSfGP6NtA6xYqEUTX+ShD3lSDQMXMEsfE4cB5koByAI0gn7dgg8qxRPdSWaq+7O13naglgHB+r0Fd6lhU8jv+dSw=', 'SHA224withDSA', '2024-12-14 19:57:59', '2024-12-14 21:43:27', 0);
+INSERT INTO `keys` VALUES (24, 26, 'MIIDQzCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBgACggEBAIDqG05lKo7zBxuWn1rccr3Oy6ggOARdFV36LhlbUyH5iH6P2CQSrcYBcKCRlz/mxgExcqtlY54F22SN3J9nicnHUtdWqw5weKXw+NrepdU9nigTjajmHig4PZQ4Y3PnlJFsEfibEWmLNlnxcnQhljCHXvIn0kxmkuY24e827CMc1wmHyFLqMe76hBf9Ns30ciKBYL2cm2AS53CvfBDYprytOSD6Vml6GS8dtRTLNYOHzOXMs3I6JSdWf0LV27siSfGP6NtA6xYqEUTX+ShD3lSDQMXMEsfE4cB5koByAI0gn7dgg8qxRPdSWaq+7O13naglgHB+r0Fd6lhU8jv+dSw=', 'SHA224withDSA', '2024-12-15 03:34:17', '2024-12-15 03:34:17', 1);
 
 -- ----------------------------
 -- Table structure for logs
@@ -483,7 +486,7 @@ CREATE TABLE `logs`  (
   `level` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`logId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1380 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1510 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of logs
@@ -1836,6 +1839,135 @@ INSERT INTO `logs` VALUES (1374, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem 
 INSERT INTO `logs` VALUES (1376, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 19:54:59');
 INSERT INTO `logs` VALUES (1377, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 19:55:08');
 INSERT INTO `logs` VALUES (1378, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 19:55:09');
+INSERT INTO `logs` VALUES (1381, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 21:43:00');
+INSERT INTO `logs` VALUES (1382, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 21:43:00');
+INSERT INTO `logs` VALUES (1383, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 22:37:32');
+INSERT INTO `logs` VALUES (1384, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 22:39:23');
+INSERT INTO `logs` VALUES (1385, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 23:02:59');
+INSERT INTO `logs` VALUES (1386, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 23:13:55');
+INSERT INTO `logs` VALUES (1387, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 23:14:00');
+INSERT INTO `logs` VALUES (1388, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:14:13');
+INSERT INTO `logs` VALUES (1389, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:14:13');
+INSERT INTO `logs` VALUES (1390, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 23:15:25');
+INSERT INTO `logs` VALUES (1391, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 23:15:30');
+INSERT INTO `logs` VALUES (1392, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:15:41');
+INSERT INTO `logs` VALUES (1393, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:15:41');
+INSERT INTO `logs` VALUES (1394, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:17:13');
+INSERT INTO `logs` VALUES (1395, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:17:13');
+INSERT INTO `logs` VALUES (1396, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 23:17:53');
+INSERT INTO `logs` VALUES (1397, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:18:09');
+INSERT INTO `logs` VALUES (1398, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:18:09');
+INSERT INTO `logs` VALUES (1399, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:21:18');
+INSERT INTO `logs` VALUES (1400, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:21:19');
+INSERT INTO `logs` VALUES (1401, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:22:29');
+INSERT INTO `logs` VALUES (1402, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:22:29');
+INSERT INTO `logs` VALUES (1403, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:24:49');
+INSERT INTO `logs` VALUES (1404, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:24:49');
+INSERT INTO `logs` VALUES (1405, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-14 23:28:35');
+INSERT INTO `logs` VALUES (1406, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 23:29:48');
+INSERT INTO `logs` VALUES (1407, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:30:02');
+INSERT INTO `logs` VALUES (1408, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:30:02');
+INSERT INTO `logs` VALUES (1409, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:32:04');
+INSERT INTO `logs` VALUES (1410, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:32:04');
+INSERT INTO `logs` VALUES (1411, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:33:18');
+INSERT INTO `logs` VALUES (1412, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:33:18');
+INSERT INTO `logs` VALUES (1413, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:34:23');
+INSERT INTO `logs` VALUES (1414, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:34:23');
+INSERT INTO `logs` VALUES (1415, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:36:39');
+INSERT INTO `logs` VALUES (1416, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:36:39');
+INSERT INTO `logs` VALUES (1417, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:38:59');
+INSERT INTO `logs` VALUES (1418, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:39:00');
+INSERT INTO `logs` VALUES (1419, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:41:24');
+INSERT INTO `logs` VALUES (1420, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:41:24');
+INSERT INTO `logs` VALUES (1421, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:42:16');
+INSERT INTO `logs` VALUES (1422, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:42:16');
+INSERT INTO `logs` VALUES (1423, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-14 23:44:26');
+INSERT INTO `logs` VALUES (1424, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:44:39');
+INSERT INTO `logs` VALUES (1425, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:44:39');
+INSERT INTO `logs` VALUES (1426, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:45:32');
+INSERT INTO `logs` VALUES (1427, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:45:33');
+INSERT INTO `logs` VALUES (1428, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:46:22');
+INSERT INTO `logs` VALUES (1429, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:46:22');
+INSERT INTO `logs` VALUES (1430, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:47:25');
+INSERT INTO `logs` VALUES (1431, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:47:25');
+INSERT INTO `logs` VALUES (1432, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:48:24');
+INSERT INTO `logs` VALUES (1433, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:48:24');
+INSERT INTO `logs` VALUES (1434, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:50:18');
+INSERT INTO `logs` VALUES (1435, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:50:18');
+INSERT INTO `logs` VALUES (1436, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:53:13');
+INSERT INTO `logs` VALUES (1437, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:53:13');
+INSERT INTO `logs` VALUES (1438, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-14 23:59:30');
+INSERT INTO `logs` VALUES (1439, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-14 23:59:30');
+INSERT INTO `logs` VALUES (1440, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:00:56');
+INSERT INTO `logs` VALUES (1441, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:00:56');
+INSERT INTO `logs` VALUES (1442, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-15 00:02:46');
+INSERT INTO `logs` VALUES (1443, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:03:02');
+INSERT INTO `logs` VALUES (1444, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:03:02');
+INSERT INTO `logs` VALUES (1445, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:06:07');
+INSERT INTO `logs` VALUES (1446, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:06:08');
+INSERT INTO `logs` VALUES (1447, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:07:38');
+INSERT INTO `logs` VALUES (1448, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:07:39');
+INSERT INTO `logs` VALUES (1449, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-15 00:14:58');
+INSERT INTO `logs` VALUES (1450, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:16:05');
+INSERT INTO `logs` VALUES (1451, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:16:05');
+INSERT INTO `logs` VALUES (1452, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-15 00:18:44');
+INSERT INTO `logs` VALUES (1453, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:19:01');
+INSERT INTO `logs` VALUES (1454, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:19:01');
+INSERT INTO `logs` VALUES (1455, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:23:13');
+INSERT INTO `logs` VALUES (1456, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:23:13');
+INSERT INTO `logs` VALUES (1457, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:24:19');
+INSERT INTO `logs` VALUES (1458, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:24:19');
+INSERT INTO `logs` VALUES (1459, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:31:29');
+INSERT INTO `logs` VALUES (1460, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:31:29');
+INSERT INTO `logs` VALUES (1461, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:32:58');
+INSERT INTO `logs` VALUES (1462, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:32:58');
+INSERT INTO `logs` VALUES (1463, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 00:39:10');
+INSERT INTO `logs` VALUES (1464, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 00:39:10');
+INSERT INTO `logs` VALUES (1465, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 01:11:22');
+INSERT INTO `logs` VALUES (1466, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 01:11:22');
+INSERT INTO `logs` VALUES (1467, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 01:15:11');
+INSERT INTO `logs` VALUES (1468, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 01:15:11');
+INSERT INTO `logs` VALUES (1469, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 01:18:58');
+INSERT INTO `logs` VALUES (1470, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 01:18:58');
+INSERT INTO `logs` VALUES (1471, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 01:22:04');
+INSERT INTO `logs` VALUES (1472, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 01:22:04');
+INSERT INTO `logs` VALUES (1473, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 01:26:25');
+INSERT INTO `logs` VALUES (1474, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 01:26:25');
+INSERT INTO `logs` VALUES (1475, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 01:35:22');
+INSERT INTO `logs` VALUES (1476, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 01:35:22');
+INSERT INTO `logs` VALUES (1477, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-15 01:40:20');
+INSERT INTO `logs` VALUES (1478, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 01:40:31');
+INSERT INTO `logs` VALUES (1479, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 01:40:32');
+INSERT INTO `logs` VALUES (1480, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-15 01:41:24');
+INSERT INTO `logs` VALUES (1481, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-15 01:41:25');
+INSERT INTO `logs` VALUES (1482, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 02:22:21');
+INSERT INTO `logs` VALUES (1483, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 02:22:21');
+INSERT INTO `logs` VALUES (1484, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 02:24:00');
+INSERT INTO `logs` VALUES (1485, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 02:24:01');
+INSERT INTO `logs` VALUES (1486, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 02:25:21');
+INSERT INTO `logs` VALUES (1487, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 02:25:21');
+INSERT INTO `logs` VALUES (1488, '127.0.0.1', '/UserInfo', 'Viet Nam', '', '{\"id\":10,\"userId\":26,\"nameUser\":\"Chúc Ngân\",\"phoneUser\":\"0869769142\",\"province\":\"Tỉnh Hà Giang\",\"districts\":\"Huyện Xín Mần\",\"wards\":\"Xã Chế Là\",\"description\":\"456\",\"isDefault\":true}', 'Người dùng thêm địa chỉ mới', 'ALERT', '2024-12-15 02:34:34');
+INSERT INTO `logs` VALUES (1489, '127.0.0.1', '/UserInfo', 'Viet Nam', '', '{\"id\":11,\"userId\":26,\"nameUser\":\"Chúc Ngân123\",\"phoneUser\":\"0869824533\",\"province\":\"Tỉnh Hà Giang\",\"districts\":\"Huyện Bắc Quang\",\"wards\":\"Xã Hùng An\",\"description\":\"\",\"isDefault\":true}', 'Người dùng thêm địa chỉ mới', 'ALERT', '2024-12-15 02:34:54');
+INSERT INTO `logs` VALUES (1490, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 02:40:43');
+INSERT INTO `logs` VALUES (1491, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 02:40:43');
+INSERT INTO `logs` VALUES (1492, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 02:42:45');
+INSERT INTO `logs` VALUES (1493, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 02:42:45');
+INSERT INTO `logs` VALUES (1494, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 02:54:21');
+INSERT INTO `logs` VALUES (1495, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 02:54:21');
+INSERT INTO `logs` VALUES (1496, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 02:59:51');
+INSERT INTO `logs` VALUES (1497, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 02:59:51');
+INSERT INTO `logs` VALUES (1498, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 03:19:27');
+INSERT INTO `logs` VALUES (1499, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 03:19:27');
+INSERT INTO `logs` VALUES (1500, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 03:23:39');
+INSERT INTO `logs` VALUES (1501, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 03:23:39');
+INSERT INTO `logs` VALUES (1502, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 03:30:23');
+INSERT INTO `logs` VALUES (1503, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 03:30:24');
+INSERT INTO `logs` VALUES (1504, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 03:32:09');
+INSERT INTO `logs` VALUES (1505, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 03:32:09');
+INSERT INTO `logs` VALUES (1506, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 03:34:07');
+INSERT INTO `logs` VALUES (1507, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 03:34:07');
+INSERT INTO `logs` VALUES (1508, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 03:38:12');
+INSERT INTO `logs` VALUES (1509, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 03:38:13');
 
 -- ----------------------------
 -- Table structure for news
@@ -2687,7 +2819,7 @@ CREATE TABLE `status`  (
   `statusId` int NOT NULL AUTO_INCREMENT,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   PRIMARY KEY (`statusId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of status
@@ -2701,6 +2833,7 @@ INSERT INTO `status` VALUES (6, 'đã hoàn thành');
 INSERT INTO `status` VALUES (7, 'đã hủy');
 INSERT INTO `status` VALUES (8, 'còn hàng');
 INSERT INTO `status` VALUES (9, 'hết hàng');
+INSERT INTO `status` VALUES (10, 'đã bị thay đổi');
 
 -- ----------------------------
 -- Table structure for users
@@ -2721,7 +2854,7 @@ CREATE TABLE `users`  (
   INDEX `fk_users_status`(`statusId` ASC) USING BTREE,
   CONSTRAINT `fk_users_role` FOREIGN KEY (`roleId`) REFERENCES `roles` (`roleId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_users_status` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
@@ -2748,6 +2881,8 @@ INSERT INTO `users` VALUES (22, '$2a$04$u9wQzRTZiBFk6qrRe50C5OKJcYDxRFIJ3Cw0uzGy
 INSERT INTO `users` VALUES (23, '$2a$04$ud6msm0lxZmRQhmodB9eV.oelZmEKwLx4prvRT67CJJf4siEZUvmm', 'Nguyễn Thị Chúc Ngân', 'ngew@gmail.com', '0747532573', 2, 2, '2024-07-06 06:22:16', '2024-07-06 06:22:16');
 INSERT INTO `users` VALUES (24, '$2a$04$j.IIOkkbrEYBbhVhMAdi8.fSUk8jx5suZI7W30/HYj3UVuHQEMoz6', 'Nguyễn Thị Chúc Ngân', 's@gmail.com', '0747532573', 2, 2, '2024-07-06 06:30:42', '2024-07-06 06:30:42');
 INSERT INTO `users` VALUES (25, '$2a$04$9FdBhzcGkq/CgbDjhuBxl.Mn.CdhxFy13YZuy/5UyRJ9w/IyOesru', 'Nguyễn Thị Chúc Ngân', 'chucngan123@gmail.com', '086976914', 2, 1, '2024-07-18 17:42:43', '2024-07-18 17:42:43');
+INSERT INTO `users` VALUES (26, '$2a$04$SCrg2SE.pmu4bYw4NPnGj.D1GvqYSae0IU/3HsCYhLL4Dh/jpVJqa', 'Ngan Nguyen', 'ngannguyen16122003@gmail.com', '', 2, 1, '2024-12-14 21:43:00', '2024-12-14 21:43:00');
+INSERT INTO `users` VALUES (27, '$2a$04$YrHfib.PkdODIXyNvI0a7e2fVJyL/uSIfv.VwurmAMGpBAZ08pvLe', 'Nguyễn Thị Chúc Ngân', '21130451@st.hcmuaf.edu.vn', '', 2, 1, '2024-12-14 23:18:09', '2024-12-14 23:18:09');
 
 -- ----------------------------
 -- Table structure for verification

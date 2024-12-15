@@ -10,6 +10,7 @@ import Model.security.DigitalSignature;
 import Model.security.Hash;
 import Model.security.Key;
 import Utils.JsonUtils;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -65,6 +66,24 @@ public class SecurityOrderController extends HttpServlet {
             case "upload-key" -> uploadKey(req, resp);
             case "send-hash" -> sendHashOrder(req, resp);
             case "verify-signature" -> verifySignature(req, resp);
+            case "report-key" -> reportKey(req, resp);
+        }
+    }
+
+    private void reportKey(HttpServletRequest req, HttpServletResponse resp) {
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
+
+        keyDAO.disableLatestKey(user.getId());
+        var keys = keyDAO.findByUsers(userId);
+        session.setAttribute("keys", keys);
+        try {
+            resp.setStatus(HttpServletResponse.SC_OK);
+            session.setAttribute("keys", keys);
+            String json = new Gson().toJson(keys); // Sử dụng Gson để chuyển đổi đối tượng thành JSON
+            resp.getWriter().write(json);
+        } catch (IOException e) {
         }
     }
 
@@ -85,13 +104,16 @@ public class SecurityOrderController extends HttpServlet {
 
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("user");
-
-            keyDAO.disableLatestKey(user.getId());
+            var keys = keyDAO.findByUsers(user.getId());
+            if(keys != null && !keys.isEmpty()) {
+                keyDAO.disableLatestKey(user.getId());
+            }
             keyDAO.insert(new Key(user.getId(), signature.getPublicKey(), algorithm, true));
-
+            session.setAttribute("keys", keys);
             // Phản hồi thành công
             resp.setStatus(HttpServletResponse.SC_OK);
-            resp.getWriter().write("Public key uploaded and processed successfully!");
+            String json = new Gson().toJson(keys); // Sử dụng Gson để chuyển đổi đối tượng thành JSON
+            resp.getWriter().write(json);
 
         } catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             try {

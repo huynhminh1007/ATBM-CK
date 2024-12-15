@@ -18,6 +18,7 @@ import Model.CartItem;
 import Model.Log;
 import Model.User;
 import Model.Wishlist;
+import Model.security.Key;
 import Services.*;
 import Utils.BHash;
 
@@ -31,6 +32,9 @@ public class Login extends HttpServlet {
     IUserService userService;
     @Inject
     private ICartService cartService;
+
+    @Inject
+    KeyService keyService;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -78,7 +82,7 @@ public class Login extends HttpServlet {
                 } else if (user.getStatus().getId() == 1 && user.getRoleId() == 2) {
                     url = "/tai-khoan.jsp";
                     session.setAttribute("user", user);
-
+                    
                     List<CartItem> cartItems = cartService.findByUserId(user.getId());
                     Map<Integer, CartItem> map = new HashMap<>();
                     if (cartItems != null) {
@@ -92,7 +96,8 @@ public class Login extends HttpServlet {
                         cart = new Cart();
                     }
                     cart.addAll(user.getId(), map);
-
+                    var keys = keyService.findByUsers(user.getId());
+                    session.setAttribute("keys", keys);
                     session.setAttribute("cart", cart);
                     session.setAttribute("wishlist", new Wishlist(userService.getWishlist(user.getId())));
                 } else {

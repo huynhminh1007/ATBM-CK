@@ -94,7 +94,7 @@ public class Key {
         this.updateDate = updateDate;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
