@@ -6,13 +6,14 @@ import Database.OrderSignatureDAO;
 import Model.Order_details;
 import Model.Orders;
 import Model.User;
-import Model.security.DigitalSignature;
-import Model.security.Hash;
-import Model.security.Key;
+import Model.security.*;
 import Utils.JsonUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -104,11 +105,25 @@ public class SecurityOrderController extends HttpServlet {
 
             HttpSession session = req.getSession();
             User user = (User) session.getAttribute("user");
+
+            RestTemplate restTemplate = new RestTemplate();
+            KeyRegister keyRegister = new KeyRegister(user.getEmail(), algorithm, publicKey, "Lương Thực Việt");
+            String url = "http://localhost:8082/api.digital-signature.com/key/register";
+            HttpEntity<KeyRegister> request = new HttpEntity<>(keyRegister);
+
+            // Gửi POST request
+            ResponseEntity<ApiResponse> response = restTemplate.postForEntity(url, request, ApiResponse.class);
+            if (!response.getStatusCode().is2xxSuccessful()) {
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                resp.getWriter().write("Error processing the public key");
+                return;
+            }
+
             var keys = keyDAO.findByUsers(user.getId());
-            if(keys != null && !keys.isEmpty()) {
+            if (keys != null && !keys.isEmpty()) {
                 keyDAO.disableLatestKey(user.getId());
             }
-            keyDAO.insert(new Key(user.getId(), signature.getPublicKey(), algorithm, true));
+            keyDAO.insert(new Key(user.getId(), publicKey, algorithm, true));
             session.setAttribute("keys", keys);
             // Phản hồi thành công
             resp.setStatus(HttpServletResponse.SC_OK);
