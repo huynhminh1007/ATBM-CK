@@ -222,6 +222,11 @@ public class SecurityOrderController extends HttpServlet {
             return;
         }
 
+        if (orderSignatureDAO.findOrder(orderId) != null) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Đơn hàng đã được xác nhận");
+            return;
+        }
+
         Key key = keyDAO.findByUser(userId);
 
         if (key == null) {
