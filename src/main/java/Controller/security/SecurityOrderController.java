@@ -273,7 +273,9 @@ public class SecurityOrderController extends HttpServlet {
 
 
                 orderSignatureDAO.insert(new OrderSignature(key.getId(), signed, orderId, hash));
-
+                String url = "/tai-khoan.jsp";
+                resp.sendRedirect(url);
+                return;
             } else {
                 status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
             }
