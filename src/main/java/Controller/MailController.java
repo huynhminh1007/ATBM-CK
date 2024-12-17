@@ -176,11 +176,6 @@ public class MailController extends HttpServlet {
                 orders.getShippingFee(),
                 formattedTotalPrice
         ));
-
-        String body = bodyBuilder.toString();
-        String subject = "Xác nhận đơn hàng #" + orders.getId() + " từ Lương Thực Việt";
-        executorService.submit(() -> emailService.send(to, subject, body));
-
         return bodyBuilder.toString();
     }
 
