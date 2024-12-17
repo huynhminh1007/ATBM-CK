@@ -1,13 +1,12 @@
 package Controller.security;
 
+import Controller.MailController;
 import Database.KeyDAO;
 import Database.OrderDAO;
 import Database.OrderSignatureDAO;
-import Model.Log;
-import Model.Order_details;
-import Model.Orders;
-import Model.User;
+import Model.*;
 import Model.security.*;
+import Services.IOrderService;
 import Services.LogServiceManager;
 import Services.MLogFactory;
 import Utils.JsonUtils;
@@ -18,6 +17,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +27,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @WebServlet("/order-security")
 @MultipartConfig(
@@ -43,6 +45,13 @@ public class SecurityOrderController extends HttpServlet {
     private OrderDAO orderDAO;
     private OrderSignatureDAO orderSignatureDAO;
     private KeyDAO keyDAO;
+
+    @Inject
+    IOrderService orderService;
+
+    @Inject
+    MailController mailController;
+    private final ExecutorService executor = Executors.newFixedThreadPool(5);
 
     public SecurityOrderController() {
         signature = new DigitalSignature();
@@ -249,6 +258,15 @@ public class SecurityOrderController extends HttpServlet {
                 log.setCurrentValue(signed);
                 log.setDescription(des);
                 LogServiceManager.getLogService().saveLog(log);
+                double amount = (double) session.getAttribute("amount");
+                order.setStatus(new Status(4, ""));
+                orderService.update(order);
+
+                executor.submit(() -> {
+                    mailController.sendVerifyOrderEmail(user.getEmail(), amount, order, signed);
+                        }
+                );
+
             } else {
                 status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
             }
