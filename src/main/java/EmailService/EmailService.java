@@ -1,13 +1,16 @@
 package EmailService;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.mail.util.ByteArrayDataSource;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
-
-import javax.mail.*;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 public class EmailService implements IEmailService {
 
@@ -52,5 +55,50 @@ public class EmailService implements IEmailService {
         return false;
     }
 
+    @Override
+    public boolean send(String to, String subject, String body, byte[] pdfAttachment, String pdfFilename) {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.host", MailProperty.HOST_NAME);
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.port", MailProperty.TSL_PORT);
+        Session session = getSesstion(props);
 
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
+            message.setSubject(subject, "utf-8");
+
+            // Create a multipart message
+            MimeMultipart multipart = new MimeMultipart();
+
+            // Add the email body
+            MimeBodyPart bodyPart = new MimeBodyPart();
+            bodyPart.setContent(body, "text/html; charset=UTF-8");
+            multipart.addBodyPart(bodyPart);
+
+            // Add the PDF attachment
+            if (pdfAttachment != null && pdfFilename != null) {
+                MimeBodyPart attachmentPart = new MimeBodyPart();
+                DataSource dataSource = new ByteArrayDataSource(pdfAttachment, "application/pdf");
+                attachmentPart.setDataHandler(new DataHandler(dataSource));
+                attachmentPart.setFileName(pdfFilename);
+                multipart.addBodyPart(attachmentPart);
+            }
+
+            // Set the multipart content
+            message.setContent(multipart);
+
+            // Set the sender
+            InternetAddress fromAddress = new InternetAddress("21130451@st.hcmuaf.edu.vn", "Lương Thực Việt");
+            message.setFrom(fromAddress);
+            message.setSentDate(new Date());
+
+            Transport.send(message);
+            return true;
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

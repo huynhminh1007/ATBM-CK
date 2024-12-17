@@ -4,11 +4,9 @@ import EmailService.IEmailService;
 import Model.Discounts;
 import Model.Order_details;
 import Model.Orders;
-import Model.security.Hash;
 import Services.IDiscountService;
 import Services.IOrderService;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import Utils.PdfHelper;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -17,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -116,9 +112,23 @@ public class MailController extends HttpServlet {
         String username = orders.getUser().getUsername();
         String userId = String.valueOf(orders.getUser().getId());
         String logoUrl = "https://firebasestorage.googleapis.com/v0/b/i-love-truyen.appspot.com/o/ltv%2Flogo_large.png?alt=media&token=a0cf5e2a-a21e-46c4-b036-d38354736cfb";
+        String activationUrl = "http://localhost:8080/kich-hoat.jsp?orderId=" + orders.getId();
 
-        String activationUrl = "http://localhost:8080//kich-hoat.jsp?orderId=" + orders.getId(); // Link kích hoạt
+        // Generate email body (HTML content)
+        String body = generateEmailBody(to, username, userId, voucherInfo, formattedTotalPrice, orders, logoUrl, activationUrl, amount);
 
+        // Generate PDF attachment
+        byte[] pdfAttachment = new PdfHelper().generatePdfFromHtml(body);
+        String pdfFilename = "Order_ODR" + orders.getId() + ".pdf";
+
+        String subject = "Xác nhận đơn hàng #" + orders.getId() + " từ Lương Thực Việt";
+
+        // Send email asynchronously
+        executorService.submit(() -> emailService.send(to, subject, body, pdfAttachment, pdfFilename));
+    }
+
+    private String generateEmailBody(String to, String username, String userId, String voucherInfo, String formattedTotalPrice, Orders orders, String logoUrl, String activationUrl, double amount) {
+        double totalPrice = orders.getTotalPrice();
         StringBuilder bodyBuilder = new StringBuilder();
         bodyBuilder.append("""
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 8px;">
@@ -171,6 +181,7 @@ public class MailController extends HttpServlet {
         String subject = "Xác nhận đơn hàng #" + orders.getId() + " từ Lương Thực Việt";
         executorService.submit(() -> emailService.send(to, subject, body));
 
+        return bodyBuilder.toString();
     }
 
     private String getVoucherInfo(Orders orders, double amount) {

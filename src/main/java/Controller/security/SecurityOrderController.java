@@ -231,6 +231,11 @@ public class SecurityOrderController extends HttpServlet {
             return;
         }
 
+        if (orderSignatureDAO.findOrder(orderId) != null) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Đơn hàng đã được xác nhận");
+            return;
+        }
+
         Key key = keyDAO.findByUser(userId);
 
         if (key == null) {
@@ -249,15 +254,13 @@ public class SecurityOrderController extends HttpServlet {
             // Nếu xác thực thành công
             if (signature.verify(hash, signed)) {
                 status = HttpServletResponse.SC_OK;
-
-                orderSignatureDAO.insert(new OrderSignature(key.getId(), signed, orderId, hash));
-
                 // Ghi log, cần kiểm tra lại do không ghi log đc
                 Log log = MLogFactory.getLog(req, this, 3);
-                var des = "User signed orderId: %s, keyId: %s, signature: %s".formatted(String.valueOf(orderId), key.getId(), signed);
+                String des = "User signed orderId: %s, keyId: %s, signature: %s".formatted(String.valueOf(orderId), key.getId(), signed);
                 log.setCurrentValue(signed);
                 log.setDescription(des);
                 LogServiceManager.getLogService().saveLog(log);
+
                 double amount = (double) session.getAttribute("amount");
                 order.setStatus(new Status(4, ""));
                 orderService.update(order);
@@ -266,6 +269,10 @@ public class SecurityOrderController extends HttpServlet {
                     mailController.sendVerifyOrderEmail(user.getEmail(), amount, order, signed);
                         }
                 );
+
+
+
+                orderSignatureDAO.insert(new OrderSignature(key.getId(), signed, orderId, hash));
 
             } else {
                 status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
