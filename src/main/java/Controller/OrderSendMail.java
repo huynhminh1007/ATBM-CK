@@ -73,7 +73,7 @@ public class OrderSendMail extends HttpServlet {
         List<CartItem> cartItems = cart.getCartItems();
         List<Order_details> order_details = new ArrayList<Order_details>();
         Orders orders = new Orders();
-        orders.setStatus(new Status(4, ""));
+        orders.setStatus(new Status(11, ""));
         orders.setUser(user);
         double amount;
         double shipping = 40000;
@@ -133,6 +133,7 @@ public class OrderSendMail extends HttpServlet {
         request.getSession().setAttribute("user", user);
         request.setAttribute("orders", orders);
         request.setAttribute("amount", amount);
+        session.setAttribute("amount", amount);
         executor.submit(() -> {
                     mailController.sendOrderConfirmationEmail(email, amount, orders);
                 }

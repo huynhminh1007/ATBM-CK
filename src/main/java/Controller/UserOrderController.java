@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Model.Discounts;
-import Model.Order_details;
-import Model.Orders;
-import Model.User;
+import Model.*;
 import Services.IDiscountService;
 import Services.IOrderDetailsService;
 import Services.IOrderService;
@@ -74,6 +71,7 @@ public class UserOrderController extends HttpServlet {
 		String customAddress = String.format("%s, Xã %s, Huyện %s, Tỉnh %s, Người nhận: %s, Số điện thoại: %s",
 				street, ward, district, province, recipientName, phone);
 		order.setAddress(customAddress);
+		order.setStatus(new Status(10, ""));
 		orderService.update(order);
 
 		JsonObject jsonObject = new JsonObject();

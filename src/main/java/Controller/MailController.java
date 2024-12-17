@@ -30,6 +30,7 @@ public class MailController extends HttpServlet {
     IOrderService orderService;
     @Inject
     IDiscountService discountService;
+
     private final ExecutorService executorService = Executors.newFixedThreadPool(5);
 
     /**
@@ -74,6 +75,42 @@ public class MailController extends HttpServlet {
         response.getWriter().append("Order confirmation email sent successfully.");
     }
 
+
+    public void sendVerifyOrderEmail(String to, double amount, Orders orders, String digitalSignature) {
+        double totalPrice = orders.getTotalPrice();
+        String formattedTotalPrice = String.format("%,.0f", totalPrice);
+        String voucherInfo = getVoucherInfo(orders, amount);
+        String username = orders.getUser().getUsername();
+        String userId = String.valueOf(orders.getUser().getId());
+        String logoUrl = "https://firebasestorage.googleapis.com/v0/b/i-love-truyen.appspot.com/o/ltv%2Flogo_large.png?alt=media&token=a0cf5e2a-a21e-46c4-b036-d38354736cfb";
+       
+        String body = "<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 8px;\">\r\n"
+                + "<h2 style=\"text-align: center; color: #4CAF50;\"><img src=\"" + logoUrl + "\" alt=\"Logo\" style=\"height: 70px; width: auto; margin-bottom: 10px;\"><br>Thông tin đơn hàng</h2>\r\n"
+                + "<div style=\"background-color: #fff; padding: 15px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\">\r\n"
+                + "<p>Xin chào bạn, " + to + "</p>\r\n"
+                + "<p>Đơn hàng của bạn đã được xác nhận. Dưới đây là thông tin chi tiết:</p>\r\n"
+                + "<div style=\"margin-bottom: 20px;\">\r\n"
+                + generateOrderDetailsHtml(orders)
+                + "</div>\r\n"
+                + "<p style=\"margin-bottom: 10px;\"><strong>Tổng tiền hàng:</strong> " + String.format("%,.0f", (totalPrice - orders.getShippingFee()) + amount) + " VNĐ</p>\r\n"
+                + "<p style=\"margin-bottom: 10px;\">" + voucherInfo + "</p>\r\n"
+                + "<p style=\"margin-bottom: 10px;\"><strong>Phí vận chuyển:</strong> " + String.format("%,.0f", orders.getShippingFee()) + " VNĐ</p>\r\n"
+                + "<p style=\"margin-bottom: 10px;\"><strong>Tổng tiền thanh toán:</strong> " + formattedTotalPrice + " VNĐ</p>\r\n"
+                + "</div>\r\n"
+                + "<p style=\"text-align: center; margin-top: 20px; color: #777;\">Trân trọng,<br> Website Lương Thực Việt</p>\r\n"
+                + "<div style=\"text-align: center; margin-top: 20px; color: #333; font-size: 12px;\">\r\n"
+                + "<p><strong>Chữ ký điện tử:</strong></p>\r\n"
+                + "<p style=\"font-family: 'Courier New', Courier, monospace; color: #555;\">" + digitalSignature + "</p>\r\n"
+                + "</div>\r\n"
+                + "</div>";
+
+        byte[] pdfAttachment = new PdfHelper().generatePdfFromHtml(body);
+        String pdfFilename = "Order_ODR" + orders.getId() + ".pdf";
+
+        String subject = "Xác nhận đơn hàng #" + orders.getId() + " từ Lương Thực Việt";
+        executorService.submit(() -> emailService.send(to, subject, body, pdfAttachment, pdfFilename));
+    }
+    
     public void sendOrderConfirmationEmail(String to, double amount, Orders orders) {
         double totalPrice = orders.getTotalPrice();
         String formattedTotalPrice = String.format("%,.0f", totalPrice);

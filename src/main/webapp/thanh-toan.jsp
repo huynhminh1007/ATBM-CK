@@ -548,7 +548,6 @@
         }
 
         var totalPrice = $("#total-price").text();
-        // alert(totalPrice)
         var discountCode = $("#discount").val().trim();
         if (discountCode) {
             $("#hidden-total-price").val(Number(newTotal));

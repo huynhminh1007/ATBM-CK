@@ -94,6 +94,7 @@
 
             // Lấy giá trị của chữ ký điện tử
             var digitalSignature = $('#digitalSignature').val();
+            var hashInput = $('#hashInput').val();
 
             // Kiểm tra nếu chữ ký không rỗng
             if (digitalSignature.trim() === '') {
@@ -108,6 +109,7 @@
                 data: {
                     orderId: orderId,
                     digitalSignature: digitalSignature,
+                    hashInput: hashInput,
                     action: 'verify-signature'
                 },
                 success: function (response) {

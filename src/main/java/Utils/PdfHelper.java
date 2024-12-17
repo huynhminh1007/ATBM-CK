@@ -35,7 +35,17 @@ public class PdfHelper {
             builder.toStream(outputStream);
 
             // Add font for Vietnamese support
-            builder.useFont(new File(getClass().getClassLoader().getResource("ARIAL.TTF").getPath()), "Arial");
+            // Load font từ thư mục resources/fonts
+            builder.useFont(new File(getClass()
+                    .getClassLoader()
+                    .getResource("fonts/ARIAL.TTF")
+                    .toURI()), "Arial");
+
+
+            System.out.println(getClass().getClassLoader().getResource("fonts/ARIAL.TTF"));
+
+
+//            builder.useFont(new File(getClass().getClassLoader().getResource("ARIAL.TTF").getPath()), "Arial");
 
             builder.run();
             return outputStream.toByteArray();
