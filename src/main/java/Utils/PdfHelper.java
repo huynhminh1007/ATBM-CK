@@ -42,11 +42,6 @@ public class PdfHelper {
                     .toURI()), "Arial");
 
 
-            System.out.println(getClass().getClassLoader().getResource("fonts/ARIAL.TTF"));
-
-
-//            builder.useFont(new File(getClass().getClassLoader().getResource("ARIAL.TTF").getPath()), "Arial");
-
             builder.run();
             return outputStream.toByteArray();
         } catch (Exception e) {

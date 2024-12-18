@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : localhost 3306
  Source Server Type    : MySQL
  Source Server Version : 80030 (8.0.30)
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 15/12/2024 04:07:35
+ Date: 18/12/2024 09:37:38
 */
 
 SET NAMES utf8mb4;
@@ -463,13 +463,14 @@ CREATE TABLE `keys`  (
   PRIMARY KEY (`keyId`) USING BTREE,
   INDEX `fk_key_users`(`userId` ASC) USING BTREE,
   CONSTRAINT `fk_key_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of keys
 -- ----------------------------
 INSERT INTO `keys` VALUES (10, 26, 'MIIDQzCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBgACggEBAIDqG05lKo7zBxuWn1rccr3Oy6ggOARdFV36LhlbUyH5iH6P2CQSrcYBcKCRlz/mxgExcqtlY54F22SN3J9nicnHUtdWqw5weKXw+NrepdU9nigTjajmHig4PZQ4Y3PnlJFsEfibEWmLNlnxcnQhljCHXvIn0kxmkuY24e827CMc1wmHyFLqMe76hBf9Ns30ciKBYL2cm2AS53CvfBDYprytOSD6Vml6GS8dtRTLNYOHzOXMs3I6JSdWf0LV27siSfGP6NtA6xYqEUTX+ShD3lSDQMXMEsfE4cB5koByAI0gn7dgg8qxRPdSWaq+7O13naglgHB+r0Fd6lhU8jv+dSw=', 'SHA224withDSA', '2024-12-14 19:57:59', '2024-12-14 21:43:27', 0);
 INSERT INTO `keys` VALUES (24, 26, 'MIIDQzCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBgACggEBAIDqG05lKo7zBxuWn1rccr3Oy6ggOARdFV36LhlbUyH5iH6P2CQSrcYBcKCRlz/mxgExcqtlY54F22SN3J9nicnHUtdWqw5weKXw+NrepdU9nigTjajmHig4PZQ4Y3PnlJFsEfibEWmLNlnxcnQhljCHXvIn0kxmkuY24e827CMc1wmHyFLqMe76hBf9Ns30ciKBYL2cm2AS53CvfBDYprytOSD6Vml6GS8dtRTLNYOHzOXMs3I6JSdWf0LV27siSfGP6NtA6xYqEUTX+ShD3lSDQMXMEsfE4cB5koByAI0gn7dgg8qxRPdSWaq+7O13naglgHB+r0Fd6lhU8jv+dSw=', 'SHA224withDSA', '2024-12-15 03:34:17', '2024-12-15 03:34:17', 1);
+INSERT INTO `keys` VALUES (25, 13, 'MIIDQjCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBQACggEABz4APtnkW0xuZU2NrlVmYbxBvHMe4dW6B6wK5nqlZ28lJipP/0BftmypK+hkTJtre6TPjz6OkmDkekqtHEbKptYTo8v9B9XVRBGChKEo/BSLMyGtgBlVGpamFN4Q4iWCrQVTGaVl+PvEjh/ScNQCuKOZ4lw18XcEJObQgVQJNoxfboDcfH6yLYFAhXkESXsvTL7NBLe0S30dVvPGMBt61B0cBsfcVCTX51SsREqM7Fah+nrjJCVdYQ9h9plK70vlpjCAaYlOmzgjjFwpNXMrAujC6SyBa7PxhHylEa3d5Utanu2ebq5wWfNRbL+UBlAr6UQEldrmaoMvclojCxLtJw==', 'SHA512withDSA', '2024-12-18 09:33:01', '2024-12-18 09:33:01', 1);
 
 -- ----------------------------
 -- Table structure for logs
@@ -486,7 +487,7 @@ CREATE TABLE `logs`  (
   `level` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`logId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1510 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1524 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of logs
@@ -1968,6 +1969,17 @@ INSERT INTO `logs` VALUES (1506, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', ''
 INSERT INTO `logs` VALUES (1507, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 03:34:07');
 INSERT INTO `logs` VALUES (1508, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Xem trang chủ', 'ALERT', '2024-12-15 03:38:12');
 INSERT INTO `logs` VALUES (1509, '127.0.0.1', '/GoogleLogin', 'Viet Nam', '', '', 'Người dùng đăng nhập bằng tài khoản Google', 'ALERT', '2024-12-15 03:38:13');
+INSERT INTO `logs` VALUES (1510, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-18 09:29:44');
+INSERT INTO `logs` VALUES (1511, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-18 09:30:24');
+INSERT INTO `logs` VALUES (1512, '127.0.0.1', '/order-security', 'Viet Nam', 'MIIDQjCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBQACggEABz4APtnkW0xuZU2NrlVmYbxBvHMe4dW6B6wK5nqlZ28lJipP/0BftmypK+hkTJtre6TPjz6OkmDkekqtHEbKptYTo8v9B9XVRBGChKEo/BSLMyGtgBlVGpamFN4Q4iWCrQVTGaVl+PvEjh/ScNQCuKOZ4lw18XcEJObQgVQJNoxfboDcfH6yLYFAhXkESXsvTL7NBLe0S30dVvPGMBt61B0cBsfcVCTX51SsREqM7Fah+nrjJCVdYQ9h9plK70vlpjCAaYlOmzgjjFwpNXMrAujC6SyBa7PxhHylEa3d5Utanu2ebq5wWfNRbL+UBlAr6UQEldrmaoMvclojCxLtJw==', '', 'User 21130445@st.hcmuaf.edu.vn uploaded public key: algorithm: SHA512withDSA, publicKey: MIIDQjCCAjUGByqGSM44BAEwggIoAoIBAQCPeTXZuarpv6vtiHrPSVG28y7FnjuvNxjo6sSWHz79NgbnQ1GpxBgzObgJ58KuHFObp0dbhdARrbi0eYd1SYRpXKwOjxSzNggooi/6JxEKPWKpk0U0CaD+aWxGWPhL3SCBnDcJoBBXsZWtzQAjPbpUhLYpH51kjviDRIZ3l5zsBLQ0pqwudemYXeI9sCkvwRGMn/qdgYHnM423krcw17njSVkvaAmYchU5Feo9a4tGU8YzRY+AOzKkwuDycpAlbk4/ijsIOKHEUOThjBopo33fXqFD3ktm/wSQPtXPFiPhWNSHxgjpfyEc2B3KI8tuOAdl+CLjQr5ITAV2OTlgHNZnAh0AuvaWpoV499/e5/pnyXfHhe8ysjO65YDAvNVpXQKCAQAWplxYIEhQcE51AqOXVwQNNNo6NHjBVNTkpcAtJC7gT5bmHkvQkEq9rI837rHgnzGC0jyQQ8tkL4gAQWDt+coJsyB2p5wypifyRz6Rh5uixOdEvSCBVEy1W4AsNo0fqD7UielOD6BojjJCilx4xHjGjQUntxyaOrsLC+EsRGiWOefTznTbEBplqiuH9kxoJts+xy9LVZmDS7TtsC98kOmkltOlXVNb6/xF1PYZ9j897buHOSXC8iTgdzEpbaiH7B5HSPh++1/et1SEMWsiMt7lU92vAhErDR8C2jCXMiT+J67ai51LKSLZuovjntnhA6Y8UoELxoi34u1DFuHvF9veA4IBBQACggEABz4APtnkW0xuZU2NrlVmYbxBvHMe4dW6B6wK5nqlZ28lJipP/0BftmypK+hkTJtre6TPjz6OkmDkekqtHEbKptYTo8v9B9XVRBGChKEo/BSLMyGtgBlVGpamFN4Q4iWCrQVTGaVl+PvEjh/ScNQCuKOZ4lw18XcEJObQgVQJNoxfboDcfH6yLYFAhXkESXsvTL7NBLe0S30dVvPGMBt61B0cBsfcVCTX51SsREqM7Fah+nrjJCVdYQ9h9plK70vlpjCAaYlOmzgjjFwpNXMrAujC6SyBa7PxhHylEa3d5Utanu2ebq5wWfNRbL+UBlAr6UQEldrmaoMvclojCxLtJw==', 'WARNING', '2024-12-18 09:33:01');
+INSERT INTO `logs` VALUES (1515, '127.0.0.1', '/CartController', 'Viet Nam', '', '', 'Người dùng Minh đẹp trai thêm sản phẩm  5 vào giỏ hàng', 'INFO', '2024-12-18 09:33:12');
+INSERT INTO `logs` VALUES (1516, '127.0.0.1', '/CartController', 'Viet Nam', '', '', 'Người dùng Minh đẹp trai thêm sản phẩm  6 vào giỏ hàng', 'INFO', '2024-12-18 09:33:14');
+INSERT INTO `logs` VALUES (1517, '127.0.0.1', '/CartController', 'Viet Nam', '', '', 'Người dùng Minh đẹp trai thêm sản phẩm  11 vào giỏ hàng', 'INFO', '2024-12-18 09:33:16');
+INSERT INTO `logs` VALUES (1518, '127.0.0.1', '/Login', 'Viet Nam', '', '', 'Xem trang chủ', 'WARNING', '2024-12-18 09:36:58');
+INSERT INTO `logs` VALUES (1519, '127.0.0.1', '/Home', 'Viet Nam', '', '', 'Xem trang chủ', 'INFO', '2024-12-18 09:37:01');
+INSERT INTO `logs` VALUES (1521, '127.0.0.1', '/CartController', 'Viet Nam', '', '', 'Người dùng Minh đẹp trai thêm sản phẩm  5 vào giỏ hàng', 'INFO', '2024-12-18 09:37:07');
+INSERT INTO `logs` VALUES (1522, '127.0.0.1', '/CartController', 'Viet Nam', '', '', 'Người dùng Minh đẹp trai thêm sản phẩm  6 vào giỏ hàng', 'INFO', '2024-12-18 09:37:09');
+INSERT INTO `logs` VALUES (1523, '127.0.0.1', '/CartController', 'Viet Nam', '', '', 'Người dùng Minh đẹp trai thêm sản phẩm  11 vào giỏ hàng', 'INFO', '2024-12-18 09:37:13');
 
 -- ----------------------------
 -- Table structure for news
@@ -2216,6 +2228,9 @@ INSERT INTO `orderdetails` VALUES (83, 6, 113000, 1);
 INSERT INTO `orderdetails` VALUES (84, 5, 108540, 1);
 INSERT INTO `orderdetails` VALUES (85, 5, 108540, 1);
 INSERT INTO `orderdetails` VALUES (86, 5, 108540, 1);
+INSERT INTO `orderdetails` VALUES (88, 5, 108540, 2);
+INSERT INTO `orderdetails` VALUES (88, 6, 113000, 1);
+INSERT INTO `orderdetails` VALUES (88, 11, 46000, 1);
 
 -- ----------------------------
 -- Table structure for orders
@@ -2238,7 +2253,7 @@ CREATE TABLE `orders`  (
   INDEX `fk_orders_users`(`userId` ASC) USING BTREE,
   CONSTRAINT `fk_orders_status` FOREIGN KEY (`statusId`) REFERENCES `status` (`statusId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_orders_users` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 87 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 89 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
@@ -2328,6 +2343,7 @@ INSERT INTO `orders` VALUES (83, 4, 13, 153000, 0, 'COD', 40000, 'Tỉnh Hà Gia
 INSERT INTO `orders` VALUES (84, 4, 13, 148540, 0, 'COD', 40000, 'Tỉnh Hà Giang, Huyện Quang Bình, Xã Xuân Minh, Người nhận: Minh đẹp trai, Số điện thoại: 0222222222', '2024-12-14 11:38:15', '2024-12-14 11:38:15', '');
 INSERT INTO `orders` VALUES (85, 4, 13, 148540, 0, 'COD', 40000, 'Tỉnh Hà Giang, Huyện Bắc Quang, Xã Vĩnh Hảo, Người nhận: Minh đẹp trai, Số điện thoại: 0222222222', '2024-12-14 14:43:14', '2024-12-14 14:43:14', '');
 INSERT INTO `orders` VALUES (86, 4, 13, 148540, 0, 'COD', 40000, 'Tỉnh Hà Giang, Huyện Bắc Quang, Thị trấn Việt Quang, Người nhận: Minh đẹp trai, Số điện thoại: 0222222222', '2024-12-14 19:55:20', '2024-12-14 19:55:20', '');
+INSERT INTO `orders` VALUES (88, 11, 13, 416080, 0, 'COD', 40000, 'Tỉnh Hà Giang, Huyện Quang Bình, Xã Xuân Minh, Người nhận: Minh đẹp trai, Số điện thoại: 0222222222', '2024-12-18 09:37:20', '2024-12-18 09:37:20', '');
 
 -- ----------------------------
 -- Table structure for producthaspromotion
@@ -2394,13 +2410,13 @@ INSERT INTO `products` VALUES (1, 2, 'Gạo thơm đặc sản Neptune ST25 túi
 INSERT INTO `products` VALUES (2, 2, 'Gạo giống Nhật Bản Vinh Hiển Taiyo túi 5kg', 'images/product-images/gao-giong-nhat-ban-vinh-hien-taiyo-tui-5kg-202007211001455095.jpg', 100000, 149000, 2, 8, 25.00, 10, '2023-01-20 00:00:00', '2023-01-21 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (3, 2, 'Gạo Hạt Ngọc Trời Tiên Nữ túi 5kg', 'images/product-images/-202210270821594671.jpg', 100000, 120000, 3, 8, 10.00, 223, '2023-01-25 00:00:00', '2023-02-26 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (4, 2, 'Gạo lài sữa Đồng Việt túi 5kg', 'images/product-images/gao-lai-sua-dong-viet-tui-5kg-202212280858091468.jpg', 100000, 115000, 4, 8, 10.00, 33, '2022-12-29 00:00:00', '2023-03-24 00:00:00', '2024-07-17 15:39:42');
-INSERT INTO `products` VALUES (5, 2, 'Gạo ST25 Đồng Việt túi 5kg', 'images/product-images/gao-st25-thuong-hang-dong-viet-tui-5kg-202212280854102020.jpg', 100000, 134000, 5, 8, 5.00, 51, '2023-01-10 00:00:00', '2023-01-10 00:00:00', '2024-07-17 15:39:42');
-INSERT INTO `products` VALUES (6, 2, 'Gạo thơm A An ST21 túi 5kg', 'images/product-images/gao-thom-a-an-st21-tui-5kg-202006061602569575.jpg', 123000, 133000, 1, 8, 5.00, 24, '2023-01-16 00:00:00', '2023-01-17 00:00:00', '2024-07-17 15:39:42');
+INSERT INTO `products` VALUES (5, 2, 'Gạo ST25 Đồng Việt túi 5kg', 'images/product-images/gao-st25-thuong-hang-dong-viet-tui-5kg-202212280854102020.jpg', 100000, 134000, 5, 8, 5.00, 47, '2023-01-10 00:00:00', '2023-01-10 00:00:00', '2024-07-17 15:39:42');
+INSERT INTO `products` VALUES (6, 2, 'Gạo thơm A An ST21 túi 5kg', 'images/product-images/gao-thom-a-an-st21-tui-5kg-202006061602569575.jpg', 123000, 133000, 1, 8, 5.00, 22, '2023-01-16 00:00:00', '2023-01-17 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (7, 2, 'Gạo Lài hương Đồng Việt túi 5kg', 'images/product-images/gao-lai-huong-dong-viet-tui-5kg-202212280845480911.jpg', 100000, 120000, 1, 8, 5.00, 13, '2023-01-17 00:00:00', '2023-01-18 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (8, 14, 'Gạo lức huyết rồng PMT túi 2kg', 'images/product-images/-202210150918339457.jpg', 800000, 100000, 1, 8, 5.00, 50, '2023-03-22 00:00:00', '2023-04-06 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (9, 2, 'Gạo thơm Vua Gạo ST25 túi 5kg', 'images/product-images/-202306191015007772.jpg', 124000, 134000, 1, 9, 5.00, 0, '2023-05-20 00:00:00', '2023-05-20 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (10, 2, 'Gạo Ngọc Sa Cỏ May túi 5kg', 'images/product-images/gao-ngoc-sa-co-may-tui-5kg-202201050907494211.jpg', 137000, 157000, 1, 9, 10.00, 0, '2022-12-13 00:00:00', '2022-12-14 00:00:00', '2024-07-17 15:39:42');
-INSERT INTO `products` VALUES (11, 7, 'Khoai lang Nhật xuất khẩu 0.9kg - 1.1kg', 'images/product-images/khoai-lang-nhat-xuat-khau-1kg-202306141637486543.jpg', 40000, 46000, 1, 8, 5.00, 45, '2023-03-03 00:00:00', '2023-03-03 00:00:00', '2024-07-17 15:39:42');
+INSERT INTO `products` VALUES (11, 7, 'Khoai lang Nhật xuất khẩu 0.9kg - 1.1kg', 'images/product-images/khoai-lang-nhat-xuat-khau-1kg-202306141637486543.jpg', 40000, 46000, 1, 8, 5.00, 43, '2023-03-03 00:00:00', '2023-03-03 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (12, 7, 'Chuối già giống Nam Mỹ hộp 0.9-1.1kg (6-7 trái)', 'images/product-images/chuoi-gia-giong-nam-my-hop-09-11kg-6-7-trai-202401151353168342.jpg', 20000, 26000, 1, 8, 5.00, 73, '2022-09-02 00:00:00', '2022-09-02 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (13, 10, 'Nấm kim châm Thái Lan 150g', 'images/product-images/nam-kim-cham-thai-lan-150g-202308291048255023.jpg', 8000, 11000, 1, 8, 10.00, 94, '2023-03-05 00:00:00', '2023-04-08 00:00:00', '2024-07-17 15:39:42');
 INSERT INTO `products` VALUES (14, 7, 'Khoai môn 450g - 550g (1 củ)', 'images/product-images/khoai-mon-tui-500g-1-cu-202205201541019491.jpg', 19500, 27000, 1, 8, 5.00, 11, '2023-03-06 00:00:00', '2023-03-07 00:00:00', '2024-07-17 15:39:42');
@@ -2819,7 +2835,7 @@ CREATE TABLE `status`  (
   `statusId` int NOT NULL AUTO_INCREMENT,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   PRIMARY KEY (`statusId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of status
@@ -2834,6 +2850,7 @@ INSERT INTO `status` VALUES (7, 'đã hủy');
 INSERT INTO `status` VALUES (8, 'còn hàng');
 INSERT INTO `status` VALUES (9, 'hết hàng');
 INSERT INTO `status` VALUES (10, 'đã bị thay đổi');
+INSERT INTO `status` VALUES (11, 'chờ xác thực');
 
 -- ----------------------------
 -- Table structure for users

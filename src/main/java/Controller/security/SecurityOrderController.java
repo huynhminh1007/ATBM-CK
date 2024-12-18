@@ -263,12 +263,10 @@ public class SecurityOrderController extends HttpServlet {
                 double amount = (double) session.getAttribute("amount");
                 order.setStatus(new Status(4, ""));
                 orderService.update(order);
-
-                executor.submit(() -> {
-                    mailController.sendVerifyOrderEmail(user.getEmail(), amount, order, signed);
-                        }
-                );
                 orderSignatureDAO.insert(new OrderSignature(key.getId(), signed, orderId, hash));
+
+                mailController.sendVerifyOrderEmail(user.getEmail(), amount, order, signed);
+
                 String url = "/tai-khoan.jsp";
                 resp.sendRedirect(url);
                 return;
