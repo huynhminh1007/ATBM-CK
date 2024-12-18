@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"
-          href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css?version=1">
     <link rel="stylesheet" href="styles/login.css?version=1">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.css?version=1">
     <link rel="stylesheet" type="text/css" href="styles/base.css?version=1">
@@ -15,6 +13,12 @@
     <link rel="stylesheet" type="text/css" href="styles/footer.css?version=1">
     <link rel="stylesheet" type="text/css" href="styles/nav.css?version=1">
     <script type="text/javascript" src="javascripts/jquery-3.7.1.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+            href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+            rel="stylesheet"/>
+    <script defer src="javascripts/select2.min.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -99,7 +103,11 @@
 
             // Kiểm tra nếu chữ ký không rỗng
             if (digitalSignature.trim() === '') {
-                alert('Chữ ký điện tử không được để trống!');
+                Swal.fire({
+                    title: 'Lỗi!',
+                    text: 'Chữ ký điện tử không được để trống!',
+                    icon: 'error'
+                });
                 return;
             }
 
@@ -113,11 +121,25 @@
                     action: 'verify-signature'
                 },
                 success: function (response) {
-                    alert('Xác thực thành công!');
-                    isClicked = false;
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Xác thực thành công!',
+                        icon: 'success',
+                        showConfirmButton: false, // Không hiển thị nút OK
+                        timer: 2000 // Tự động đóng sau 3 giây
+                    });
+                    setTimeout(function () {
+                        window.location.href = "/tai-khoan.jsp";
+                        isClicked = false;
+                    }, 2000); // Chờ 3 giây (3000 milliseconds)
                 },
+
                 error: function (xhr, status, error) {
-                    alert('Xác thực không thành công!');
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Xác thực không thành công!',
+                        icon: 'error'
+                    });
                     isClicked = false;
                 }
             });

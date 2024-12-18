@@ -260,6 +260,7 @@ public class SecurityOrderController extends HttpServlet {
                 log.setCurrentValue(signed);
                 log.setDescription(des);
                 LogServiceManager.getLogService().saveLog(log);
+
                 double amount = (double) session.getAttribute("amount");
                 order.setStatus(new Status(4, ""));
                 orderService.update(order);
@@ -267,8 +268,7 @@ public class SecurityOrderController extends HttpServlet {
 
                 mailController.sendVerifyOrderEmail(user.getEmail(), amount, order, signed);
 
-                String url = "/tai-khoan.jsp";
-                resp.sendRedirect(url);
+                orderSignatureDAO.insert(new OrderSignature(key.getId(), signed, orderId, hash));
                 return;
             } else {
                 status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;

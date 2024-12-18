@@ -186,7 +186,6 @@ public class MailController extends HttpServlet {
                 orders.getShippingFee(),
                 formattedTotalPrice
         ));
-
         return bodyBuilder.toString();
     }
 
