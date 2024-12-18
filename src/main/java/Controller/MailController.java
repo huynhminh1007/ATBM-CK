@@ -107,7 +107,7 @@ public class MailController extends HttpServlet {
         byte[] pdfAttachment = new PdfHelper().generatePdfFromHtml(body);
         String pdfFilename = "Order_ODR" + orders.getId() + ".pdf";
 
-        String subject = "Xác nhận đơn hàng #" + orders.getId() + " từ Lương Thực Việt";
+        String subject = "Hóa đơn đơn hàng #" + orders.getId() + " từ Lương Thực Việt";
         executorService.submit(() -> emailService.send(to, subject, body, pdfAttachment, pdfFilename));
     }
     

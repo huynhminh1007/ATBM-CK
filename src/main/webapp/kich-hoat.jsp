@@ -88,13 +88,14 @@
                 $('#error-message').text('Có lỗi xảy ra khi lấy mã hash.');
             }
         });
-
+        let isClicked = false;
         $('#submitButton').click(function (e) {
             e.preventDefault();
+            if(isClicked) return;
+            isClicked = true;
 
             // Lấy giá trị của chữ ký điện tử
             var digitalSignature = $('#digitalSignature').val();
-            var hashInput = $('#hashInput').val();
 
             // Kiểm tra nếu chữ ký không rỗng
             if (digitalSignature.trim() === '') {
@@ -109,14 +110,15 @@
                 data: {
                     orderId: orderId,
                     digitalSignature: digitalSignature,
-                    hashInput: hashInput,
                     action: 'verify-signature'
                 },
                 success: function (response) {
                     alert('Xác thực thành công!');
+                    isClicked = false;
                 },
                 error: function (xhr, status, error) {
                     alert('Xác thực không thành công!');
+                    isClicked = false;
                 }
             });
         });
