@@ -128,7 +128,7 @@
                 renderResult(data);
             },
             error: function (xhr, status, error) {
-                notify("Thông báo", "Đơn hàng không tồn tại chữ ký số", "error")
+                notify("Thông báo", "Đơn hàng không tồn tại chữ ký điện tử", "error")
                 $("#loading").hide();
             },
         });
