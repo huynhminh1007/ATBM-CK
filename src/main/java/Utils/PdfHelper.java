@@ -34,6 +34,7 @@ public class PdfHelper {
             builder.withHtmlContent(sanitizedHtml, null);
             builder.toStream(outputStream);
 
+
             // Add font for Vietnamese support
             // Load font từ thư mục resources/fonts
             builder.useFont(new File(getClass()
