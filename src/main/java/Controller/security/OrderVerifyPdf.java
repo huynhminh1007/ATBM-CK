@@ -9,6 +9,7 @@ import Services.IUserService;
 import Services.KeyService;
 import Services.UserServices;
 import Utils.pdf.PdfHelper;
+import com.google.gson.Gson;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -45,22 +47,17 @@ public class OrderVerifyPdf extends HttpServlet {
     public OrderVerifyPdf() {
     }
 
-    public InputStream extractFileInputStream(HttpServletRequest request) throws IOException {
-        try {
-            // Lấy file từ request part
-            Part filePart = request.getPart("order-pdf"); // "file" là tên field từ form
-            if (filePart != null && filePart.getSize() > 0) {
-                return filePart.getInputStream(); // Trả về InputStream của file
-            } else {
-                throw new RuntimeException("File trống");
-            }
-        } catch (ServletException e) {
-            throw new IOException("Xảy ra lỗi trong quá trình xử lý file");
-        }
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        // API response too fast, we have to sleep a little bit to make it more realistic
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Map<String, String> jsonResponse = new HashMap<>();
         InputStream inputStream = request.getInputStream();
         Map<String, String> digitalSignatureInfo = PdfHelper.verifyPdfMetadata(inputStream);
         //Compare 2 signatures
@@ -78,20 +75,19 @@ public class OrderVerifyPdf extends HttpServlet {
             signature.setAlgorithm(activePublicKey.getAlgorithm());
             signature.loadPublicKey(activePublicKey.getKey());
             String currentOrderHash = hashAlgorithm.hashBase64(shortInfo, "utf-8");
-            System.out.printf("current hash:%s ", currentOrderHash);
-            System.out.printf("signature:%s ", digitalSignature);
+            jsonResponse.put("orderId", String.valueOf(orderId));
+            jsonResponse.put("user", user.getFullName());
+            jsonResponse.put("digitalSignature", digitalSignature);
             if (signature.verify(currentOrderHash, digitalSignature)) {
-                request.setAttribute("orderId", orderId);
-                request.setAttribute("userId", userId);
-                request.setAttribute("digitalSignature", digitalSignatureInfo);
-                request.setAttribute("status", "ok");
+                jsonResponse.put("status", "success");
             } else {
-                System.out.println("not match");
+                jsonResponse.put("status", "unmatched");
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException | SignatureException e) {
             throw new RuntimeException(e);
         }
-        request.getRequestDispatcher("/order-pdf-verify.jsp").forward(request, response);
+        Gson gson = new Gson();
+        response.getWriter().write(gson.toJson(jsonResponse));
     }
 
     //delete post traffic to doGet method
