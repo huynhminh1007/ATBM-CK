@@ -75,7 +75,8 @@
                                                     </div>
                                                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                                         <fieldset class="form-group">
-                                                            <input placeholder="Số điện thoại" type="text" pattern="[0-9]{10,11}"
+                                                            <input placeholder="Số điện thoại" type="text"
+                                                                   pattern="[0-9]{10,11}"
                                                                    class="form-input form-control-comment"
 
                                                                    name="PhoneNumber" required id="PhoneNumber"
