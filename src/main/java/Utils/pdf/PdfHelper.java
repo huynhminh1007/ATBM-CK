@@ -109,7 +109,7 @@ public class PdfHelper {
             // Xác minh chữ ký
             String digitalSignature = metadata.getCustomMetadataValue("DigitalSignature");
             if (digitalSignature != null && !digitalSignature.isEmpty()) {
-                result.put("UserId", metadata.getCustomMetadataValue("UserId"));
+                result.put("userId", metadata.getCustomMetadataValue("UserId"));
                 result.put("orderId", metadata.getCustomMetadataValue("OrderId"));
                 result.put("digitalSignature", digitalSignature);
                 return result;

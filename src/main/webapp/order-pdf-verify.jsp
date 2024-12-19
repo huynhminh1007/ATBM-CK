@@ -16,9 +16,12 @@
     <script type="text/javascript" src="javascripts/jquery-3.7.1.js"></script>
     <title>Kiểm tra đơn hàng</title>
 </head>
-
 <body>
 <jsp:include page="Components/header.jsp"/>
+<%
+    String status = request.getAttribute("status") == null ? "error" : (String) request.getAttribute("status");
+%>
+
 <section class="section">
     <div class="container ">
         <div class="wrap_background_aside ">
@@ -39,6 +42,11 @@
                             </div>
                             <button id="btn_upload_key" type="submit" class="btn btn-success mt-3">Kiểm tra</button>
                         </form>
+                        <div>
+                            <h3>Kết quả</h3>
+                            <h4>Chữ ký${requestScope.digitalSignature}</h4>
+                            <h4>Order id${param.orderId}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
