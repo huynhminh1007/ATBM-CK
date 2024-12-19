@@ -246,7 +246,6 @@ public class SecurityOrderController extends HttpServlet {
         }
         JsonObject response = new JsonObject();
         int status;
-
         String shortInfo = getShortInfo(user, order);
         try {
             signature.setAlgorithm(key.getAlgorithm());
@@ -293,7 +292,7 @@ public class SecurityOrderController extends HttpServlet {
      * @param order
      * @return
      */
-    private String getShortInfo(User user, Orders order) {
+    public static String getShortInfo(User user, Orders order) {
         JsonObject result = new JsonObject();
 
         result.addProperty("userId", user.getId());
