@@ -18,7 +18,7 @@ public class JDBCConnector {
 		String port = "3306";
 		String dbName = "luong_thuc_viet";
 		String username = "root";
-		String password = "";
+		String password = "password";
 		String url = "jdbc:mysql://" + host + ":" + port + "/" + dbName+"?useUnicode=true&characterEncoding=utf8";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

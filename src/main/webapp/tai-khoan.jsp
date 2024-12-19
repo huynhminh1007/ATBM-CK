@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles/tai-khoan.css">
-    <link rel="stylesheet" type="text/css"  href="styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="styles/base.css?version">
     <link rel="stylesheet" type="text/css" href="styles/main.css?version">
     <link rel="stylesheet" type="text/css" href="styles/nav.css">
@@ -38,7 +38,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 200px;  /* Tùy chỉnh chiều rộng tối đa của cột */
+            max-width: 200px; /* Tùy chỉnh chiều rộng tối đa của cột */
         }
 
         #dt-length-0 {
@@ -81,7 +81,8 @@
                 <div id="page_account">
                     <h4 class="title-account">TRANG TÀI KHOẢN</h4>
                     <p class="title-account" style="font-size: 20px">
-                        Xin chào! <span class="text-primary-green" id="userName"  style="font-size: 20px">${user.getFullName()}</span>
+                        Xin chào! <span class="text-primary-green" id="userName"
+                                        style="font-size: 20px">${user.getFullName()}</span>
                     </p>
                 </div>
                 <ul class=" toc-list m-0 p-0">
@@ -131,12 +132,19 @@
                             data-target="#updateInfor">Cập nhập thông tin?
                     </button>
                 </div>
-<%--                Đơn hàng của bạn--%>
+                <%--                Đơn hàng của bạn--%>
                 <div class="block-account" id="YOUR_ORDER">
                     <div class="recent-orders">
                         <div class="table-responsive-block tab-all"
                              style="overflow-x: auto;">
-                            <h5 class="title-acccount">ĐƠN HÀNG CỦA BẠN</h5>
+                            <div style="display :flex;justify-content: space-between">
+                                <h5 class="title-acccount">ĐƠN HÀNG CỦA BẠN</h5>
+                                <a href="">
+                                    <button class="btn btn-success">
+                                        Kiểm tra đơn hàng
+                                    </button>
+                                </a>
+                            </div>
                             <jsp:include page="Components/myOrder.jsp"/>
                         </div>
                         <div
@@ -144,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-<%--                Thay đổi mật khẩu--%>
+                <%--                Thay đổi mật khẩu--%>
                 <div class="block-account" id="Change_Password">
                     <div class="col-xs-12 col-sm-12 col-lg-9 col-right-ac">
                         <h5 class="title-head margin-top-0">ĐỔI MÂT KHẨU</h5>
@@ -162,9 +170,9 @@
                                             <fieldset class="form-group">
                                                 <label for="oldPass">Mật khẩu cũ <span
                                                         class="error">*</span></label><input type="password"
-                                                                                 name="OldPassword"
-                                                                                 id="OldPass" required=""
-                                                                                 class="form-control form-control-lg"/>
+                                                                                             name="OldPassword"
+                                                                                             id="OldPass" required=""
+                                                                                             class="form-control form-control-lg"/>
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 <label for="changePass">Mật khẩu mới <span
@@ -197,7 +205,7 @@
                         </div>
                     </div>
                 </div>
-<%--                Địa chỉ của bạn--%>
+                <%--                Địa chỉ của bạn--%>
                 <div class="block-account" id="address_your">
                     <h5 class="title-acccount">ĐỊA CHỈ CỦA BẠN</h5>
                     <p id="success" style="color: red;"></p>
@@ -276,54 +284,62 @@
                             </div>
 
                             <!-- Form upload khóa -->
-                            <form id="key-upload-form" enctype="multipart/form-data" style="display: none; margin-top: 20px;">
+                            <form id="key-upload-form" enctype="multipart/form-data"
+                                  style="display: none; margin-top: 20px;">
                                 <div style="margin-bottom: 10px;">
                                     <label for="key-file-input">Chọn Tệp Khóa:</label>
-                                    <input name="key-file-input" type="file" id="key-file-input" class="form-control" required>
+                                    <input name="key-file-input" type="file" id="key-file-input" class="form-control"
+                                           required>
                                 </div>
                                 <button id="btn_upload_key" type="submit" class="btn btn-success">Lưu Thông Tin</button>
                             </form>
 
                             <!-- Khung hiển thị thông tin khóa hiện tại -->
                             <c:if test="${not empty keys}">
-                            <c:forEach var="key" items="${keys}" varStatus="status">
-                            <div id="current-key-container" class="card my-4" style="padding: 20px; display: ${key.isActive ? 'flex' : 'none'} ; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
-                                <h6 style="margin-bottom: 15px; font-weight: bold;">Khóa Hiện Tại</h6>
+                                <c:forEach var="key" items="${keys}" varStatus="status">
+                                    <div id="current-key-container" class="card my-4"
+                                         style="padding: 20px; display: ${key.isActive ? 'flex' : 'none'} ; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+                                        <h6 style="margin-bottom: 15px; font-weight: bold;">Khóa Hiện Tại</h6>
 
-                                <div style="display: flex; flex-wrap: wrap; gap: 15px;">
-                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0; line-height: 1.2;" title="${key.key}">
-                                        <strong style="vertical-align: middle;">Khóa:</strong>
-                                        <span id="current-key" class="text-ellipsis" style="vertical-align: middle;">${key.key}</span>
-                                    </p>
+                                        <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                                            <p style="flex: 1 1 calc(50% - 10px); margin: 0; line-height: 1.2;"
+                                               title="${key.key}">
+                                                <strong style="vertical-align: middle;">Khóa:</strong>
+                                                <span id="current-key" class="text-ellipsis"
+                                                      style="vertical-align: middle;">${key.key}</span>
+                                            </p>
 
-                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Thuật Toán:</strong>
-                                        <span id="current-algorithm">
-                                                ${key.algorithm}
-                                        </span>
-                                    </p>
+                                            <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
+                                                <strong>Thuật Toán:</strong>
+                                                <span id="current-algorithm">
+                                                        ${key.algorithm}
+                                                </span>
+                                            </p>
 
-                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Ngày Bắt Đầu:</strong> <span id="current-start-date">${key.beginDate}</span>
-                                    </p>
-                                    <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
-                                        <strong>Ngày Kết Thúc:</strong> <span id="current-end-date">${key.updateDate}</span>
-                                    </p>
-                                </div>
+                                            <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
+                                                <strong>Ngày Bắt Đầu:</strong> <span
+                                                    id="current-start-date">${key.beginDate}</span>
+                                            </p>
+                                            <p style="flex: 1 1 calc(50% - 10px); margin: 0;">
+                                                <strong>Ngày Kết Thúc:</strong> <span
+                                                    id="current-end-date">${key.updateDate}</span>
+                                            </p>
+                                        </div>
 
-                                <!-- Nút Report Key -->
-                                <div class="mt-4 text-end">
-                                    <button id="reportKeyButton" class="btn btn-danger px-4 py-2" style="font-size: 14px;">
-                                        Report Key
-                                    </button>
-                                </div>
+                                        <!-- Nút Report Key -->
+                                        <div class="mt-4 text-end">
+                                            <button id="reportKeyButton" class="btn btn-danger px-4 py-2"
+                                                    style="font-size: 14px;">
+                                                Report Key
+                                            </button>
+                                        </div>
 
-                            </div>
-                            </c:forEach>
+                                    </div>
+                                </c:forEach>
                             </c:if>
 
                             <!-- Giao diện danh sách khóa -->
-                            <jsp:include page="Components/myKey.jsp" />
+                            <jsp:include page="Components/myKey.jsp"/>
                         </div>
                         <div
                                 class="paginate-pages pull-right page-account text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -382,7 +398,8 @@
             </div>
             <div class="modal-body">
                 <p class="m-0"><strong>Bước 1:</strong> Tải công cụ hỗ trợ tạo khóa tại link bên dưới.</p>
-                <a href="https://drive.google.com/file/d/1nU5_gSpPd6Bj_-i2YrgObpApZAF8jKJo/view?usp=drive_link" class="btn btn-link" target="_blank">Tải Công Cụ</a>
+                <a href="https://drive.google.com/file/d/1nU5_gSpPd6Bj_-i2YrgObpApZAF8jKJo/view?usp=drive_link"
+                   class="btn btn-link" target="_blank">Tải Công Cụ</a>
                 <p><strong>Bước 2:</strong> Thực hiện các bước sau trong công cụ:</p>
                 <ul>
                     <li> Chọn thuật toán (ví dụ: RSA, DSA).</li>
@@ -399,7 +416,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!-- Modal Form -->
@@ -429,7 +445,7 @@
 
 <script>
     // Hiển thị form upload khi nhấn nút Upload Khóa
-    document.getElementById('upload-key-btn').addEventListener('click', function() {
+    document.getElementById('upload-key-btn').addEventListener('click', function () {
         var form = document.getElementById('key-upload-form');
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
     });
@@ -525,7 +541,7 @@
         });
         $(".btn-edit-address").click(function () {
             let addressId = $(this).data("target");
-            let fullName = $("#" + addressId).find("#fullname"+addressId).text();
+            let fullName = $("#" + addressId).find("#fullname" + addressId).text();
             let phone = $("#" + addressId).find("#phone").text();
             let index = $("#pos").val(addressId);
             let form = $("#address-form");
