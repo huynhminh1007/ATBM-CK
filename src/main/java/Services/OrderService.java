@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import Database.IOrderDAO;
 import Model.Order_details;
 import Model.Orders;
+import org.springframework.core.annotation.Order;
 
 public class OrderService implements IOrderService {
 	@Inject
@@ -49,6 +50,10 @@ public class OrderService implements IOrderService {
 	@Override
 	public boolean updateStatus(Orders orders) {
 		return orderDao.updateStatus( orders);
+	}
+
+	public List<Orders> findOrderByUserId(int userId) {
+		return orderDao.findOrderByUserId(userId);
 	}
 
 }

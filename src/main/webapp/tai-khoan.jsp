@@ -65,6 +65,8 @@
     String menuId = request.getAttribute("menu") == null ? "ACCOUNT_INFORMATION" : request.getAttribute("menu") + "";
 //    // Lấy danh sách keys từ request
     List<Key> keys = (List<Key>) session.getAttribute("keys");
+
+    String orderStatus = (String) request.getAttribute("orderStatus");
 %>
 
 <body>
