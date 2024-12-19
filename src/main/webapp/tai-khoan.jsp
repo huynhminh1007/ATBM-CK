@@ -139,7 +139,7 @@
                              style="overflow-x: auto;">
                             <div style="display :flex;justify-content: space-between">
                                 <h5 class="title-acccount">ĐƠN HÀNG CỦA BẠN</h5>
-                                <a href="">
+                                <a href="/order-verify.jsp">
                                     <button class="btn btn-success">
                                         Kiểm tra đơn hàng
                                     </button>
