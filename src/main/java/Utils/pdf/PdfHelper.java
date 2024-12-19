@@ -10,6 +10,9 @@ import org.jsoup.nodes.Document;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PdfHelper {
     private String sanitizeHtml(String html) {
@@ -98,41 +101,24 @@ public class PdfHelper {
         }
     }
 
-    public static void verifyPdfMetadata(File pdfFile) {
-        try (PDDocument pdfDocument = PDDocument.load(pdfFile)) {
+    public static Map<String, String> verifyPdfMetadata(InputStream inputStream) {
+        try (PDDocument pdfDocument = PDDocument.load(inputStream)) {
             // Truy xuất metadata
+            var result = new HashMap<String, String>();
             PDDocumentInformation metadata = pdfDocument.getDocumentInformation();
-
-            // In thông tin metadata chung
-            System.out.println("Title: " + metadata.getTitle());
-            System.out.println("Author: " + metadata.getAuthor());
-            System.out.println("Subject: " + metadata.getSubject());
-            System.out.println("Keywords: " + metadata.getKeywords());
-
-            // Lấy chữ ký điện tử từ metadata (Custom Metadata)
-            String digitalSignature = metadata.getCustomMetadataValue("DigitalSignature");
-            System.out.println("Digital Signature: " + digitalSignature);
-
-            String userId = metadata.getCustomMetadataValue("UserId");
-            System.out.println("User Id: " + userId);
-
-            String orderId = metadata.getCustomMetadataValue("OrderId");
-            System.out.println("Order Id: " + orderId);
-
             // Xác minh chữ ký
+            String digitalSignature = metadata.getCustomMetadataValue("DigitalSignature");
             if (digitalSignature != null && !digitalSignature.isEmpty()) {
-                System.out.println("Chữ ký điện tử hợp lệ: " + digitalSignature);
+                result.put("UserId", metadata.getCustomMetadataValue("UserId"));
+                result.put("orderId", metadata.getCustomMetadataValue("OrderId"));
+                result.put("digitalSignature", digitalSignature);
+                return result;
             } else {
-                System.out.println("Không tìm thấy chữ ký điện tử.");
+                throw new RuntimeException("No digitalSignature found");
             }
         } catch (IOException e) {
-            System.err.println("Không thể đọc file PDF: " + e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
-    public static void main(String[] args) {
-        // Đường dẫn đến file PDF cần xác minh
-        File pdfFile = new File("C:\\Users\\DLCD\\Downloads\\Order_ODR92.pdf");
-        verifyPdfMetadata(pdfFile);
-    }
 }

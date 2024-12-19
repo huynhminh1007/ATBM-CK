@@ -29,11 +29,11 @@
                         <h2 class="text-center">Kiểm tra đơn hàng</h2>
                         <h5 class="text-secondary fst-italic">Vui lòng tải lên hóa đơn cần kiểm tra!</h5>
                         <form id="key-upload-form" style="width: 500px"
-                              action="/order-security"
+                              action="/OrderVerifyPdf"
                               enctype="multipart/form-data" method="post"
                         >
                             <div style="margin-bottom: 10px;" class="m-auto">
-                                <input accept=application/pdf name="key-file-input" type="file" id="key-file-input"
+                                <input accept=application/pdf name="order-pdf" type="file" id="order-pdf"
                                        class="form-control"
                                        required>
                             </div>
