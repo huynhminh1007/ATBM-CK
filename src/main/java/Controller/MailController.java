@@ -92,6 +92,7 @@ public class MailController extends HttpServlet {
         String username = orders.getUser().getUsername();
         String userId = String.valueOf(orders.getUser().getId());
         String logoUrl = "https://firebasestorage.googleapis.com/v0/b/i-love-truyen.appspot.com/o/ltv%2Flogo_large.png?alt=media&token=a0cf5e2a-a21e-46c4-b036-d38354736cfb";
+        String logoSignature = "https://firebasestorage.googleapis.com/v0/b/i-love-truyen.appspot.com/o/ltv%2Fklipartz.com.png?alt=media&token=cfde9d34-9888-4dd0-ab97-5aaeb43c4928";
 
         String body = "<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 8px;\">\r\n"
                 + "<h2 style=\"text-align: center; color: #4CAF50;\"><img src=\"" + logoUrl + "\" alt=\"Logo\" style=\"height: 70px; width: auto; margin-bottom: 10px;\"><br>Thông tin đơn hàng</h2>\r\n"
@@ -108,8 +109,7 @@ public class MailController extends HttpServlet {
                 + "</div>\r\n"
                 + "<p style=\"text-align: center; margin-top: 20px; color: #777;\">Trân trọng,<br> Website Lương Thực Việt</p>\r\n"
                 + "<div style=\"text-align: center; margin-top: 20px; color: #333; font-size: 12px;\">\r\n"
-//                + "<p><strong>Chữ ký điện tử:</strong></p>\r\n"
-//                + "<p style=\"font-family: 'Courier New', Courier, monospace; color: #555;\">" + digitalSignature + "</p>\r\n"
+                + "<img src=\"" + logoSignature + "\" alt=\"Logo Signature\" style=\"height: 50px; width: auto;\">\r\n"
                 + "</div>\r\n"
                 + "</div>";
         return body;
