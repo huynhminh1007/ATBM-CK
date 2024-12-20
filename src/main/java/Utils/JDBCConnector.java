@@ -18,13 +18,19 @@ public class JDBCConnector {
 		String port = "3306";
 		String dbName = "luong_thuc_viet";
 		String username = "root";
-		String password = "password";
+		String password = "";
 		String url = "jdbc:mysql://" + host + ":" + port + "/" + dbName+"?useUnicode=true&characterEncoding=utf8";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(url, username, password);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+				conn = DriverManager.getConnection(url, username, "password");
+            } catch (ClassNotFoundException  | SQLException ex) {
+				ex.printStackTrace();
+            }
 			e.printStackTrace();
 		}
 	}
