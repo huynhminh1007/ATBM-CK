@@ -2,6 +2,11 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="java.sql.Timestamp" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="Model.security.Key" %>
+<%@ page import="Model.security.OrderSignature" %>
+<%@ page import="java.net.URLEncoder" %>
 <!DOCTYPE html>
 <html></html>
 
@@ -67,25 +72,26 @@
         margin-left: 5px;
     }
 
-    /* Specific Status Styles */
-    .status-4 {
-        background-color: #007bff; /* Bootstrap primary color */
-    }
-
-    .status-5 {
-        background-color: #fd7e14; /* Bootstrap orange color */
-    }
-
-    .status-6 {
-        background-color: #28a745; /* Bootstrap green color */
-    }
-
-    .status-7 {
-        background-color: #dc3545; /* Bootstrap red color */
+    .form-group {
+        margin-bottom: 20px;
     }
 
 </style>
 <body>
+<%
+    // Lấy đối tượng Key từ request attribute
+    Key key = (Key) request.getAttribute("key");
+    OrderSignature orderSignature = (OrderSignature) request.getAttribute("orderSignature");
+    String formattedDate = "";
+    String formattedSignDate = "";
+    if (key != null && key.getBeginDate() != null) {
+        Timestamp beginDate = key.getBeginDate();
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        formattedDate = dateTimeFormat.format(beginDate);
+        formattedSignDate = dateTimeFormat.format(orderSignature.getSignedDate());
+    }
+%>
+
 <jsp:include page="header.jsp"></jsp:include>
 <div class="container-fluid"></div>
 <div class="row">
@@ -152,6 +158,15 @@
                                             <fmt:formatNumber type="currency" value="${order.totalPrice}"/>
                                         </strong>
                                     </h5>
+
+                                    <h5>
+                                        Thông tin xác thực:
+                                        <button data-toggle="modal" data-target="#info_verify_modal"
+                                                class="btn btn-secondary btn-sm me-1 btn-order-detail">
+                                            <i id="info_verify" class="fa-solid fa-circle-info"
+                                            ></i>
+                                        </button>
+                                    </h5>
                                 </div>
                             </div>
                             <div>
@@ -162,16 +177,6 @@
                                 <h5><strong>
                                     Cập nhập trạng thái
                                 </strong></h5>
-                                <%--                                <form action="OrderController" id="statusForm">--%>
-                                <%--                                    <input type="hidden" name="action" value="put"> <input--%>
-                                <%--                                        type="hidden" name="orderId" value="${order.id}"> <select--%>
-                                <%--                                        class="form-select" name="statusId">--%>
-                                <%--                                    <option id="status6" value="6">Đã hoàn thành</option>--%>
-                                <%--                                    <option id="status7" value="7">Đã hủy</option>--%>
-                                <%--                                    <option id="status4" value="4">Đang xử lý</option>--%>
-                                <%--                                    <option id="status5" value="5">Đang vận chuyển</option>--%>
-                                <%--                                </select>--%>
-                                <%--                                </form>--%>
                             </div>
                         </div>
 
@@ -236,15 +241,121 @@
                     </div>
                 </div>
             </div>
+
+
+        </div>
+    </div>
+    <div class="modal fade" id="info_verify_modal" tabindex="-1" role="dialog"
+         aria-labelledby="filterModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterModalLongTitle">Thông tin xác thực</h5>
+                    <i data-dismiss="modal" class="close fa-solid fa-xmark"></i>
+                </div>
+                <div class="modal-body">
+                    <form id="form-filter">
+                        <div class="form-group row align-items-center">
+                            <label class="col">Public Key</label>
+                            <div class="col">
+                                <input readonly class="form-control" type="text"
+                                       value="${key.key}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label class="col">Thuật toán</label>
+                            <div class="col">
+                                <input readonly class="form-control" type="text"
+                                       value="${key.algorithm}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <div class="col text-end">
+                                <button id="downloadBtn" class="btn btn-success">Download</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label class="col">Ngày đăng ký</label>
+                            <div class="col">
+                                <input class="form-control" type="text" readonly
+                                       value="<%= formattedDate %>">
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label class="col">Hash</label>
+                            <div class="col">
+                                <input class="form-control" type="text" readonly
+                                       value="${orderSignature.hash}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label class="col">Chữ ký</label>
+                            <div class="col">
+                                <input class="form-control" type="text" readonly
+                                       value="${orderSignature.signatureBase64}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row align-items-center">
+                            <label class="col">Ngày ký</label>
+                            <div class="col">
+                                <input class="form-control" type="text" readonly
+                                       value="<%= formattedSignDate %>">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </body>
+<script type="text/javascript" src="../javascripts/bootstrap.min.js"></script>
 <script type="text/javascript" src="../javascripts/jquery-3.7.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" src="../javascripts/main.js"></script>
 <script type="text/javascript">
     $(document).ready(() => {
+        $('#downloadBtn').click(function (e) {
+            e.preventDefault();
+
+            var key = $('input[type="text"][value="${key.key}"]').val();
+            var algorithm = $('input[type="text"][value="${key.algorithm}"]').val();
+
+            $.ajax({
+                url: '/downloadPublicKey',
+                type: 'POST',
+                data: {
+                    key: key,
+                    algorithm: algorithm
+                },
+                xhrFields: {
+                    responseType: 'blob' // Dữ liệu phản hồi dưới dạng blob (tệp)
+                },
+                success: function (data, status, xhr) {
+                    // Tạo một URL object để tải file blob về
+                    var blob = data;
+                    var link = document.createElement('a');
+                    var fileName = 'publicKey.pub';
+
+                    // Đặt tên file và tạo URL blob
+                    link.href = URL.createObjectURL(blob);
+                    link.download = fileName;
+
+                    // Giả lập click vào link để tải xuống
+                    link.click();
+                },
+                error: function (xhr, status, error) {
+                    alert('Có lỗi xảy ra khi tải xuống');
+                }
+            });
+        });
 
         let re = ' ${requestScope.result}';
         if (re != ' ') {

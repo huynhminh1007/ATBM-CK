@@ -42,9 +42,24 @@ public class KeyDAO extends AbtractDAO<Key> {
         return disableKey(latestKey.getId());
     }
 
+    public Key findByOrderSigned(int orderId) {
+        String sql = """
+                SELECT k.* FROM `keys` k
+                INNER JOIN order_signatures os ON os.keyId = k.keyId
+                WHERE os.orderId = ?
+                ORDER BY os.signed_date DESC
+                LIMIT 1
+                """;
+
+        return Optional.ofNullable(querry(sql, new KeyMapper(), orderId))
+                .filter(keys -> !keys.isEmpty())
+                .map(keys -> keys.get(0))
+                .orElse(null);
+    }
+
     public static void main(String[] args) {
         KeyDAO dao = new KeyDAO();
-        List<Key> key = dao.findByUsers(26);
+        Key key = dao.findByOrderSigned(89);
         System.out.println(key);
 //        dao.disableLatestKey(26);
     }

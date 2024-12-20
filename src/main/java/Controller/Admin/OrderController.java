@@ -1,9 +1,18 @@
 package Controller.Admin;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import Controller.security.SecurityOrderController;
+import Database.KeyDAO;
+import Database.OrderDAO;
+import Database.OrderSignatureDAO;
+import EmailService.IEmailService;
+import Model.Orders;
+import Model.Status;
+import Model.security.Hash;
+import Model.security.Key;
+import Model.security.OrderSignature;
+import Services.IDiscountService;
+import Services.IOrderDetailsService;
+import Services.IOrderService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,14 +20,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import EmailService.IEmailService;
-import Model.Order_details;
-import Model.Orders;
-import Model.Status;
-import Services.IDiscountService;
-import Services.IOrderDetailsService;
-import Services.IOrderService;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Servlet implementation class OrderController
@@ -34,7 +40,16 @@ public class OrderController extends HttpServlet {
     IDiscountService discountService;
     @Inject
     IEmailService iEmailService;
+    OrderSignatureDAO orderSignatureDAO;
+    OrderDAO orderDAO;
+    KeyDAO keyDAO;
     private final ExecutorService excutor = Executors.newFixedThreadPool(5);
+
+    public OrderController() {
+        orderSignatureDAO = new OrderSignatureDAO();
+        orderDAO = new OrderDAO();
+        keyDAO = new KeyDAO();
+    }
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -80,14 +95,28 @@ public class OrderController extends HttpServlet {
     protected void detail(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int orderId = request.getParameter("orderId") != null ? Integer.valueOf(request.getParameter("orderId")) : 0;
-        Orders order = orderService.findById(orderId);
-        List<Order_details> order_details = orderDetailsService.findAllOrderId(orderId);
+        Orders order = orderDAO.findById(orderId);
         var discount = discountService.findById(order.getDiscountId());
-        order.setDetails(order_details);
+
         request.setAttribute("discount", discount);
         request.setAttribute("order", order);
-        request.getRequestDispatcher("/admin/order-detail.jsp").forward(request, response);
 
+        OrderSignature orderSignature = orderSignatureDAO.findByOrder(orderId);
+        if (orderSignature != null) {
+            Hash hash = new Hash();
+            try {
+                orderSignature.setHash(hash.hashBase64(
+                        SecurityOrderController.getShortInfo(order.getUser(), order), "utf-8"));
+                Key key = keyDAO.findByOrderSigned(orderId);
+
+                request.setAttribute("key", key);
+                request.setAttribute("orderSignature", orderSignature);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+        }
+
+        request.getRequestDispatcher("/admin/order-detail.jsp").forward(request, response);
     }
 
     public void sendOrderUpdate(String to, Orders orders) {
