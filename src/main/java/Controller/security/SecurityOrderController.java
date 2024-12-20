@@ -6,7 +6,6 @@ import Database.OrderDAO;
 import Database.OrderSignatureDAO;
 import Model.*;
 import Model.security.*;
-import Services.IOrderService;
 import Services.LogServiceManager;
 import Services.MLogFactory;
 import Services.OrderService;
@@ -19,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -272,8 +270,6 @@ public class SecurityOrderController extends HttpServlet {
                 orderSignatureDAO.insert(new OrderSignature(key.getId(), signed, orderId, hash));
 
                 mailController.sendVerifyOrderEmail(user.getEmail(), amount, order, signed);
-
-                orderSignatureDAO.insert(new OrderSignature(key.getId(), signed, orderId, hash));
                 return;
             } else {
                 status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
