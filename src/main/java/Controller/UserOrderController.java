@@ -20,6 +20,7 @@ import Model.User;
 import Services.IDiscountService;
 import Services.IOrderDetailsService;
 import Services.IOrderService;
+import Services.OrderService;
 import Utils.JsonUtils;
 import com.google.gson.JsonObject;
 
@@ -29,7 +30,7 @@ import com.google.gson.JsonObject;
 @WebServlet("/UserOrderController")
 public class UserOrderController extends HttpServlet {
 	@Inject
-	IOrderService orderService;
+	OrderService orderService;
 	@Inject
 	IOrderDetailsService orderDetailsService;
 	@Inject
@@ -54,14 +55,41 @@ public class UserOrderController extends HttpServlet {
 		switch (action) {
 		case "detail" -> detail(request, response);
 		case "changeAddress" -> changeAddress(request, response);
+		case "deleteOrder" -> deleteOrder(request, response);
 		default -> throw new IllegalArgumentException("Unexpected value: " + action);
 		}
+	}
+
+	private void deleteOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getParameter("orderId") == null || request.getParameter("orderId").isEmpty())
+			return;
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		int userId = user.getId();
+
+		int orderId = Integer.valueOf(request.getParameter("orderId"));
+
+		Orders order = orderService.findById(orderId);
+
+		order.setStatus(new Status(7, "đã hủy"));
+
+		orderService.update(order);
+
+		user.setOrders(orderService.findOrderByUserId(userId));
+		session.setAttribute("user", user);
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("status", order.getStatus().getDescription());
+
+		JsonUtils.sendJsonResponse(response, HttpServletResponse.SC_OK, jsonObject.toString());
+
 	}
 
 	private void changeAddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameter("orderId") == null || request.getParameter("orderId").isEmpty())
 			return;
-
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		int userId = user.getId();
 		String street = request.getParameter("street");
 		String ward = request.getParameter("ward");
 		String district = request.getParameter("district");
@@ -77,12 +105,16 @@ public class UserOrderController extends HttpServlet {
 				street, ward, district, province, recipientName, phone);
 		order.setAddress(customAddress);
 
-		order.setStatus(new Status(10, ""));
+		order.setStatus(new Status(10, "đã bị thay đổi"));
 
 		orderService.update(order);
 
+		user.setOrders(orderService.findOrderByUserId(userId));
+		session.setAttribute("user", user);
+
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.addProperty("address", customAddress);
+		jsonObject.addProperty("status", order.getStatus().getDescription());
 
 		JsonUtils.sendJsonResponse(response, HttpServletResponse.SC_OK, jsonObject.toString());
 	}
