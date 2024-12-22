@@ -102,7 +102,7 @@
                         ${order.getTotalPrice()}
                 </td>
                 <td class="text-center" style="color: #e39b04">
-                    <p>${order.getStatus().getDescription()}</p>
+                    <p class="status">${order.getStatus().getDescription()}</p>
                 </td>
                 <td class="text-center">
                     <div class="btn-group">
@@ -243,18 +243,30 @@
                 type: "GET",
                 data: formData,
                 success: function (response) {
-                    alert("Địa chỉ đã được cập nhật thành công!");
+
                     $('#updateAddressModal').modal('hide');
                     let orderId = $('#orderId').val();
 
                     // Cập nhật địa chỉ trong bảng
                     let currentRow = $('.btn-order-edit[data-target="' + orderId + '"]').closest('tr');
                     currentRow.find('.order_address').text(response.address);
+
+                    currentRow.find('.status').text(response.status);
+
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Địa chỉ đã được cập nhật thành công!',
+                        icon: 'success'
+                    });
                 },
                 error: function (xhr, status, error) {
                     // Xử lý khi có lỗi
                     console.error("Lỗi khi cập nhật địa chỉ: " + error);
-                    alert("Cập nhật địa chỉ thất bại. Vui lòng thử lại.");
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Cập nhật địa chỉ thất bại. Vui lòng thử lại.',
+                        icon: 'error'
+                    });
                 }
             });
         });

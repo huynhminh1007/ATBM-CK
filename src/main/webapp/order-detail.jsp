@@ -19,6 +19,13 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css?version=1">
     <link rel="stylesheet" type="text/css"
           href="styles/footer.css?version=1">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link
+            href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+            rel="stylesheet"/>
+    <script defer src="javascripts/select2.min.js"></script>
     <title>Chi tiết đơn hàng</title>
 </head>
 <style>
@@ -116,9 +123,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="status-bar">
-                        <h5>Trạng thái: ${order.status.getDescription()}</h5>
-
+                    <div class="status-bar ">
+                        <h5 class="statusDelete">Trạng thái: ${order.status.getDescription()}</h5>
+                        <c:if test="${order.status != 'DA_HUY' && order.status != 'HOAN_THANH'}">
+                            <button id="cancel-order-btn" class="btn btn-danger mt-3">Hủy đơn hàng</button>
+                        </c:if>
                     </div>
                 </div>
                 <table class="table" id="orders">
@@ -167,4 +176,51 @@
     </div>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.getElementById("cancel-order-btn")?.addEventListener("click", function () {
+        Swal.fire({
+            title: "Bạn có chắc chắn muốn hủy đơn hàng này?",
+            text: "Thao tác này không thể hoàn tác!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Hủy đơn hàng",
+            cancelButtonText: "Hủy bỏ",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Gửi yêu cầu hủy đơn hàng đến server bằng AJAX
+                let formData = {
+                    action: 'deleteOrder',
+                    orderId: "${order.id}"
+                };
+                $.ajax({
+                    url: "UserOrderController",
+                    type: "GET",
+                    data: formData,
+                    success: function (response) {
+                        $(".statusDelete").text("Trạng thái: " + response.status);
+                        // Ẩn nút "Hủy đơn hàng"
+                        document.getElementById("cancel-order-btn")?.remove();
+                        Swal.fire(
+                            "Đã hủy!",
+                            "Đơn hàng đã được hủy thành công.",
+                            "success"
+                        );
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Lỗi khi hủy đơn hàng:", error);
+                        Swal.fire(
+                            "Lỗi!",
+                            "Đã xảy ra sự cố. Vui lòng thử lại.",
+                            "error"
+                        );
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 </html>
